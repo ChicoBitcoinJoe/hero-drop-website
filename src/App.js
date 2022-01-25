@@ -78,7 +78,12 @@ function App() {
             <ActionTable />
           </Grid>
         </Box>
-        <div style={{ height: '50vh' }}></div>
+        <div style={{ height: '30vh' }}></div>
+        <AppBar position="static" color="primary" elevation={2} sx={{ p: 3, textAlign: 'center' }}>
+          Created by Joseph Reed <br />
+          <br />
+          chicobitcoinjoe@gmail.com
+        </AppBar>
       </div>
     </ThemeProvider>
   );

@@ -15,7 +15,7 @@ import logo from '../logo.png';
 
 const RulebookLink = "https://docs.google.com/document/d/1s07JBt4ydLFZTLBsmE2q0BFiW32j7CPS1l54scmiiJo/edit?usp=sharing"
 const BardsGuideLink = "https://docs.google.com/document/d/1sYbL_LNhaXJnUL4doECauA8FChkL0_o0P5XuVVxby20/edit?usp=sharing"
-const CharacterSheetLink = "https://drive.google.com/file/d/1y9y1k-bLqsjMUKLOepVpkn4vP8_Hmpjv/view?usp=sharing"
+const CharacterSheetLink = "https://drive.google.com/file/d/1RHzUlfzSAGwazND7HJ1TnysoT8l59hZ7/view?usp=sharing"
 const DiscordInviteLink = "https://discord.gg/2mkNaseFph"
 
 function NavMenu({ label, menuItems}) {
@@ -51,9 +51,9 @@ function NavMenu({ label, menuItems}) {
       }}
     >
       {
-        menuItems.map((menuItem) => {
+        menuItems.map((menuItem, index) => {
           return (
-            <MenuItem sx={{ minWidth: '130px' }} disabled={!menuItem.link}>
+            <MenuItem key={index} sx={{ minWidth: '130px' }} disabled={!menuItem.link}>
               <Link target="_blank" href={menuItem.link} color="inherit" underline="none">{menuItem.name}</Link>
             </MenuItem>
           )

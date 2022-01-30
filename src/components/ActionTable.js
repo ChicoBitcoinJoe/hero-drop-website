@@ -49,25 +49,20 @@ export default function ActionTable() {
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell><b>Talent</b></TableCell>
-            <TableCell align="left"><b>Combat Pillar</b></TableCell>
-            <TableCell align="left"><b>Social Pillar</b></TableCell>
-            <TableCell align="left"><b>Exploration Pillar</b></TableCell>
+          <TableRow key={'Headers'}>
+            <TableCell key="Talent"><b>Talent</b></TableCell>
+            <TableCell key="Combat" align="left"><b>Combat Pillar</b></TableCell>
+            <TableCell key="Social" align="left"><b>Social Pillar</b></TableCell>
+            <TableCell key="Exploration" align="left"><b>Exploration Pillar</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.talent}
-              </TableCell>
-              <TableCell align="left">{row.combatDescription}</TableCell>
-              <TableCell align="left">{row.socialDescription}</TableCell>
-              <TableCell align="left">{row.explorationDescription}</TableCell>
+          {rows.map((row, index) => (
+            <TableRow key={row.name + ' ' + index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell key="1" component="th" scope="row">{row.talent}</TableCell>
+              <TableCell key="2" align="left">{row.combatDescription}</TableCell>
+              <TableCell key="3" align="left">{row.socialDescription}</TableCell>
+              <TableCell key="4" align="left">{row.explorationDescription}</TableCell>
             </TableRow>
           ))}
         </TableBody>

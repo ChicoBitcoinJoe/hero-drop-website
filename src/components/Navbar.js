@@ -16,6 +16,7 @@ import logo from '../logo.png';
 const RulebookLink = "https://docs.google.com/document/d/1s07JBt4ydLFZTLBsmE2q0BFiW32j7CPS1l54scmiiJo/edit?usp=sharing"
 const BardsGuideLink = "https://docs.google.com/document/d/1sYbL_LNhaXJnUL4doECauA8FChkL0_o0P5XuVVxby20/edit?usp=sharing"
 const CharacterSheetLink = "https://drive.google.com/file/d/1RHzUlfzSAGwazND7HJ1TnysoT8l59hZ7/view?usp=sharing"
+const CommunityDAOLink = "https://app.daohaus.club/dao/0x4/0xb50e7539fd9efde9a50808d93300b3afe55f2cc7"
 const DiscordInviteLink = "https://discord.gg/2mkNaseFph"
 
 function NavMenu({ label, menuItems}) {
@@ -83,7 +84,7 @@ function Navbar({ label }) {
       ]} />
       <NavMenu label="Community" menuItems={[
         createMenuItem('Discord', DiscordInviteLink), 
-        createMenuItem("DAO (coming soon!)", null), 
+        createMenuItem("Community DAO (free)", CommunityDAOLink), 
       ]} />
     </Toolbar>
   );

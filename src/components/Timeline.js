@@ -12,57 +12,58 @@ function createData(timeline, complete, goal, link) {
   return { timeline, complete, goal, link };
 }
 
-const rows = [
-  createData( 
-    "January", 
-    "✓",  
-    'Create a Website',
-  ),
-  createData(
-    "",
-    "✓", 
-    "Create the Community Discord",
-    "https://discord.com/channels/927340117637603370/927340117637603373"    
-  ),  
-  createData(
-    "", 
-    "✓",
-    "Create the Hero Drop Community DAO (Free on the Rinkeby Network)",
-    "https://app.daohaus.club/dao/0x4/0xb50e7539fd9efde9a50808d93300b3afe55f2cc7"
-  ),  
-  createData(
-    "", 
-    "", 
-    "Create the Hero Drop Asset DAO (costs real money on the Polygon Network)"
-  ),
-  createData(
-    "February", 
-    "", 
-    "Grow the Discord and both DAOs"
-  ),
-  createData(
-    "", 
-    "", 
-    "Incentivize Playtesters and Content Creators"
-  ),
-  createData(
-    "June", 
-    "", 
-    "Define Partner Fee and find Partners"
-  ),
-  createData(
-    "December", 
-    "", 
-    "Hero Drop leaves beta"
-  ),
-  createData(
-    "", 
-    "", 
-    "Continue growing the community and run exciting events!"
-  ),
-];
+export default function Timeline({ Links }) {
 
-export default function Timeline() {
+  const rows = [
+    createData( 
+      "January", 
+      "✓",  
+      'Create a Website',
+    ),
+    createData(
+      "",
+      "✓", 
+      "Create the Community Discord",
+      Links.CommunityDAO   
+    ),  
+    createData(
+      "", 
+      "✓",
+      "Create the Hero Drop Community DAO (Free on the Rinkeby Network)",
+      Links.Discord 
+    ),  
+    createData(
+      "", 
+      "", 
+      "Create the Hero Drop Asset DAO (costs real money on the Polygon Network)"
+    ),
+    createData(
+      "February", 
+      "", 
+      "Grow the Discord and both DAOs"
+    ),
+    createData(
+      "", 
+      "", 
+      "Incentivize Playtesters and Content Creators"
+    ),
+    createData(
+      "June", 
+      "", 
+      "Define Partner Fee and find Partners"
+    ),
+    createData(
+      "December", 
+      "", 
+      "Hero Drop leaves beta"
+    ),
+    createData(
+      "", 
+      "", 
+      "Continue growing the community and run exciting events!"
+    ),
+  ];
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="simple table">

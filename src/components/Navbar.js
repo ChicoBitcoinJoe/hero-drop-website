@@ -4,7 +4,6 @@ import Link from '@mui/material/Link';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Divider from '@mui/material/Divider';
 import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -62,7 +61,7 @@ function createMenuItem(name, link) {
   return { name, link }
 }
 
-function Navbar({ label, Links }) {
+export default function Navbar({ label, Links }) {
   return (
     <Toolbar>
       <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2, p: 0.5 }}>
@@ -79,9 +78,8 @@ function Navbar({ label, Links }) {
       <NavMenu label="Community" menuItems={[
         createMenuItem('Discord', Links.Discord), 
         createMenuItem("Community DAO", Links.CommunityDAO), 
+        createMenuItem("Asset DAO", Links.AssetDAO), 
       ]} />
     </Toolbar>
   );
 }
-
-export default Navbar

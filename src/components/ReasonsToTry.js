@@ -3,8 +3,7 @@ import Grid from '@mui/material/Grid'
 
 export default function ReasonsToTry() {
   return <>
-    <Grid item xs={12} style={{ height: '100px' }}></Grid>
-    <Grid container item sx={{ px: 4 }}>
+    <Grid container>
       <Grid item xs={12} sm={6} md={4} sx={{ px: 5, py: 3, textAlign: "center" }}>
         <Typography variant="h5">Quick to Learn</Typography>
         <Typography variant="body1" sx={{ my: 2 }}>
@@ -24,6 +23,5 @@ export default function ReasonsToTry() {
         </Typography>
       </Grid>
     </Grid>
-    <Grid item xs={12} style={{ height: '100px' }}></Grid>
   </>
 }

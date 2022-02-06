@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.e74be6fd.css",
-    "main.js": "/static/js/main.c0af3a08.js",
-    "static/js/787.792544f5.chunk.js": "/static/js/787.792544f5.chunk.js",
-    "static/media/logo.png": "/static/media/logo.671f9e0336d45ca37c66.png",
-    "index.html": "/index.html",
-    "main.e74be6fd.css.map": "/static/css/main.e74be6fd.css.map",
-    "main.c0af3a08.js.map": "/static/js/main.c0af3a08.js.map",
-    "787.792544f5.chunk.js.map": "/static/js/787.792544f5.chunk.js.map"
+    "main.css": "/hero-drop-website/static/css/main.e74be6fd.css",
+    "main.js": "/hero-drop-website/static/js/main.2488eb85.js",
+    "static/js/787.792544f5.chunk.js": "/hero-drop-website/static/js/787.792544f5.chunk.js",
+    "static/media/logo.png": "/hero-drop-website/static/media/logo.671f9e0336d45ca37c66.png",
+    "index.html": "/hero-drop-website/index.html",
+    "main.e74be6fd.css.map": "/hero-drop-website/static/css/main.e74be6fd.css.map",
+    "main.2488eb85.js.map": "/hero-drop-website/static/js/main.2488eb85.js.map",
+    "787.792544f5.chunk.js.map": "/hero-drop-website/static/js/787.792544f5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e74be6fd.css",
-    "static/js/main.c0af3a08.js"
+    "static/js/main.2488eb85.js"
   ]
 }

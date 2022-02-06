@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/hero-drop-website/static/css/main.e74be6fd.css",
-    "main.js": "/hero-drop-website/static/js/main.2488eb85.js",
-    "static/js/787.792544f5.chunk.js": "/hero-drop-website/static/js/787.792544f5.chunk.js",
-    "static/media/logo.png": "/hero-drop-website/static/media/logo.671f9e0336d45ca37c66.png",
-    "index.html": "/hero-drop-website/index.html",
-    "main.e74be6fd.css.map": "/hero-drop-website/static/css/main.e74be6fd.css.map",
-    "main.2488eb85.js.map": "/hero-drop-website/static/js/main.2488eb85.js.map",
-    "787.792544f5.chunk.js.map": "/hero-drop-website/static/js/787.792544f5.chunk.js.map"
+    "main.css": "https://www.herodrop.org/static/css/main.e74be6fd.css",
+    "main.js": "https://www.herodrop.org/static/js/main.39933c9d.js",
+    "static/js/787.792544f5.chunk.js": "https://www.herodrop.org/static/js/787.792544f5.chunk.js",
+    "static/media/logo.png": "https://www.herodrop.org/static/media/logo.671f9e0336d45ca37c66.png",
+    "index.html": "https://www.herodrop.org/index.html",
+    "main.e74be6fd.css.map": "https://www.herodrop.org/static/css/main.e74be6fd.css.map",
+    "main.39933c9d.js.map": "https://www.herodrop.org/static/js/main.39933c9d.js.map",
+    "787.792544f5.chunk.js.map": "https://www.herodrop.org/static/js/787.792544f5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e74be6fd.css",
-    "static/js/main.2488eb85.js"
+    "static/js/main.39933c9d.js"
   ]
 }

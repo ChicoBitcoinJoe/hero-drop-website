@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -17,7 +16,7 @@ export default function Roadmap({ Links }) {
   const rows = [
     createData( 
       <b>January 2022</b>, 
-      "",
+      "✓",
       <b>Phase 0 - Laying the Foundation</b>, 
     ),
     createData( 
@@ -26,18 +25,18 @@ export default function Roadmap({ Links }) {
       'Create the Website',
     ),
     createData(
-      <Button size="small" href={Links.Community.Discord} target="_blank">Link</Button>,
+      "",
       "✓", 
       "Create the community Discord"      
     ),  
     createData(
-      <Button size="small" href={Links.Community.Discord} target="_blank">Link</Button>,
+      "",
       "✓", 
       "Deploy the DAO on the Polygon Network",
     ),
     createData(
       <b>February</b>, 
-      "", 
+      "✓", 
       <b>Phase 1 - It Is Dangerous To Go Alone!</b>
     ),
     createData(

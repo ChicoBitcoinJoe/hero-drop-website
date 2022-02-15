@@ -22,12 +22,12 @@ export default function Distribution() {
     createData( 
       "400,000", 
       "",  
-      "To community members who give tribute to the DAO in exchange for voting shares",
+      "To community members who give tribute to the DAO in exchange for voting shares.",
     ),
     createData( 
       "", 
       "150,000",  
-      "To playtesters and content creators that donate their time to improving Hero Drop before leaving beta",
+      "To playtesters and content creators that donate their time to improving Hero Drop before leaving beta.",
     ),
   ];
 

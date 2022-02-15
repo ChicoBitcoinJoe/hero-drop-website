@@ -7,7 +7,7 @@ import ActionTable from './ActionTable'
 
 export default function WhatIsHeroDrop() {
   return (
-    <Card sx={{ height: '100%' }}>
+    <Card>
       <Box sx={{ p: 2 }}>
         <Typography variant="h5">The Three Pillars of Adventure</Typography>
         <Typography variant="body1" sx={{ my: 2, textAlign: 'justify'}}>

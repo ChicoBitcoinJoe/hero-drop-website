@@ -23,7 +23,7 @@ export default function Home({ Links }) {
           <Grid item xs={12}>
             <HowToPlay Links={Links}/>
           </Grid>            
-          <Grid item sx={{ mt: 1, width: '100%', maxWidth: window.innerWidth - 16 }}>
+          <Grid item sx={{ width: '100%', maxWidth: window.innerWidth - 16 }}>
             <WhatIsHeroDrop />
           </Grid>
         </Grid>

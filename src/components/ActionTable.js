@@ -5,7 +5,6 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 
 function createData(talent, combatDescription, socialDescription, explorationDescription) {
   return { talent, combatDescription, socialDescription, explorationDescription };
@@ -46,7 +45,7 @@ const rows = [
 
 export default function ActionTable() {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table aria-label="simple table">
         <TableHead>
           <TableRow key={'Headers'}>

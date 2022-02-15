@@ -1,15 +1,20 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
+import MuiLink from '@mui/material/Link';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Hidden from '@mui/material/Hidden';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import Avatar from '@mui/material/Avatar';
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { FaDiscord as DiscordIcon } from "react-icons/fa";
 import logo from '../logo.png';
 
 function NavMenu({ label, menuItems}) {
@@ -29,7 +34,20 @@ function NavMenu({ label, menuItems}) {
       aria-expanded={open ? 'true' : undefined}
       onClick={handleClick}
       disableElevation
-      sx={{ color: "white" }}
+      sx={{ color: "white", borderColor: 'white', display: { xs: 'none', sm: 'flex' } }}
+      endIcon={<KeyboardArrowDownIcon/>}
+    >
+      {label}
+    </Button>
+    <Button
+      id="demo-customized-button"
+      aria-controls={open ? 'basic-menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? 'true' : undefined}
+      onClick={handleClick}
+      disableElevation
+      size="small"
+      sx={{ color: "white", borderColor: 'white', display: { xs: 'flex', sm: 'none' } }}
       endIcon={<KeyboardArrowDownIcon/>}
     >
       {label}
@@ -48,7 +66,16 @@ function NavMenu({ label, menuItems}) {
         menuItems.map((menuItem, index) => {
           return (
             <MenuItem key={index} sx={{ minWidth: '130px' }} disabled={!menuItem.link}>
-              <Link target="_blank" href={menuItem.link} color="inherit" underline="none">{menuItem.name}</Link>
+              <MuiLink sx={{ width: '100%' }} target="_blank" href={menuItem.link} color="inherit" underline="none">
+                <Grid container>
+                  <Grid item xs>
+                    {menuItem.name}
+                  </Grid>
+                  <Grid item>
+                    {menuItem.icon}
+                  </Grid>
+                </Grid>
+              </MuiLink>
             </MenuItem>
           )
         })
@@ -57,29 +84,30 @@ function NavMenu({ label, menuItems}) {
   </>
 }
 
-function createMenuItem(name, link) {
-  return { name, link }
+function createMenuItem(name, link, icon) {
+  return { name, link, icon }
 }
 
 export default function Navbar({ label, Links }) {
-  return (
+  const ref = React.createRef()
+  return <>    
     <Toolbar>
-      <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2, p: 0.5 }}>
+      <IconButton component={Link} edge="start" color="inherit" aria-label="menu" sx={{ mr: 2, p: 0.5 }} to="/">
         <Avatar alt="Remy Sharp" src={logo}/>
       </IconButton>
       <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
         <Hidden only="xs">{label}</Hidden>
       </Typography>
       <NavMenu label="Resources" menuItems={[
-        createMenuItem('Rulebook', Links.Rulebook), 
-        createMenuItem("Bard's Guide", Links.BardsGuide), 
-        createMenuItem('Printable Character Sheet', Links.CharacterSheet), 
+        createMenuItem('Rulebook', Links.Resources.Rulebook), 
+        createMenuItem("Bard's Guide", Links.Resources.BardsGuide), 
+        createMenuItem('Printable Character Sheet', Links.Resources.CharacterSheet), 
       ]} />
-      <NavMenu label="Community" menuItems={[
-        createMenuItem('Discord', Links.Discord), 
-        createMenuItem("Community DAO", Links.CommunityDAO), 
-        createMenuItem("Asset DAO", Links.AssetDAO), 
-      ]} />
+      <Divider orientation="vertical" flexItem sx={{ m: 1 }} />      
+      <Button component={Link} sx={{ color: "white" }} to="/dao">DAO</Button>
+      <Divider orientation="vertical" flexItem sx={{ m: 1 }} />
+      <IconButton ref={ref} href={Links.Community.Twitter} target="_blank"><TwitterIcon /></IconButton>
+      <IconButton ref={ref} href={Links.Community.Discord} target="_blank"><DiscordIcon /></IconButton>
     </Toolbar>
-  );
+  </>
 }

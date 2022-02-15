@@ -50,7 +50,7 @@ function RewardCard({ Links, array, color, action, children }) {
         <DialogActions sx={{ p: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Button fullWidth component="a" variant="outlined" color="warning" href={Links.DAOGuide} target="_blank" rel="noreferrer">
+              <Button fullWidth component="a" variant="outlined" color="warning" href={Links.Community.DAOGuide} target="_blank" rel="noreferrer">
                 What is a DAO?
               </Button>
             </Grid>
@@ -108,7 +108,7 @@ export default function Participation({ Links }) {
             Links={Links} 
             color={'111,113,189'} 
             array={["Earn","10 REP","per POST","to Promote!"]}
-            action={['Explore the Community DAO', Links.CommunityDAO]}>
+            action={['Explore the Community DAO', Links.Community.DAO]}>
             <DialogTitle>
               Earning Reputation
             </DialogTitle>
@@ -135,14 +135,14 @@ export default function Participation({ Links }) {
                 Links={Links} 
                 color={'125,186,111'} 
                 array={["Tribute","2 DAI","per SHARE","to Vote!"]}
-                action={['Explore the Asset DAO', Links.AssetDAO]}>
+                action={['Explore the Asset DAO', Links.Community.DAO]}>
                 <DialogTitle>
                   Tribute Dai for Shares
                 </DialogTitle>
                 <DialogContent>
                   SHARES are used to decide on governance decisions in the DAO such as new partners, paid positions, and rewarding content creators for things such as NFTs and other IP. Any distribution phases after the first are approved by the DAO using SHARES as votes.
                   <Divider sx={{ my: 4 }} />
-                  A total of 400,000 SHARES will be distributed to those who tribute Dai to the Asset DAO. 
+                  A total of 400,000 SHARES will be distributed to those who tribute Dai to the Asset DAO. <a style={{ color: 'white' }} href="https://makerdao.com/en/" >What is Dai?</a>
                   <Grid container justifyContent="center" sx={{ p: 2 }}>
                     <b>2 Dai</b>
                     <DoubleArrowIcon sx={{ mx: 2}} />
@@ -157,17 +157,18 @@ export default function Participation({ Links }) {
                 Links={Links} 
                 color={'187,10,30'} 
                 array={["Earn up to","60 LOOT","per HOUR",currentAction]}
-                action={['Explore the Asset DAO', Links.AssetDAO]}>
+                action={['Explore the Asset DAO', Links.Community.DAO]}>
                 <DialogTitle>
                   Earn LOOT in the Asset DAO
                 </DialogTitle>
                 <DialogContent>
                   You can earn LOOT rewards by tributing your time to the Asset DAO.
                   <Divider sx={{ my: 4 }} />
-                  A total of <b>150,000 LOOT</b> will be distributed to those who tribute their time.
+                  A total of <b>150,000 LOOT</b> will be distributed to those who tribute their time. In the event all voting shares are distributed, each LOOT will be worth roughly <b>1 dollar.</b>
                   <ul>
                     <li>60 LOOT per hour per piece of concept art</li>
                     <li>60 LOOT per hour to write a campaign</li>
+                    <li>60 LOOT per hour to translate content</li>
                     <li>60 LOOT per hour to create a unique creature</li>
                     <li>60 LOOT per hour to run a playtest session</li>
                     <li>30 LOOT per hour to join a playtest session</li>

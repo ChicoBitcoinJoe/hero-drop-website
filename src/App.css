@@ -1,10 +1,4 @@
-.App {
-  
-}
-
-.App-header {
-  margin-top: 20vh;
-  min-height: calc(50vh);
+.App-header {  
   font-size: calc(10px + 2vmin);
   text-align: center;
   display: flex;
@@ -23,6 +17,10 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+ol {
+  list-style-type: lower-alpha;
 }
 
 @media (prefers-reduced-motion: no-preference) {

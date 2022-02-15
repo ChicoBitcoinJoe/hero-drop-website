@@ -1,80 +1,78 @@
 import * as React from 'react'
-import Grid from '@mui/material/Grid'
-import AppBar from '@mui/material/AppBar'
-import Typography from '@mui/material/Typography'
-import { ThemeProvider } from '@mui/material/styles'
-import CssBaseline from '@mui/material/CssBaseline'
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
 
-import theme from './theme'
+import { ThemeProvider } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import CssBaseline from '@mui/material/CssBaseline'
+import Link from '@mui/material/Link'
+
 import './App.css'
-import Header from './components/Header'
+import theme from './theme'
+import Home from './routes/Home'
+import Dao from './routes/Dao'
 import Navbar from './components/Navbar'
-import WhatIsHeroDrop from './components/WhatIsHeroDrop'
-import HowToPlay from './components/HowToPlay'
-import ReasonsToTry from './components/ReasonsToTry'
-import ActionTable from './components/ActionTable'
-import Roadmap from './components/Roadmap'
-import AboutTheCreator from './components/About'
-import Participation from './components/Participation'
 
 const Links = {
-  Rulebook: "https://docs.google.com/document/d/1s07JBt4ydLFZTLBsmE2q0BFiW32j7CPS1l54scmiiJo/edit?usp=sharing",
-  BardsGuide: "https://docs.google.com/document/d/1sYbL_LNhaXJnUL4doECauA8FChkL0_o0P5XuVVxby20/edit?usp=sharing",
-  CharacterSheet: "https://drive.google.com/file/d/1RHzUlfzSAGwazND7HJ1TnysoT8l59hZ7/view?usp=sharing",
-  CommunityDAO: "https://app.daohaus.club/dao/0x4/0x9747a913f50a2f1b9f1a7bb2d4fbc4fb1d678bbb",
-  AssetDAO: "https://app.daohaus.club/dao/0x89/0xa7ddfaaa605b9699e08543d980b40ffb94894ba7",
-  Discord: "https://discord.com/channels/927340117637603370/927340117637603373",
-  DAOGuide: "https://docs.google.com/document/d/1HlgXcBMiAK_-e8HiFC_iHRRcKyTarUv5W_8tjAPXbVs/edit?usp=sharing",
-  LearnMore: {
-    reputation: "https://docs.google.com/document/d/1OtRpsBs3KKUoFFBEI32Chy5InLYiEWQWHZAEOxnGcc0/edit#heading=h.p8ixy7bw1nmh",
-    loot: "https://docs.google.com/document/d/1OtRpsBs3KKUoFFBEI32Chy5InLYiEWQWHZAEOxnGcc0/edit#heading=h.fzi6z9bd7o2s",
-    shares: "https://docs.google.com/document/d/1OtRpsBs3KKUoFFBEI32Chy5InLYiEWQWHZAEOxnGcc0/edit#heading=h.xmbk9xljbred",
-  }
+  Resources: {
+    Rulebook: "https://docs.google.com/document/d/1s07JBt4ydLFZTLBsmE2q0BFiW32j7CPS1l54scmiiJo/edit?usp=sharing",
+    BardsGuide: "https://docs.google.com/document/d/1sYbL_LNhaXJnUL4doECauA8FChkL0_o0P5XuVVxby20/edit?usp=sharing",
+    CharacterSheet: "https://drive.google.com/file/d/1RHzUlfzSAGwazND7HJ1TnysoT8l59hZ7/view?usp=sharing",
+  },
+  Community: {
+    DAO: "https://app.daohaus.club/dao/0x89/0xa7ddfaaa605b9699e08543d980b40ffb94894ba7",
+    Discord: "https://discord.com/channels/927340117637603370/927340117637603373",
+    Twitter: "https://twitter.com/HeroDropTTRPG",
+    TestnetDAO: "https://app.daohaus.club/dao/0x4/0x9747a913f50a2f1b9f1a7bb2d4fbc4fb1d678bbb",
+  },
+  HowTo: {
+    Metamask: "https://metamask.io/",
+    Ledger: "https://www.ledger.com/",
+    StoreSeed: "https://www.coinbase.com/learn/crypto-basics/what-is-a-seed-phrase",
+    Polygon: "https://docs.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/",
+    Matic: "https://www.moonpay.com/buy/matic",
+    Dai: "https://makerdao.com/en/",
+    Uniswap: "https://app.uniswap.org/#/swap?chain=polygon",
+  },
+  LearnMore: "https://ethereum.org/en/dao/",
+  ProfilePicture: "https://avatars.githubusercontent.com/u/21048886?v=4"
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      // behavior: 'smooth', 
+    });
+  }, [pathname]);
+
+  return null;
 }
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="fixed" color="primary" elevation={0}>
-        <Navbar label='Hero Drop' Links={Links} />
-      </AppBar>
-      <Header />
-      <Grid container item xs={12} justifyContent={'center'}>
-        <Grid sx={{ maxWidth: '996px', p: 2 }}>
-          <Grid item xs={12} sx={{ mt: 4, mb: 8 }}>
-            <ReasonsToTry />
-          </Grid>
-
-          <Participation Links={Links} />
-
-          <Grid container spacing={2} sx={{ mt: 16 }}>            
-            <Grid item xs={12}>
-              <HowToPlay />
-            </Grid>            
-            <Grid item xs={12}>
-              <WhatIsHeroDrop />
-            </Grid>
-          </Grid>
-            
-          <Grid item sx={{ mt: 2, width: '100%', maxWidth: window.innerWidth - 32 }}>
-            <ActionTable />
-          </Grid>
-      
-          <Grid item sx={{ width: '100%', maxWidth: window.innerWidth - 32 }}>
-            <Typography variant="h4" sx={{ mt: 8, mb: 4 }}>Roadmap</Typography>
-            <Roadmap Links={Links} />
-          </Grid>                    
-
-          <Grid item xs={12} sx={{ mt: 8 }}>
-            <AboutTheCreator />
-          </Grid>
-        </Grid>
-    
-        <AppBar position="static" color="primary" elevation={2} sx={{ p: 3, textAlign: 'center' }}>
-          contact me - chicobitcoinjoe@gmail.com
+      <Router>
+        <ScrollToTop />
+        <AppBar position="fixed" color="primary" elevation={0}>
+          <Navbar label='Hero Drop' Links={Links} />
         </AppBar>
-      </Grid>
+        <div style={{ height: '56px' }}></div>
+        <Routes>
+          <Route exact path="/" element={<Home Links={Links} />} />
+          <Route exact path="/dao" element={<Dao Links={Links} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <AppBar position="static" color="primary" elevation={2} sx={{ mt: 8, p: 3, textAlign: 'center' }}>
+          <div>
+            Any questions? Email <Link sx={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} href="mailto:support@herodrop.org" target="_blank">support@herodrop.org</Link>
+          </div>
+        </AppBar>
+      </Router>
     </ThemeProvider>
   )
 }

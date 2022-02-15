@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "https://www.herodrop.org/static/css/main.6ce2d795.css",
-    "main.js": "https://www.herodrop.org/static/js/main.d4bba3d5.js",
+    "main.js": "https://www.herodrop.org/static/js/main.da3fc047.js",
     "static/js/787.792544f5.chunk.js": "https://www.herodrop.org/static/js/787.792544f5.chunk.js",
     "static/media/logo.png": "https://www.herodrop.org/static/media/logo.671f9e0336d45ca37c66.png",
     "index.html": "https://www.herodrop.org/index.html",
     "main.6ce2d795.css.map": "https://www.herodrop.org/static/css/main.6ce2d795.css.map",
-    "main.d4bba3d5.js.map": "https://www.herodrop.org/static/js/main.d4bba3d5.js.map",
+    "main.da3fc047.js.map": "https://www.herodrop.org/static/js/main.da3fc047.js.map",
     "787.792544f5.chunk.js.map": "https://www.herodrop.org/static/js/787.792544f5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6ce2d795.css",
-    "static/js/main.d4bba3d5.js"
+    "static/js/main.da3fc047.js"
   ]
 }

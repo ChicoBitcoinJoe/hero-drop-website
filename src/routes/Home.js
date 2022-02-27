@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
@@ -8,7 +9,23 @@ import ReasonsToTry from '../components/ReasonsToTry'
 import Roadmap from '../components/Roadmap'
 import AboutTheCreator from '../components/About'
 
+function useWindowWidth() {
+  
+  const [windowWidth, setWindowWidth] = React.useState()
+  React.useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+
+  return windowWidth
+}
+
 export default function Home({ Links }) {
+  const windowWidth = useWindowWidth()
   return <>  
     <div style={{ height: '10vh' }}></div>
     <Grid container item xs={12} justifyContent={'center'}>
@@ -23,12 +40,12 @@ export default function Home({ Links }) {
           <Grid item xs={12}>
             <HowToPlay Links={Links}/>
           </Grid>            
-          <Grid item sx={{ width: '100%', maxWidth: window.innerWidth - 16 }}>
+          <Grid item sx={{ width: '100%', maxWidth: windowWidth - 16 }}>
             <WhatIsHeroDrop />
           </Grid>
         </Grid>
 
-        <Grid item sx={{ width: '100%', maxWidth: window.innerWidth - 32 }}>
+        <Grid item sx={{ width: '100%', maxWidth: windowWidth - 32 }}>
           <Typography variant="h4" align="center" sx={{ mt: 8, mb: 4 }}>Roadmap</Typography>
           <Roadmap Links={Links} />
         </Grid>          

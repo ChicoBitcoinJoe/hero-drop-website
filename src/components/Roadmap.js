@@ -42,12 +42,12 @@ export default function Roadmap({ Links }) {
     createData(
       "", 
       "", 
-      "Grow number of members in the community Discord"
+      "Grow number of members in the community Discord to 1,000"
     ),
     createData(
       "",
       "", 
-      "Grow the number of members in the Hero Drop DAO",
+      "Grow the number of members in the Hero Drop DAO to 100",
     ),
     createData(
       "",
@@ -55,9 +55,14 @@ export default function Roadmap({ Links }) {
       "Incentivize playtesters and content creators with rewards",
     ),
     createData(
-      <b>Members &gt; 100</b>, 
+      <b>July</b>, 
       "", 
       <b>Phase 2 - Boss Fight</b>
+    ),
+    createData(
+      "", 
+      "", 
+      "Hero Drop leave alpha!"
     ),
     createData(
       "", 

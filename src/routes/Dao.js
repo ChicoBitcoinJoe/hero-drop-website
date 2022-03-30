@@ -1,3 +1,4 @@
+import * as React from 'react'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
@@ -5,8 +6,25 @@ import Typography from '@mui/material/Typography'
 import CollectionsBookmarkRoundedIcon from '@mui/icons-material/CollectionsBookmarkRounded'
 
 import Distribution from '../components/Distribution'
+import Roadmap from '../components/Roadmap'
+
+function useWindowWidth() {
+  
+  const [windowWidth, setWindowWidth] = React.useState()
+  React.useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [])
+
+  return windowWidth
+}
 
 export default function Dao({ Links }) {
+  const windowWidth = useWindowWidth()
   return <>
     <div style={{ height: '10vh' }}></div>
     <Grid container justifyContent={'center'}>
@@ -116,6 +134,9 @@ export default function Dao({ Links }) {
               </Typography>
             </li>
           </ol>
+        </Grid>
+        <Grid item sx={{ width: '100%', maxWidth: windowWidth - 32 }}>          
+          <Roadmap Links={Links} />
         </Grid>
       </Grid>
     </Grid>

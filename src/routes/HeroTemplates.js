@@ -25,40 +25,13 @@ function useWindowWidth() {
   return windowWidth
 }
 
-export default function Home({ Links }) {
+export default function ClassTemplates({ Links }) {
   const windowWidth = useWindowWidth()
   return <>
     <AppBar position="fixed" color="primary" elevation={0} className="hide-on-print">
       <Navbar label='Hero Drop' Links={Links} />
     </AppBar>
-    <div style={{ height: '56px' }}></div>        
-    <div style={{ height: '10vh' }}></div>
-    <Grid container item xs={12} justifyContent={'center'}>
-      <Grid sx={{ maxWidth: '996px', p: 2 }}>
-        <Grid container justifyContent="center">
-          <Header />
-        </Grid>
-        <Grid item xs={12}>
-          <ReasonsToTry />
-        </Grid>
-        <Grid container spacing={2} sx={{ mt: 8 }}>            
-          <Grid item xs={12}>
-            <HowToPlay Links={Links}/>
-          </Grid>            
-          <Grid item sx={{ width: '100%', maxWidth: windowWidth - 16 }}>
-            <WhatIsHeroDrop />
-          </Grid>
-        </Grid>                
-        <Grid item container spacing={4} sx={{ mt: 8 }}>
-          <Grid container item xs={12} sm={5} justifyContent="center">
-            <img style={{ borderRadius: '50%', border: '4px solid white', height: '256px' }} src={Links.ProfilePicture} alt="creator's face" />
-          </Grid>
-          <Grid item xs>
-            <AboutTheCreator />
-          </Grid>
-        </Grid>
-      </Grid>      
-    </Grid>
+    <div style={{ height: '56px' }}></div>
     <AppBar position="static" color="primary" elevation={2} sx={{ mt: 8, p: 3, textAlign: 'center' }} className="hide-on-print">
       <div>
         Any questions? Email <Link sx={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} href="mailto:support@herodrop.org" target="_blank">support@herodrop.org</Link>

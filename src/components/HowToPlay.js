@@ -32,7 +32,7 @@ export default function HowToPlay({ Links }) {
             </CardContent>
             <CardActions>
               <Button href={Links.Resources.Rulebook} target="_blank" variant="outlined" sx={{ color: 'white' }}>Rulebook</Button>
-              <Button href={Links.Resources.CharacterSheet} target="_blank" variant="outlined" sx={{ color: 'white' }}>Character Sheet</Button>
+              <Button href={"/character-sheet"} target="_blank" variant="outlined" sx={{ color: 'white' }}>Character Sheet</Button>
             </CardActions>
           </Card>
         </Grid>

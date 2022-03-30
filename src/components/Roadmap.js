@@ -1,14 +1,15 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import * as React from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
 function createData(left, middle, right) {
-  return { left, middle, right };
+  return { left, middle, right }
 }
 
 export default function Roadmap({ Links }) {
@@ -94,9 +95,10 @@ export default function Roadmap({ Links }) {
       "", 
       "Use funds collected from partners to run exciting events!"
     ),
-  ];
+  ]
 
   return <>
+    <Typography variant="h4" align="center" sx={{ mt: 8, mb: 4 }}>Roadmap</Typography>
     <TableContainer component={Paper}>
       <Table aria-label="simple table">
         <TableHead>

@@ -11,7 +11,7 @@ export default function Header() {
       </Typography>
       <Typography variant="h2" sx={{ display: { xs: 'block', sm: 'none' }}}>
         Hero Drop
-      </Typography>      
+      </Typography>
     </Grid>
     <Grid container justifyContent="center">
       <Typography variant="h6" sx={{ color: 'rgba(255,255,255,0.5)' }} align="center">

@@ -1,17 +1,15 @@
 import * as React from 'react'
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 
 import { ThemeProvider } from '@mui/material/styles'
-import AppBar from '@mui/material/AppBar'
 import CssBaseline from '@mui/material/CssBaseline'
-import Link from '@mui/material/Link'
 
 import './App.css'
 import theme from './theme'
 import Home from './routes/Home'
-import Dao from './routes/Dao'
-import Navbar from './components/Navbar'
+import HeroTemplates from './routes/HeroTemplates'
+import CharacterSheet from './routes/CharacterSheet'
+// import Dao from './routes/Dao'
 
 const Links = {
   Resources: {
@@ -41,40 +39,18 @@ const Links = {
   ProfilePicture: "https://avatars.githubusercontent.com/u/21048886?v=4"
 }
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      // behavior: 'smooth', 
-    });
-  }, [pathname]);
-
-  return null;
-}
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <ScrollToTop />
-        <AppBar position="fixed" color="primary" elevation={0}>
-          <Navbar label='Hero Drop' Links={Links} />
-        </AppBar>
-        <div style={{ height: '56px' }}></div>
+      <Router>        
         <Routes>
           <Route exact path="/" element={<Home Links={Links} />} />
-          <Route exact path="/dao" element={<Dao Links={Links} />} />
+          {/* <Route exact path="/dao" element={<Dao Links={Links} />} /> */}
+          <Route exact path="/hero-templates" element={<HeroTemplates  Links={Links} />} />
+          <Route exact path="/character-sheet" element={<CharacterSheet />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        <AppBar position="static" color="primary" elevation={2} sx={{ mt: 8, p: 3, textAlign: 'center' }}>
-          <div>
-            Any questions? Email <Link sx={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} href="mailto:support@herodrop.org" target="_blank">support@herodrop.org</Link>
-          </div>
-        </AppBar>
       </Router>
     </ThemeProvider>
   )

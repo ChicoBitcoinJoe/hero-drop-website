@@ -84,8 +84,8 @@ function NavMenu({ label, menuItems}) {
   </>
 }
 
-function createMenuItem(name, link, icon) {
-  return { name, link, icon }
+function createMenuItem(name, link, options) {
+  return { name, link, options }
 }
 
 export default function Navbar({ label, Links }) {
@@ -101,10 +101,11 @@ export default function Navbar({ label, Links }) {
       <NavMenu label="Resources" menuItems={[
         createMenuItem('Rulebook', Links.Resources.Rulebook), 
         createMenuItem("Bard's Guide", Links.Resources.BardsGuide), 
-        createMenuItem('Printable Character Sheet', Links.Resources.CharacterSheet), 
+        createMenuItem('Hero Templates', '/hero-templates'),
+        createMenuItem('Character Sheet', '/character-sheet'),
       ]} />
-      <Divider orientation="vertical" flexItem sx={{ m: 1 }} />      
-      <Button component={Link} sx={{ color: "white" }} to="/dao">DAO</Button>
+      {/* <Divider orientation="vertical" flexItem sx={{ m: 1 }} />       */}
+      {/* <Button component={Link} sx={{ color: "white" }} to="/dao">DAO</Button> */}
       <Divider orientation="vertical" flexItem sx={{ m: 1 }} />
       <IconButton ref={ref} href={Links.Community.Twitter} target="_blank"><TwitterIcon /></IconButton>
       <IconButton ref={ref} href={Links.Community.Discord} target="_blank"><DiscordIcon /></IconButton>

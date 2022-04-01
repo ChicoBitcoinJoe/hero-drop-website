@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { ThemeProvider } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
@@ -9,6 +10,8 @@ import HowToPlay from '../components/HowToPlay'
 import ReasonsToTry from '../components/ReasonsToTry'
 import AboutTheCreator from '../components/About'
 import Navbar from '../components/Navbar'
+
+import theme from '../theme'
 
 function useWindowWidth() {
   
@@ -28,6 +31,8 @@ function useWindowWidth() {
 export default function Home({ Links }) {
   const windowWidth = useWindowWidth()
   return <>
+  <ThemeProvider theme={theme}>
+
     <AppBar position="fixed" color="primary" elevation={0} className="hide-on-print">
       <Navbar label='Hero Drop' Links={Links} />
     </AppBar>
@@ -64,5 +69,6 @@ export default function Home({ Links }) {
         Any questions? Email <Link sx={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} href="mailto:support@herodrop.org" target="_blank">support@herodrop.org</Link>
       </div>
     </AppBar>
+  </ThemeProvider>
   </>
 }

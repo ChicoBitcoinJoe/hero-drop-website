@@ -1,41 +1,14 @@
 import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { Routes, Route, Navigate } from "react-router-dom"
 
-import Header from '../components/Header'
-import WhatIsHeroDrop from '../components/WhatIsHeroDrop'
-import HowToPlay from '../components/HowToPlay'
-import ReasonsToTry from '../components/ReasonsToTry'
-import AboutTheCreator from '../components/About'
-import Navbar from '../components/Navbar'
+import CharacterSheet from '../routes/CharacterSheet'
+import Fighter from '../HeroTemplates/Fighter'
 
-function useWindowWidth() {
-  
-  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
-  React.useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
-
-  return windowWidth
-}
-
-export default function ClassTemplates({ Links }) {
-  const windowWidth = useWindowWidth()
+export default function HeroTemplates({ Links }) {
   return <>
-    <AppBar position="fixed" color="primary" elevation={0} className="hide-on-print">
-      <Navbar label='Hero Drop' Links={Links} />
-    </AppBar>
-    <div style={{ height: '56px' }}></div>
-    <AppBar position="static" color="primary" elevation={2} sx={{ mt: 8, p: 3, textAlign: 'center' }} className="hide-on-print">
-      <div>
-        Any questions? Email <Link sx={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }} href="mailto:support@herodrop.org" target="_blank">support@herodrop.org</Link>
-      </div>
-    </AppBar>
+    <Routes>
+      <Route exact path="/fighter" element={<CharacterSheet data={Fighter} />} />
+      <Route path="*" element={<Navigate to="/" />} />
+    </Routes>
   </>
 }

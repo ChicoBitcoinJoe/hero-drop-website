@@ -1,5 +1,4 @@
-
-export default {
+const file = {
   playerName: 'Joseph Reed',
   characterName: 'King Richard',
   level: '6',
@@ -11,29 +10,67 @@ export default {
   weight: '265 lbs',
   height: '6ft 3in',
   pillars: {
-    combat: '1',
+    combat: '0',
     social: '1',
-    exploration: '1',
-    magic: '1',
+    exploration: '5',
+    magic: '6',
+  },
+  talents: {
+    athletics: '0',
+    fortitude: '1',
+    influence: '2',
+    knowledge: '4',
+    perception: '5',
+    stealth: '6',
   },
   resources: {
-    health: '1',
-    stamina: '1',
-    will: '1',
-    mana: '1',
-    wealth: '1',
+    health: '5',
+    stamina: '10',
+    will: '15',
+    mana: '20',
+    wealth: '25',
   },
   feats: {
-    background: 'background',
-    level1: 'level1',
-    level2: 'level2',
-    level3: 'level3',
-    level4: 'level4',
-    level5: 'level5',
-    level6: 'level6',
-    attunement1: 'attunement1',
-    attunement2: 'attunement2',
-    attunement3: 'attunement3',
+    background: {
+      name: 'background',
+      value: '',
+    },
+    level1: {
+      name: 'Rage',
+      value: 'Once per short rest you have physical resistance(1) and advantage in Athletics contests for one minute.',
+    },
+    level2: {
+      name: 'level2',
+      value: '',
+    },
+    level3: {
+      name: 'level3',
+      value: '',
+    },
+    level4: {
+      name: 'level4',
+      value: '',
+    },
+    level5: {
+      name: 'level5',
+      value: '',
+    },
+    level6: {
+      name: 'level6',
+      value: '',
+    },
+    attunement1: {
+      name: 'attunement1',
+      value: '',
+    },
+    attunement2: {
+      name: 'attunement2',
+      value: '',
+    },
+    attunement3: {
+      name: 'attunement3',
+      value: '',
+    },
   },
   equipment: [],
   proficiencies: [],
@@ -54,3 +91,5 @@ export default {
     throwingPenalty3: '1',
   }
 }
+
+export default file

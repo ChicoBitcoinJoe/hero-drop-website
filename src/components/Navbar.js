@@ -106,16 +106,16 @@ function NavMenu({ label, menuItems}) {
         </ListItemButton>
         <Collapse in={openList} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/hero-templates/fighter">
+            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/fighter">
               <ListItemText primary="Fighter" />
             </ListItemButton>
-            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/hero-templates/rogue">
+            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/rogue">
               <ListItemText primary="Rogue" />
             </ListItemButton>
-            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/hero-templates/wizard">
+            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/wizard">
               <ListItemText primary="Wizard" />
             </ListItemButton>
-            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/hero-templates/cleric">
+            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/cleric">
               <ListItemText primary="Cleric" />
             </ListItemButton>
           </List>

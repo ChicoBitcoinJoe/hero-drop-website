@@ -47,8 +47,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home Links={Links} />} />
           {/* <Route exact path="/dao" element={<Dao Links={Links} />} /> */}
-          <Route exact path="/hero-templates/*" element={<HeroTemplates Links={Links} />} />
           <Route exact path="/character-sheet" element={<CharacterSheet />} />
+          <Route exact path="/character-sheet/*" element={<HeroTemplates />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>

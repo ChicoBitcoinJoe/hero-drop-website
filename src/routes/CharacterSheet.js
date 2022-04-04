@@ -78,7 +78,8 @@ function Lines({ rows }) {
   return lines;
 }
 
-function Notes({ xs, sx, offset, rows, height, title, label, midLabel, endLabel }) {
+function Notes({ xs, sx, offset, rows, height, title, value, label, midLabel, endLabel }) {
+  console.log(value)
   return (
     <Grid item xs={xs} sx={sx}>
       <Border style={{ padding: title ? '6px 10px' : '3px 10px', height: height, width: '100%' }}>
@@ -98,9 +99,7 @@ function Notes({ xs, sx, offset, rows, height, title, label, midLabel, endLabel 
           <b>{endLabel}</b>
         </Grid>
         <Grid item xs={12} style={{ position: 'relative' }}>
-          <InputBase fullWidth style={{ position: 'absolute', padding: '0px' }} multiline rows={rows}
-            inputProps={{ style: { fontSize: '12px', lineHeight: '21px', height: height-48 } }} 
-          />
+          <TextArea style={{ position: 'absolute' }} rows={rows} height={height - (label ? 52 : 32)} value={value} />
         </Grid>
         <Lines rows={rows} />
       </Border>
@@ -190,12 +189,12 @@ function Resource({ name, label, value, marginBottom }) {
 function Feat({ label, name, value }) {
   return (
     <Border container xs={12} style={{ height: '76.8px', marginBottom: '.1in' }}>
-      <Grid item xs={6} style={{ height: '20px', marginTop: '-3px' }}>
-      <InputBase defaultValue={name} sx={{ p: 0 }} 
-        inputProps={{ style: { padding: '0px 4px', lineHeight: '15px', fontSize: '11px', fontWeight: 'bold' } }} 
-      />
+      <Grid item xs style={{ height: '20px', marginTop: '-3px' }}>
+        <InputBase defaultValue={name} sx={{ p: 0 }} fullWidth
+          inputProps={{ style: { padding: '0px 4px', lineHeight: '15px', fontSize: '11px', fontWeight: 'bold' } }} 
+        />
       </Grid>
-      <Grid item xs={6} style={{ height: '20px' }}>
+      <Grid item style={{ height: '20px' }}>
         <div style={{ fontSize: '11px', margin: '2px 4px 0 4px', fontWeight: 'bold', textAlign: 'right' }}>{label}</div>
       </Grid>
       <Grid item xs={12} style={{ marginTop: '-10px' }}>
@@ -233,6 +232,15 @@ function Input({ xs, sx, label, value, center }) {
   )
 }
 
+function TextArea({ style, rows, height, align, value }) {
+  console.log(value)
+  return (
+    <InputBase multiline fullWidth rows={rows} style={{ padding: '0px', ...style }} defaultValue={value}
+      inputProps={{ style: { height: height, textAlign: align, fontSize: '12px', lineHeight: '21px' } }} 
+    />
+  )
+}
+
 export default function CharacterSheet({ file }) {
   const [data, ] = React.useState({ ...BlankFile, ...file })
   const windowTitle = data.characterName ? data.characterName : 'Character Sheet'
@@ -257,35 +265,35 @@ export default function CharacterSheet({ file }) {
       <Grid container item xs={8} style={{ maxHeight: '336px' }}>
         <Grid container item xs={6} style={{ height: '3.5in'}}>
           <Grid container item style={{ width: '0.833in', marginRight: '8px', }}>
-            <Pillar name={'Combat'} score={data.pillars.combat} />
-            <Pillar name={'Social'} score={data.pillars.social} />
-            <Pillar name={'Exploration'} score={data.pillars.exploration} />
-            <Pillar name={'Magic'} score={data.pillars.magic} />
+            <Pillar name={'Combat'} score={data.combat} />
+            <Pillar name={'Social'} score={data.social} />
+            <Pillar name={'Exploration'} score={data.exploration} />
+            <Pillar name={'Magic'} score={data.magic} />
           </Grid>
           <Grid container item xs>
-            <Talent name={'Athletics'} score={data.talents.athletics} />
-            <Talent name={'Fortitude'} score={data.talents.fortitude} />
-            <Talent name={'Influence'} score={data.talents.influence} />
-            <Talent name={'Knowledge'} score={data.talents.knowledge} />
-            <Talent name={'Perception'} score={data.talents.perception} />
-            <Talent name={'Stealth'} score={data.talents.stealth} />
+            <Talent name={'Athletics'} score={data.athletics} />
+            <Talent name={'Fortitude'} score={data.fortitude} />
+            <Talent name={'Influence'} score={data.influence} />
+            <Talent name={'Knowledge'} score={data.knowledge} />
+            <Talent name={'Perception'} score={data.perception} />
+            <Talent name={'Stealth'} score={data.stealth} />
           </Grid>
         </Grid>
         <Grid container item xs={6} style={{ padding: '0 .1in', height: '3.5in' }}>
-          <Resource name={'Health Maximum'} value={data.resources.health} xs={12} marginBottom />
-          <Resource name={'Stamina Maximum'} value={data.resources.stamina} xs={12} marginBottom />
-          <Resource name={'Will Maximum'} value={data.resources.will} xs={12} marginBottom />
-          <Resource name={'Mana Maximum'} value={data.resources.mana} xs={12} marginBottom />
+          <Resource name={'Health Maximum'} value={data.health} xs={12} marginBottom />
+          <Resource name={'Stamina Maximum'} value={data.stamina} xs={12} marginBottom />
+          <Resource name={'Will Maximum'} value={data.will} xs={12} marginBottom />
+          <Resource name={'Mana Maximum'} value={data.mana} xs={12} marginBottom />
         </Grid>
         <Grid container item style={{ paddingRight: '.1in' }}>
           <Grid container item style={{ marginTop: '.1in' }}>
             <Grid container item style={{ width: '240px', marginRight: '-.1in' }}>
-              <Notes xs={12} title={'Proficiencies'} offset={'2.5px'} rows={22} height={509} />
+              <Notes xs={12} title={'Proficiencies'} value={data.proficiencies} offset={'2.5px'} rows={22} height={509} />
             </Grid>
             <Grid container item xs style={{ paddingLeft: '.2in' }}>
-              <Resource name="Wealth Income" marginBottom value={data.resources.wealth} label={<span>on person &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; in bank</span>} />
-              <Notes xs={12} title={'Race Perks'} sx={{ pb: '.1in' }} rows={7} height={200} />
-              <Notes xs title="Reputation" offset={'7px'} label={'Location'} midLabel="Honor" endLabel="Infamy" rows={7} height={213} />
+              <Resource name="Wealth Income" marginBottom value={data.wealth} label={<span>on person <span style={{ marginRight: '.56in' }}></span> in bank</span>} />
+              <Notes xs={12} title={'Race Perks'} value={data.racePerks} sx={{ pb: '.1in' }} rows={7} height={200} />
+              <Notes xs title="Reputation" offset={'7px'} label={'Location'} midLabel="Honor" endLabel="Infamy" rows={7} height={213} value={data.reputation} />
             </Grid>
           </Grid>
         </Grid>
@@ -311,18 +319,18 @@ export default function CharacterSheet({ file }) {
         <Title>Hero Drop</Title>
         <CharacterName value={data.characterName} />
         <Border container xs style={{ marginLeft: '.1in', padding: '0 4px' }}>
-          <Input xs={4} sx={{ pr: '8px' }} label={'Eyes'} />
-          <Input xs={4} sx={{ pr: '8px' }} label={'Hair'} />
-          <Input xs={4} label={'Skin'} />
-          <Input xs={4} sx={{ pr: '8px' }} label={'Carry Capacity (lbs)'} />
-          <Input xs={4} sx={{ pr: '8px' }} label={'Max March Speed'} />
-          <Input xs={4} label={'Max March Distance'} />
+          <Input xs={4} sx={{ pr: '8px' }} label={'Eyes'} value={data.eyes} />
+          <Input xs={4} sx={{ pr: '8px' }} label={'Hair'} value={data.hair} />
+          <Input xs={4} label={'Skin'} value={data.skin} />
+          <Input xs={4} sx={{ pr: '8px' }} label={'Carry Capacity (lbs)'} value={data.carryCapacity} />
+          <Input xs={4} sx={{ pr: '8px' }} label={'Max Marching Speed'} value={data.maxMarchSpeed} />
+          <Input xs={4} label={'Max Marching Distance'} value={data.maxMarchDistance} />
         </Border>
       </Grid>
 
       <Grid container item xs={4}>
-        <Notes xs={12} title={'Equipment'} offset={'5px'} label={'Item Name'} midLabel="Equipped" endLabel="Weight" rows={24} height={575} />
-        <Notes xs={12} sx={{ pt: '.1in' }} title={'Character Description'} rows={11} height={283} />
+        <Notes xs={12} value={data.equipment} title={'Equipment'} offset={'5px'} label={'Item Name'} midLabel="Equipped" endLabel="Weight" rows={24} height={575} />
+        <Notes xs={12} value={data.description} sx={{ pt: '.1in' }} title={'Character Description'} rows={11} height={283} />
       </Grid>
       <Grid container item xs={8} style={{ fontSize: '10px' }}>
         <Grid item xs={6} sx={{ pl: '.1in' }} >
@@ -331,21 +339,17 @@ export default function CharacterSheet({ file }) {
               <b>Movement</b>
               <b>Speed</b>
             </Grid>
-            <Grid item xs={6} style={{ lineHeight: '23px' }}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px' } }} 
-              />
+            <Grid item xs={9} style={{ lineHeight: '23px' }}>
+              <TextArea rows={5} height={'112px'} value={data.movement} />
             </Grid>
-            <Grid container item xs={6} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px', textAlign: 'right' } }} 
-              />
+            <Grid container item xs={3} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
+              <TextArea rows={5} height={'112px'} value={data.speed} align="right"/>
             </Grid>
             <Grid container item xs={12} justifyContent={'space-between'} style={{ fontSize: '11px' }}>
               <b>Jumping</b>
               <b>Distance</b>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <div style={{ lineHeight: '21px', marginTop: '1px' }}>
                 Standing High
                 <br />
@@ -358,10 +362,8 @@ export default function CharacterSheet({ file }) {
                 Running Long
               </div>
             </Grid>
-            <Grid container item xs={6} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px', textAlign: 'right' } }} 
-              />
+            <Grid container item xs={3} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
+              <TextArea rows={5} height={'112px'} align="right" value={data.jumping} />
             </Grid>
           </Border>
         </Grid>
@@ -371,15 +373,11 @@ export default function CharacterSheet({ file }) {
               <b>Vision</b>
               <b>Distance</b>
             </Grid>
-            <Grid item xs={6} style={{ lineHeight: '23px' }}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px' } }} 
-              />
+            <Grid item xs={7} style={{ lineHeight: '23px' }}>
+              <TextArea rows={5} height={'112px'} value={data.vision} />
             </Grid>
-            <Grid container item xs={6} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px', textAlign: 'right' } }} 
-              />
+            <Grid container item xs={5} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
+              <TextArea rows={5} height={'112px'} align="right" value={data.visionDistance} />
             </Grid>
             <Grid container item xs={12} justifyContent={'space-between'} style={{ fontSize: '11px' }}>
               <b>Range</b>
@@ -387,7 +385,7 @@ export default function CharacterSheet({ file }) {
             </Grid>
             <Grid item xs={6}>
               <div style={{ lineHeight: '21px', marginTop: '1px' }}>
-              Accurate Range
+                Accurate Range
                 <br />
                 Throwing Base
                 <br />
@@ -399,17 +397,15 @@ export default function CharacterSheet({ file }) {
               </div>
             </Grid>
             <Grid container item xs={6} style={{ lineHeight: '23px' }} justifyContent={'flex-end'}>
-              <InputBase multiline rows={5} style={{ padding: '0px' }} 
-                inputProps={{ style: { height: '112px', fontSize: '12px', lineHeight: '21px', textAlign: 'right' } }} 
-              />
+              <TextArea rows={5} height={'112px'} align="right" value={data.range} />
             </Grid>
           </Border>
         </Grid>
         <Spacer height=".1in" />
-        <Notes xs={6} sx={{ pl: '.1in' }} title="Principles" rows={11} height={283} />
-        <Notes xs={6} sx={{ pl: '.1in' }} title="Flaws" rows={11} height={283} />
+        <Notes xs={6} value={data.principles} sx={{ pl: '.1in' }} title="Principles" rows={11} height={283} />
+        <Notes xs={6} value={data.flaws} sx={{ pl: '.1in' }} title="Flaws" rows={11} height={283} />
         <Spacer height=".1in" />
-        <Notes xs={12} sx={{ pl: '.1in' }} title={'Character Backstory'} rows={11} height={283} />
+        <Notes xs={12} value={data.backstory} sx={{ pl: '.1in' }} title={'Character Backstory'} rows={11} height={283} />
       </Grid>
     </Paper>
   </ThemeProvider>

@@ -46,10 +46,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home Links={Links} />} />
-          {/* <Route exact path="/dao" element={<Dao Links={Links} />} /> */}
-          <Route exact path="/character-sheet" element={<CharacterSheet />} />
+          {/* <Route exact path="/dao" element={<Dao Links={Links} />} /> */}          
           <Route exact path="/character-sheet/*" element={<HeroTemplates />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
         </Routes>
       </Router>
     </ThemeProvider>

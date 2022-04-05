@@ -7,7 +7,9 @@ import Fighter from '../HeroTemplates/Fighter'
 export default function HeroTemplates() {
   return <>
     <Routes>
+      <Route exact path="/" element={<CharacterSheet />} />
       <Route exact path="/fighter" element={<CharacterSheet file={Fighter} />} />
+      <Route exact path="/custom/:file" element={<CharacterSheet loadFromURI />} />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </>

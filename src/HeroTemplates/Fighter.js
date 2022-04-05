@@ -2,8 +2,7 @@ const file = {
   playerName: 'Joseph Reed',
   characterName: 'King Richard',
   level: '6',
-  class: 'Fighter',
-  race: 'Human',
+  raceAndClass: 'Human Fighter',
   age: '35',
   alignment: 'Neutral',
   size: 'Medium',
@@ -24,47 +23,45 @@ const file = {
   will: '15',
   mana: '20',
   wealth: '25',
-  feats: {
-    background: {
-      name: 'World Renown',
-      value: 'You are known in all the lands and are treated as such. Your reputation score is set to 5 honor or infamy in any land where royalty is respected.',
-    },
-    level1: {
-      name: 'Cultured',
-      value: 'You have a current knowledge of the cultures and celebrities in any regions and any peculiar laws from those regions.'
-    },
-    level2: {
-      name: 'Politician',
-      value: 'Gain 2 proficiency dice in Influence. You can spend one day in to learn their likes and dislikes of any politician.',
-    },
-    level3: {
-      name: 'Defensive Aura',
-      value: 'You and any allies within 15 feet cannot be critically struck.',
-    },
-    level4: {
-      name: 'Signature Spell',
-      value: 'Inspiring Presence',
-    },
-    level5: {
-      name: 'Battle Master',
-      value: 'You are proficient in all weapons, armors, shields, and physical damage types. As part of a Free Action you can determine one combatants health, stamina, will, and mana.',
-    },
-    level6: {
-      name: 'Domain: Army',
-      value: 'Enemies have vulnerability(1) to any damage type you are proficient with if there are at least 100 people within a 120ft radius who will fight for you.',
-    },
-    attunement1: {
-      value: 'Once per long rest give the effects of three short rests to any allies within your sight',
-      name: 'Divine Recovery',
-    },
-    attunement2: {
-      name: '',
-      value: '',
-    },
-    attunement3: {
-      name: '',
-      value: '',
-    },
+  backgroundFeat: {
+    name: 'World Renown',
+    value: 'You are known in all the lands and are treated as such. Your reputation score is set to 5 honor or infamy in any land where royalty is respected.',
+  },
+  level1Feat: {
+    name: 'Cultured',
+    value: 'You have a current knowledge of the cultures and celebrities in any regions and any peculiar laws from those regions.'
+  },
+  level2Feat: {
+    name: 'Politician',
+    value: 'Gain 2 proficiency dice in Influence. You can spend one day in to learn their likes and dislikes of any politician.',
+  },
+  level3Feat: {
+    name: 'Defensive Aura',
+    value: 'You and any allies within 15 feet cannot be critically struck.',
+  },
+  level4Feat: {
+    name: 'Signature Spell',
+    value: 'Inspiring Presence',
+  },
+  level5Feat: {
+    name: 'Battle Master',
+    value: 'You are proficient in all weapons, armors, shields, and physical damage types. As part of a Free Action you can determine one combatants health, stamina, will, and mana.',
+  },
+  level6Feat: {
+    name: 'Domain: Army',
+    value: 'Enemies have vulnerability(1) to any damage type you are proficient with if there are at least 100 people within a 120ft radius who will fight for you.',
+  },
+  attunement1Feat: {
+    value: 'Once per long rest give the effects of three short rests to any allies within your sight',
+    name: 'Divine Recovery',
+  },
+  attunement2Feat: {
+    name: '',
+    value: '',
+  },
+  attunement3Feat: {
+    name: '',
+    value: '',
   },
   equipment: "equipment",
   proficiencies: "Slashing Damage\nCombat Proficiency Die (2)",

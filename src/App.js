@@ -6,10 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline'
 
 import './App.css'
 import theme from './theme'
-import Home from './routes/Home'
+import Navigation from './routes/Navigation'
 import HeroTemplates from './routes/HeroTemplates'
-import CharacterSheet from './routes/CharacterSheet'
-// import Dao from './routes/Dao'
 
 const Links = {
   Resources: {
@@ -45,10 +43,9 @@ function App() {
       <CssBaseline />
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home Links={Links} />} />
-          {/* <Route exact path="/dao" element={<Dao Links={Links} />} /> */}          
+          <Route exact path="/*" element={<Navigation Links={Links} />} />
           <Route exact path="/character-sheet/*" element={<HeroTemplates />} />
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </ThemeProvider>

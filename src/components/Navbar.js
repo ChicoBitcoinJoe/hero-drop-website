@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Avatar from '@mui/material/Avatar'
 import Divider from '@mui/material/Divider'
@@ -12,19 +12,17 @@ import Hidden from '@mui/material/Hidden'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import TwitterIcon from '@mui/icons-material/Twitter'
-import { FaDiscord as DiscordIcon } from "react-icons/fa"
 import List from '@mui/material/List'
 import ListItemButton from '@mui/material/ListItemButton'
-import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import ExpandLess from '@mui/icons-material/ExpandLess'
-import ExpandMore from '@mui/icons-material/ExpandMore'
-import StarBorder from '@mui/icons-material/StarBorder'
-import { useNavigate } from "react-router-dom"
 import Collapse from '@mui/material/Collapse'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import { FaDiscord as DiscordIcon } from "react-icons/fa"
+
 import logo from '../logo.png'
 
 function NavMenu({ label, menuItems}) {
@@ -106,7 +104,7 @@ function NavMenu({ label, menuItems}) {
         </ListItemButton>
         <Collapse in={openList} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/fighter">
+            <ListItemButton component={MuiLink} sx={{ pl: 4 }} target="_blank" href="/character-sheet/fighter">
               <ListItemText primary="Fighter" />
             </ListItemButton>
             <ListItemButton component={MuiLink} sx={{ pl: 4 }} href="/character-sheet/rogue">

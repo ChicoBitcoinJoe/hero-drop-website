@@ -4,7 +4,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import Grid from '@mui/material/Grid'
 import Divider from '@mui/material/Divider'
 import InputBase from '@mui/material/InputBase'
-import BlankFile from '../HeroTemplates/Blank'
 
 const theme = createTheme();
 
@@ -122,7 +121,7 @@ function Pillar({ id, name, score, onChange }) {
 
   const godly = score > 5
   const excess = score - 5
-  const die = score != null ? score === '0' ? 'd1' : !godly ? 'd'+score*4 : 'd20 d'+excess*4 : ''
+  const die = score !== "" ? score === '0' ? 'd1' : !godly ? 'd'+score*4 : 'd20 d'+excess*4 : ''
 
   return (
     <Border style={{ width: '0.833in', height: '0.7in', textAlign: 'center', marginBottom: '.2in' }}>
@@ -153,7 +152,7 @@ function Talent({ id, name, score, onChange }) {
 
   const godly = score > 5
   const excess = score - 5
-  const die = score != null ? score === '0' ? 'd1' : !godly ? 'd'+score*4 : 'd20 d'+excess*4 : ''
+  const die = score !== "" ? score === '0' ? 'd1' : !godly ? 'd'+score*4 : 'd20 d'+excess*4 : ''
 
   return <Grid container item>
     <Border xs container alignItems="center" style={{ marginBottom: '8px', paddingLeft: '.1in', marginRight: '-.21in' }}>
@@ -281,7 +280,7 @@ function TextArea({ id, style, rows, height, align, value, onChange }) {
 export default function CharacterSheet({ file, loadFromURI, match }) {
   const navigate = useNavigate()
   const params = useParams()
-  const [data, setData] = React.useState({ ...BlankFile })
+  const [data, setData] = React.useState({})
   const windowTitle = data.characterName ? data.characterName : 'Character Sheet'
   useWindowTitle(windowTitle)
 
@@ -290,15 +289,15 @@ export default function CharacterSheet({ file, loadFromURI, match }) {
     if(loadFromURI) {
       currentFile = JSON.parse(decodeURIComponent(params.file))
     }
-    setData({ ...BlankFile, ...currentFile })
-  }, [file])
+    setData({ ...currentFile })
+  }, [file, loadFromURI, params.file])
 
   function onChange(id, value) {
     const newData = { ... data }
     newData[id] = value
     setData(newData)
     const params = encodeURIComponent(JSON.stringify(newData))
-    navigate("/character-sheet/custom/" + params, { replace: true })
+    navigate("/print/" + params, { replace: true })
   }
 
   return <ThemeProvider theme={theme}>

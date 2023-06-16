@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider'
 import Paper from './components/Paper'
 import BorderedContainer from '../../components/BorderedContainer'
 import SpecializationCard from '../../components/SpecializationCard'
-import { utils } from "../../hooks/useCharacterManager"
+import { utils } from "../../hooks/useCharacter"
 
 function Score({ label, endLabel, bold }) {
   return <>

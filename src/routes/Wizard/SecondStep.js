@@ -23,7 +23,7 @@ import AddIcon from '@mui/icons-material/Add'
 
 import Navigation from "./Navigation"
 import { Traits } from "../../components/SelectTraitsDialog"
-import { utils } from '../../hooks/useCharacterManager'
+import { utils } from '../../hooks/useCharacter'
 
 function TraitDialog({ open, character, handleSubmit, closeDialog }) {
   const { data } = character

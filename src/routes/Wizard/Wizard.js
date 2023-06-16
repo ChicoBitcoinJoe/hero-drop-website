@@ -17,7 +17,7 @@ import FourthStep from "./FourthStep"
 import FifthStep from "./FifthStep"
 import Container from '../../components/Container'
 
-import { useCharacter } from '../../hooks/useCharacterManager'
+import useCharacter from '../../hooks/useCharacter'
 
 export default function Wizard({ appReady, roster }) {
   let navigate = useNavigate()
@@ -28,17 +28,21 @@ export default function Wizard({ appReady, roster }) {
   const navigation = {activeStep, setActiveStep}
   
   React.useEffect(() => {
-    (async function() {
-      if(appReady && characterPath) {
-        const data = await roster.loadCharacter(characterPath)
-        character.setData(data)
-        setReady(true)
-      }
-      else {        
-        setReady(true)
-      }
-    })()
-  }, [appReady]) // eslint-disable-line
+    if(!roster) return
+
+    loadCharacter()
+  }, [roster]) // eslint-disable-line
+
+  async function loadCharacter() {
+    if(characterPath) {
+      const data = await roster.loadMember(characterPath)
+      character.setData(data)
+      setReady(true)
+    }
+    else {
+      setReady(true)
+    }
+  }
 
   const handleReset = () => {
     setActiveStep(4)

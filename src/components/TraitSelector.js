@@ -9,7 +9,7 @@ import Divider from '@mui/material/Divider'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import TextField from '@mui/material/TextField'
 
-import { utils } from "../hooks/useCharacterManager"
+import { utils } from "../hooks/useCharacter"
 
 function TraitButton({ children, initialState, score, onChange }) {
   const [state, setState] = React.useState(initialState || 'none')

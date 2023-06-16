@@ -15,7 +15,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import AddIcon from '@mui/icons-material/Add'
 import { Divider } from '@mui/material'
 
-import { useCharacter } from '../hooks/useCharacterManager'
+import useCharacter from '../hooks/useCharacter'
 import Container from '../components/Container'
 
 function CharacterCard({ index, characterPath, roster, height, img }) {
@@ -25,7 +25,7 @@ function CharacterCard({ index, characterPath, roster, height, img }) {
   
   React.useEffect(() => {
     (async function() {
-      const data = await roster.loadCharacter(characterPath)
+      const data = await roster.loadMember(characterPath)
       character.setData(data)
     })()
   }, [characterPath])
@@ -104,7 +104,7 @@ function CharacterCard({ index, characterPath, roster, height, img }) {
   </>
 }
 
-export default function Roster({ appReady, roster }) {
+export default function List({ roster }) {
   const navigate = useNavigate()
   
   return <>
@@ -126,7 +126,7 @@ export default function Roster({ appReady, roster }) {
         <Divider textAlign="left">Roster</Divider>
       </Grid>
       {
-        appReady && <>
+        roster.ready && <>
           <Grid container xs={12} spacing={2}>
             {
               roster.list.map((characterPath, index) => {

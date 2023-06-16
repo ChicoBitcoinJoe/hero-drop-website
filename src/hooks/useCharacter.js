@@ -26,38 +26,6 @@ function getSpecializationScore(years, isNatural) {
   return score
 }
 
-function useList(initialList) {
-  const [list, setList] = React.useState(initialList || [])
-  
-  function push(item) {
-    const newList = [...list, item]
-    console.log(newList)
-    setList(newList)
-  }
-
-  function updateAt(index, value) {
-    const newList = [...list]
-    newList[index] = value
-    setList(newList)
-  }
-
-  function removeAt(index) {
-    let newList = [...list]
-    newList.splice(index, 1)
-    setList(newList)
-  }
-
-  return [
-    list,
-    {
-      set: setList,
-      push,
-      updateAt,
-      removeAt,
-    }
-  ]
-}
-
 export const utils = {
   rollDice,
   getSpecializationScore,
@@ -142,7 +110,7 @@ export function useCharacter2(initialData) {
   }
 }
 
-export function useCharacter(initialData) {
+export default function useCharacter(initialData) {
   const [ data, setData ] = React.useState(initialData || { 
     playerName: '',
     characterName: '',
@@ -446,68 +414,5 @@ export function useCharacter(initialData) {
     getLethalDie,
     getAgeCategory,
     getMaxAge,
-  }
-}
-
-export default function useCharacterManager(saveCharacter, loadCharacter, saveRoster) {
-  const [list, list_] = useList([])
-  // *implemented*  *not*
-  // const { 
-  //   set, 
-  //   push, 
-  //   updateAt, 
-  //                insertAt, 
-  //                update, 
-  //                updateFirst, 
-  //                upsert, 
-  //                sort, 
-  //                filter, 
-  //   removeAt, 
-  //                clear, 
-  //                reset 
-  // } = list_
-
-  async function addMember(data) {
-    console.log(data)
-    const id = await saveCharacter(data)
-    const newList = [...list, id]
-    saveRoster(newList)
-    list_.push(id)
-    return id
-  }
-
-  async function updateMember(index, characterData) {
-    const newId = await saveCharacter(characterData)
-    console.log('update', index, newId)
-    const newList = [...list]
-    newList[index] = newId
-    saveRoster(newList)
-    list_.updateAt(index, newId)
-    return newId
-  }
-  
-  function removeMember(index) {
-    let newList = [...list]
-    newList.splice(index, 1)
-    saveRoster(newList)
-    list_.removeAt(index)
-  }
-
-  function isMember(id) {
-    for(let i = 0; i < list.length; i++) {
-      if(list[i] === id) return i
-    }
-    return -1
-  }
-
-  return {
-    list,
-    set: list_.set,
-    isMember,
-    addMember,
-    updateMember,
-    removeMember,
-    loadCharacter,
-    saveCharacter,
   }
 }

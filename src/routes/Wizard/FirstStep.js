@@ -13,7 +13,7 @@ import FormHelperText from '@mui/material/FormHelperText'
 
 
 import Navigation from "./Navigation"
-import { utils } from "../../hooks/useCharacterManager"
+import { utils } from "../../hooks/useCharacter"
 
 
 export default function FirstStep({ character, navigation }) {

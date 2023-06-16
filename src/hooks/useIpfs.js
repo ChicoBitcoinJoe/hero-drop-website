@@ -74,11 +74,9 @@ export default function useIpfs() {
     ipfs,
     ipfsReady: isIpfsReady,
     ipfsInitError,
-    utils: {
-      saveJSON,
-      loadJSON,
-      saveString,
-      loadString
-    }
+    saveJSON,
+    loadJSON,
+    saveString,
+    loadString,
   }
 }

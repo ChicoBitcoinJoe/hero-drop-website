@@ -124,7 +124,7 @@ export default function Home() {
       </Grid>
       <Grid xs={12}><Divider sx={{ my: 4 }} /></Grid>
       <Grid xs={12} container justifyContent="center">
-        <Grid>Hero Drop is created by Joseph Reed</Grid>
+        <Grid>Hero Drop is created and updated by Joseph Reed</Grid>
         <Grid xs={12} />
         <Grid>All Rights Reserved</Grid>
       </Grid>

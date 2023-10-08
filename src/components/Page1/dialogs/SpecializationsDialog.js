@@ -7,8 +7,8 @@ import ButtonBase from '@mui/material/ButtonBase'
 import Checkbox from '@mui/material/Checkbox'
 import { Divider, FormControlLabel } from '@mui/material'
 
-import { getCurrentNaturals, getMaxNaturals, getSpecializationScore } from '../../../../hooks/useCharacter'
-import { useObject } from '../../../../hooks/useObject'
+import { getCurrentNaturals, getMaxNaturals, getSpecializationScore } from '../../../hooks/useCharacter'
+import { useObject } from '../../../hooks/useObject'
 
 export function TraitButton({ children, initialState, years, onChange }) {
 

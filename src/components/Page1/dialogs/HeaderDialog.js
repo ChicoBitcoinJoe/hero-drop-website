@@ -1,12 +1,7 @@
 import * as React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 import TextField from '@mui/material/TextField'
-import Input from '@mui/material/Input'
 import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import InputAdornment from '@mui/material/InputAdornment'
-
-import { getClassFromLevel, getClassScoreFromLevel } from '../../../../hooks/useCharacter'
 
 export default function HeaderDialog({ character, submit, close }) {
   const [ characterName, setCharacterName] = React.useState(character.name || '')

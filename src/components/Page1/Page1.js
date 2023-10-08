@@ -8,18 +8,17 @@ import Paper from '../Paper'
 import BorderedContainer, { Label } from '../BorderedContainer'
 import Clickable from '../Clickable'
 import Header from './components/Header'
-import HeaderDialog from './components/Dialogs/HeaderDialog'
+import HeaderDialog from './dialogs/HeaderDialog'
 import { Form, FormDialog } from './components/Form'
 import Age from './components/Age'
-import AgeDialog from './components/Dialogs/AgeDialog'
-import AbilityScoreDialog from './components/Dialogs/AbilityScoreDialog'
+import AgeDialog from './dialogs/AgeDialog'
+import AbilityScoreDialog from './dialogs/AbilityScoreDialog'
 import Specializations from './components/Specializations'
-import SpecializationDialog from './components/Dialogs/SpecializationsDialog'
+import SpecializationDialog from './dialogs/SpecializationsDialog'
 import Values from './components/Values'
 import Miracles from './components/Miracles'
 import AbilityScore from './components/AbilityScore'
 import { getCurrentNaturals, getMaxNaturals } from '../../hooks/useCharacter'
-
 
 export default function Page1({ character }) {  
   console.log(character)
@@ -181,29 +180,32 @@ export default function Page1({ character }) {
 
         <Grid xs={6} container>
           <Grid xs={12}>
-            <BorderedContainer 
-              onClick={(event) => handleClickOpen('Description', event)} 
-              label="Character Description" 
-              sx={{ p: 1, height: 193 }} 
-            />
+            <Clickable onClick={(event) => handleClickOpen('Description', event)}>
+              <BorderedContainer
+                label="Character Description" 
+                sx={{ height: 193 }} 
+              />
+            </Clickable>
           </Grid>
           <Grid xs={12}>
-            <BorderedContainer 
-              onClick={(event) => handleClickOpen('Values', event)} 
-              label="Values" label2="Conviction" 
-              sx={{ p: 1, height: 165 }}
-            >
-              <Values character={character} />
-            </BorderedContainer>
+            <Clickable onClick={(event) => handleClickOpen('Values', event)}>
+              <BorderedContainer
+                label="Values" label2="Conviction" 
+                sx={{ height: 165 }}
+              >
+                <Values character={character} />
+              </BorderedContainer>
+            </Clickable>
           </Grid> 
           <Grid xs={12}>
-            <BorderedContainer 
-              onClick={(event) => handleClickOpen('Miracles', event)} 
-              label={"Miracles"} 
-              sx={{ height: 518 }}
-            >
-              <Miracles character={character} />
-            </BorderedContainer>
+            <Clickable onClick={(event) => handleClickOpen('Miracles', event)}>
+              <BorderedContainer  
+                label={"Miracles"} 
+                sx={{ height: 518 }}
+              >
+                <Miracles character={character} />
+              </BorderedContainer>
+            </Clickable>
           </Grid>
         </Grid>
       </Grid> 

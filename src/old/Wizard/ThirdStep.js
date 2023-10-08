@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { styled } from '@mui/material/styles'
 import StepLabel from '@mui/material/StepLabel'
 import StepContent from '@mui/material/StepContent'
 import Button from '@mui/material/Button'

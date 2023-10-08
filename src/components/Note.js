@@ -1,8 +1,8 @@
 import * as React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 
-import BorderedContainer, { ExtraLabels } from '../../../components/BorderedContainer'
-import HorizontalSpace from './HorizontalSpace'
+import BorderedContainer from './BorderedContainer'
+import HorizontalSpace from '../routes/Print/components/HorizontalSpace'
 
 export function Lines({ rows }) {
   const lines = []

@@ -141,7 +141,7 @@ export default function TraitSelector({ open, closeDialog, handleSubmit, initial
   const [specializationYears, setSpecializationYears] = React.useState(initialData ? initialData.specializationYears : '0')
   const [specializationBonusYears, setSpecializationBonusYears] = React.useState(initialData && (initialData.specializationBonusYears || '0'))
   const [isNatural, setIsNatural] = React.useState(initialData ? initialData.isNatural : false)
-  const [traits, setTraits] = React.useState(initialData ? initialData.traits : {})
+  const [traits, setTraits] = React.useState(initialData ? initialData.sentienceTraits : {})
   
   let currentIsNatural = initialData ? ( (isNatural && !initialData['isNatural']) && 1 ) || ( (!isNatural && (initialData['isNatural'] || false)) && 1 ) : 0
   const totalYears = Number(specializationYears) + Number(specializationBonusYears)

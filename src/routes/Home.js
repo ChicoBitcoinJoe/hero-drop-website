@@ -15,8 +15,6 @@ import TwitterIcon from '@mui/icons-material/Twitter'
 import { FaDiscord as DiscordIcon } from "react-icons/fa"
 import { Divider } from '@mui/material'
 
-import Container from '../components/Container'
-
 function useWindowWidth() {
   
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
@@ -103,31 +101,33 @@ export default function Home() {
   let navigate = useNavigate()
 
   return <>
-    <Container justifyContent="center" alignItems="center">
-      <Header />
-        
-      <Grid container xs={12}>
-        <Grid xs={12} sm={6}>
-          <ImageCard title={"Read the Rules"} body="(opens a google document)" href={Links.Rulebook} height={346}/>
+    <Grid container sx={{ p: 2, height: '100vh' }} justifyContent="center" alignItems="center">
+      <Grid container xs sx={{ maxWidth: '768px' }} spacing={2}>
+        <Header />
+          
+        <Grid container xs={12}>
+          <Grid xs={12} sm={6}>
+            <ImageCard title={"Read the Rules"} body="(opens a google document)" href={Links.Rulebook} height={346}/>
+          </Grid>
+          <Grid container xs={12} sm={6}>
+            <Grid xs={12}>
+              <ImageCard title={"Create a Character"} img={null} onClick={() => navigate('/wizard')} />
+            </Grid>
+            <Grid xs={6}>
+              <ImageCard body={"My Roster"} height={128} img={null} onClick={() => navigate('/roster')} />
+            </Grid>
+            <Grid xs={6}>
+              <ImageCard body={"Email Support"} height={128} href="mailto:support@herodrop.org" />
+            </Grid>
+          </Grid>
         </Grid>
-        <Grid container xs={12} sm={6}>
-          <Grid xs={12}>
-            <ImageCard title={"Create a Character"} img={null} onClick={() => navigate('/wizard')} />
-          </Grid>
-          <Grid xs={6}>
-            <ImageCard body={"My Roster"} height={128} img={null} onClick={() => navigate('/roster')} />
-          </Grid>
-          <Grid xs={6}>
-            <ImageCard body={"Email Support"} height={128} href="mailto:support@herodrop.org" />
-          </Grid>
+        <Grid xs={12}><Divider sx={{ my: 4 }} /></Grid>
+        <Grid xs={12} container justifyContent="center">
+          <Grid>Hero Drop is created by Joseph Reed</Grid>
+          <Grid xs={12} />
+          <Grid>All Rights Reserved</Grid>
         </Grid>
       </Grid>
-      <Grid xs={12}><Divider sx={{ my: 4 }} /></Grid>
-      <Grid xs={12} container justifyContent="center">
-        <Grid>Hero Drop is created and updated by Joseph Reed</Grid>
-        <Grid xs={12} />
-        <Grid>All Rights Reserved</Grid>
-      </Grid>
-    </Container>
+    </Grid>
   </>
 }

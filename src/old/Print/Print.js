@@ -7,6 +7,7 @@ import Button from '@mui/material/Button'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
+import Page0 from './Page1/Page1'
 import Page1 from './Page1'
 import Page2 from './Page2'
 import Page3 from './Page3'
@@ -20,7 +21,7 @@ export default function Print({ roster }) {
 
   React.useEffect(() => {
     if(roster.ready) asyncLoadCharacter(characterPath)
-  }, [roster]) // eslint-disable-line
+  }, [roster.ready]) // eslint-disable-line
 
   async function asyncLoadCharacter() {
     if(characterPath) {
@@ -48,9 +49,9 @@ export default function Print({ roster }) {
         Edit Character
       </Button>
 
-      {/* <Page0 character={character}  />
+      {/* <Page0 character={character}  /> */}
 
-      <Divider sx={{ displayPrint: "none", my: 4 }} /> */}
+      {/* <Divider sx={{ displayPrint: "none", my: 4 }} />
 
       <Page1 character={character} />
 
@@ -60,7 +61,7 @@ export default function Print({ roster }) {
 
       <Divider sx={{ displayPrint: "none", my: 4 }} />
 
-      <Page3 character={character} />
+      <Page3 character={character} /> */}
 
     </Box>
   </>

@@ -5,9 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 
 import './App.css'
 import Home from './routes/Home'
-import List from './routes/List'
-import Wizard from './routes/Wizard/Wizard.js'
-import Print from './routes/Print/Print.js'
+import Roster from './routes/Roster'
 import useRosterManager from './hooks/useRosterManager'
 
 const appTheme = createTheme({
@@ -32,9 +30,10 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/home" element={<Home />} />
-            <Route index path="/roster" element={<List roster={roster} />} />
-            <Route path="/wizard/*" element={<Wizard roster={roster} />} />
-            <Route path="/print/*" element={<Print roster={roster} />} />
+          <Route path="/roster/*" element={<Roster roster={roster} />} />
+          {/* <Route path="/roster/*" element={<List roster={roster} />} /> */}
+      {/* <Route path="/wizard/*" element={<Wizard roster={roster} />} /> */}
+      {/* <Route path="/print/*" element={<Print roster={roster} />} /> */}
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </Router>

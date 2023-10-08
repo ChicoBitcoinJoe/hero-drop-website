@@ -1,9 +1,9 @@
 import * as React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 
-import Paper from './components/Paper'
+import Paper from '../../components/Paper'
 import BorderedContainer, { ExtraLabels } from '../../components/BorderedContainer'
-import Note from './components/Note'
+import Note from '../../components/Note'
 
 function Score({ label, label2, label3, endLabel, header }) {
   return <>
@@ -89,14 +89,14 @@ function Resources({ character }) {
     </Grid>
 
     <Grid xs={12}>
-      <BorderedContainer label={'Conditions and Effects'} height={'164px'}></BorderedContainer>
+      <BorderedContainer label={'Conditions and Effects'} sx={{ height: 164 }}></BorderedContainer>
     </Grid>
   </>
 }
 
 function DR({ label, label2, header }) {
   return <>
-    <Grid container xs={12} sx={{ py: '4px', fontWeight: header && 'bold', fontSize: '9px', borderBottom: '1px solid rgba(0,0,0,0.25)' }}>
+    <Grid container xs={12} sx={{ p: '8px', fontWeight: header && 'bold', fontSize: '9px', borderBottom: '1px solid rgba(0,0,0,0.25)' }}>
       <Grid xs={3}>
         {label} 
       </Grid>
@@ -192,7 +192,7 @@ function DamageReduction({ character }) {
 export default function Page2({ character }) {
   const { data, onChange } = character
 
-  return <Paper page="1" size="Letter" margin={'0.4in'}>
+  return <Paper page="1" size="Letter" margin={'0.5in'}>
     <Grid container spacing={2}>
 
       <Grid container xs={4}>
@@ -211,7 +211,7 @@ export default function Page2({ character }) {
 
       <Grid container xs={8}>
         <Grid xs={6}>
-          <BorderedContainer label="Attacks and Spellcasting" height={'327px'}>
+          <BorderedContainer label="Attacks and Spellcasting" sx={{ height: 327 }}>
 
           </BorderedContainer>
         </Grid>

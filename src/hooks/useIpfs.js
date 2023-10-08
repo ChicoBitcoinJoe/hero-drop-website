@@ -56,14 +56,11 @@ export default function useIpfs() {
   }
   
   async function saveString(data) {
-    if(!isIpfsReady) return
     const id = await ipfs.add(data)
     return id.path
   }
 
-  async function loadString(path) {
-    if(!isIpfsReady) return
-    
+  async function loadString(path) {    
     const promises = ipfs.cat(path)
     const resolved = await all(promises)
     const uint8Array = uint8ArrayConcat(resolved)

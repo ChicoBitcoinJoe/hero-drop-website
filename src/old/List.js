@@ -121,7 +121,7 @@ export default function List({ roster }) {
             Member
           </Button>
         </Grid>
-      </Grid>        
+      </Grid>
       <Grid xs={12}>
         <Divider textAlign="left">Roster</Divider>
       </Grid>

@@ -6,7 +6,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Divider from '@mui/material/Divider'
 
-import Paper from './components/Paper'
+import Paper from '../../components/Paper'
 import BorderedContainer from '../../components/BorderedContainer'
 import SpecializationCard from '../../components/SpecializationCard'
 import { utils } from "../../hooks/useCharacter"
@@ -28,9 +28,9 @@ export default function Page3({ character }) {
   const { data, getSpecializationScore } = character
   const { totalSpecializations } = data
 
-  return <Paper page="0" size="Letter" margin={'0.4in'}>
+  return <Paper page="3" size="Letter" margin={'0.4in'}>
     <Grid container spacing={2}>
-      <Grid sx={{ width: '180px' }}>
+      {/* <Grid sx={{ width: '180px' }}>
         <BorderedContainer label="Primary Traits" label2="Score">
           <Grid xs>
             {
@@ -62,34 +62,44 @@ export default function Page3({ character }) {
             }
           </Grid>
         </BorderedContainer>
-      </Grid>
-      <Grid xs>
+      </Grid> */}
+      <Grid xs={6}>
         <div>
-          <Grid container spacing={2}>
-            <Grid xs={6}>
-              <SpecializationCard
+          <Grid container spacing={'2px'}>
+            <Grid xs={12}>
+              {/* <SpecializationCard
                 name={character.sentienceName} 
                 age={character.getAge()} 
                 score={character.sentienceScore} 
                 traits={character.sentienceTraits} 
-              />
+              /> */}
+            </Grid>
+            <Grid xs={12}>
+              <Divider sx={{ my: 2 }}></Divider>
+            </Grid>
+            <Grid xs={12}>
+              {/* <SpecializationCard
+                name={'Specialization'}
+                score={'Score'} 
+                traits={character.sentienceTraits} 
+              /> */}
             </Grid>
             {
               Array(totalSpecializations).fill(null).map((_, i) => i+1).map((index) => {
                 const key = "specialization" + index
-                const { specializationName, specializationYears, isNatural, traits } = data[key]
-                const score = getSpecializationScore(key)
+                // const { specializationName, specializationYears, isNatural, traits } = data[key]
+                // const score = getSpecializationScore(key)
 
                 const specialization = {
-                  isNatural,
-                  name: specializationName, 
-                  years: specializationYears,
-                  score,
-                  traits
+                  isNatural: false,
+                  name: '', //specializationName, 
+                  years: '', // specializationYears,
+                  score: '',
+                  traits: []
                 }
 
-                return <Grid xs={6} key={key}>
-                  <SpecializationCard {...specialization} />
+                return <Grid xs={12} key={key}>
+                  {/* <SpecializationCard {...specialization} /> */}
                 </Grid>
               })
             }

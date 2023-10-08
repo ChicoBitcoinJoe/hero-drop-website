@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Box from '@mui/material/Box'
 import StepLabel from '@mui/material/StepLabel'
 import StepContent from '@mui/material/StepContent'
 import Button from '@mui/material/Button'
@@ -8,65 +7,17 @@ import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
 import Grid from '@mui/material/Unstable_Grid2'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import FormHelperText from '@mui/material/FormHelperText'
-import Dialog from '@mui/material/Dialog'
-import DialogContent from '@mui/material/DialogContent'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
 
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import CasinoIcon from '@mui/icons-material/Casino'
-import AddIcon from '@mui/icons-material/Add'
 
 import Navigation from "./Navigation"
 import { Traits } from "../../components/SelectTraitsDialog"
 import { utils } from '../../hooks/useCharacter'
 
-function TraitDialog({ open, character, handleSubmit, closeDialog }) {
-  const { data } = character
-  const [traits, setTraits] = React.useState(data.sentienceTraits)
-    
-  const handleAddSpecialization = () => {
-    handleSubmit(traits)
-  }
-
-  const onTraitChange = (id, value) => {
-    let updatedTraits = {...traits}
-    updatedTraits[id] = value
-    setTraits(updatedTraits)
-  }
-
-  return <>
-    <Dialog open={open} onClose={closeDialog}>
-      <DialogContent>
-        <Grid container spacing={2}>
-          <Grid container xs={12}>
-            <Traits traits={traits} specializationScore={data["sentienceScore"]} onChange={onTraitChange} />
-          </Grid>
-          <Grid xs={4}>
-            <Button variant="outlined" fullWidth onClick={closeDialog}>Cancel</Button>
-          </Grid>
-          <Grid xs={8}>
-            <Button 
-              variant="outlined" 
-              fullWidth 
-              onClick={handleAddSpecialization}
-            >
-              Save
-            </Button>
-          </Grid>
-        </Grid>
-      </DialogContent>
-    </Dialog>
-  </>
-}
-
 export default function SecondStep({ character, navigation }) {
   const { data, update, swapSentienceAndBeauty, swapBeautyAndPeak } = character
-  console.log(data)
   const [sentienceScore, setSentienceScore] = React.useState(character.sentienceScore)
   const [beautyScore, setBeautyScore] = React.useState(character.sentienceBeautyScore)
   const [peakBeauty, setPeakBeauty] = React.useState(character.sentiencePeakBeauty)
@@ -130,12 +81,12 @@ export default function SecondStep({ character, navigation }) {
     swapBeautyAndPeak()
   }
   
-  const [traits, setTraits] = React.useState(data.sentienceTraits)
+  const [traits, setTraits] = React.useState(character.sentienceTraits)
   const onTraitChange = (id, value) => {
     let updatedTraits = {...traits}
     updatedTraits[id] = value
     setTraits(updatedTraits)
-    update('traits', updatedTraits)
+    update('sentienceTraits', updatedTraits)
   }
 
   return <>
@@ -204,7 +155,7 @@ export default function SecondStep({ character, navigation }) {
         </Grid>
       </Grid>
       <Divider sx={{ my: 2 }} />
-      <Navigation {...navigation} inputComplete={data.sentienceName} />
+      <Navigation {...navigation} inputComplete={sentienceScore !== 0 && beautyScore !== 0} />
     </StepContent>
   </>
 }

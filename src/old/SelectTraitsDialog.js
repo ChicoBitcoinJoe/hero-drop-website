@@ -11,7 +11,8 @@ import TextField from '@mui/material/TextField'
 
 import { utils } from "../hooks/useCharacter"
 
-function TraitButton({ children, initialState, score, onChange }) {
+export function TraitButton({ children, initialState, score, onChange }) {
+  console.log(score)
   const [state, setState] = React.useState(initialState || 'none')
   const isNotTrait = state === 'none'
   const isHalfTrait = state === 'half'
@@ -41,7 +42,7 @@ function TraitButton({ children, initialState, score, onChange }) {
     textAlign: 'left', 
     fontSize: '12px',
     border: '1px solid black',
-    borderRadius: '16px',
+    borderRadius: '4px',
     overflow: 'hidden'
   }
 
@@ -58,23 +59,28 @@ function TraitButton({ children, initialState, score, onChange }) {
   }
 
   return <>
-    <Grid xs={12}>
-      <ButtonBase sx={buttonStyles} onClick={onClick}>
-        <Grid container sx={{ width: '100%' }} >
-          <Grid xs={6} sx={leftStyles}>
-            {children}
-          </Grid>
-          <Grid container xs={6} justifyContent={'end'} sx={rightStyles}>
-            {state} { state !== 'none' && <>trait&nbsp;</>} 
-            { state !== 'none' && '(' + (state === 'full' ? score : Math.round(score / 2)) + ")"}
-          </Grid>
+    <ButtonBase sx={buttonStyles} onClick={onClick}>
+      <Grid container sx={{ width: '100%' }} >
+        <Grid xs={6} sx={leftStyles}>
+          {children}
         </Grid>
-      </ButtonBase>
-    </Grid>
+        <Grid container xs={6} justifyContent={'end'} sx={rightStyles}>
+          {/* {state} { state !== 'none' && <>&nbsp;</>}  */}
+          { 
+            state == 'full' 
+            ? '+' + score 
+            : state === 'half'
+            ? '+' + Math.round(score / 2)
+            : 0
+          }
+        </Grid>
+      </Grid>
+    </ButtonBase>
   </>
 }
 
 export function Traits({ traits, specializationScore, onChange }) {
+  if(!traits) return
   return <>
     <Grid container xs={12} sx={{ fontSize: '12px' }}>
       <Grid xs={12} sm={4}>
@@ -84,7 +90,7 @@ export function Traits({ traits, specializationScore, onChange }) {
             utils.traits.map((trait, index) => {
               return <Grid xs={12} key={index}>
                 <TraitButton 
-                  initialState={traits[trait] || 'none'} 
+                  initialState={traits[trait]} 
                   score={specializationScore}
                   onChange={onChange}
                 >
@@ -140,12 +146,13 @@ export default function SelectTraitsDialog({ open, closeDialog, handleSubmit, in
   const [specializationYears, setSpecializationYears] = React.useState(initialData ? initialData.specializationYears : '0')
   const [specializationBonusYears, setSpecializationBonusYears] = React.useState(initialData && (initialData.specializationBonusYears || '0'))
   const [isNatural, setIsNatural] = React.useState(initialData ? initialData.isNatural : false)
-  const [traits, setTraits] = React.useState(initialData ? initialData.traits : {})
+  const [traits, setTraits] = React.useState(initialData ? initialData.sentienceTraits : {})
   
+  console.log(initialData)
   let currentIsNatural = initialData && ( 
-    (initialData['isNatural'] && !isNatural) ? -1 : 0 
-    +
-    (!initialData['isNatural'] && isNatural) ? 1 : 0 
+    (initialData.isNatural && !isNatural) ? -1 : 0 
+    // +
+    // (!initialData['isNatural'] && isNatural) ? 1 : 0 
   )
   
   const totalYears = Number(specializationYears) + Number(specializationBonusYears)
@@ -217,7 +224,7 @@ export default function SelectTraitsDialog({ open, closeDialog, handleSubmit, in
                 variant="outlined" 
                 fullWidth 
                 onClick={handleAddSpecialization}
-                disabled={!valid}
+                disabled={false && !valid}
               >
                 Save
               </Button>

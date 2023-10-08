@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider'
 import InputBase from '@mui/material/InputBase'
 
 import Paper from './components/Paper'
-import BorderedContainer, { ExtraLabels } from '../../components/BorderedContainer'
+import BorderedContainer from '../../components/BorderedContainer'
 
 function Header({ character }) {
   const classSentience = <b>
@@ -71,6 +71,56 @@ function Miracles({ character }) {
   </Grid>
 }
 
+function BorderedSpecializations({ container, label, label2, children, spacing, height, sx }){
+  const bsx ={
+    height: height + ' !important', 
+    position: 'relative',
+    border: 'solid black',
+    borderWidth: '2px 1px 2px 1px',
+    borderRadius: '4px',
+    p: 0.5,
+    ...sx
+  }
+
+  const baseLabelStyles = {
+    padding: '0 2px', 
+    margin: '0 0 0 6px', 
+    position: 'absolute', 
+    backgroundColor: 'white',
+    fontSize: '9px'
+  }
+
+  const startLabelStyles = {
+    ...baseLabelStyles,
+    top: '-8px', 
+  }
+  
+  const middleLabel1Styles = {
+    ...baseLabelStyles,
+    top: '-8px', 
+    right: '160px',
+  }
+  const middleLabel2Styles = {
+    ...baseLabelStyles,
+    top: '-8px', 
+    right: '100px',
+  }
+
+  const endLabelStyles = {
+    ...baseLabelStyles,
+    top: '-8px', 
+    right: '20px',
+  }
+
+  return <Grid container={container} sx={bsx} spacing={spacing}>
+    <h6 style={startLabelStyles}>Specializations</h6>
+    <h6 style={middleLabel1Styles}>Years</h6>
+    <h6 style={middleLabel2Styles}>Bonus </h6>
+    <h6 style={endLabelStyles}>Score</h6>
+    {children ? children : <>&nbsp;</>}
+  </Grid>
+}
+
 function Specializations({ character }) {
 
   // function Specialization({ natural, label, label2, label3, header }) {
@@ -105,22 +155,18 @@ function Specializations({ character }) {
   //   </>
   // }
 
-  return <>
-    <Grid xs>
-      {
-        Array(character.totalSpecializations).fill(null).map((_, i) => i+1).map((index) => {
-          const key = 'specialization' + index
-          const specialization = character[key]
-          const label = specialization.specializationName
-          const score = character.getSpecializationScore(key)
-          const natural = specialization.isNatural
-          return <React.Fragment key={key}>
-            <Score label={label} endLabel={score} bold={natural} />
-          </React.Fragment>
-        })
-      }
-    </Grid>
-  </>
+  return (
+    Array(character.totalSpecializations).fill(null).map((_, i) => i+1).map((index) => {
+      const key = 'specialization' + index
+      const specialization = character[key]
+      const label = specialization.specializationName
+      const score = character.getSpecializationScore(key)
+      const natural = specialization.isNatural
+      return <React.Fragment key={key}>
+        <Score label={label} endLabel={score} bold={natural} />
+      </React.Fragment>
+    })
+  )
   // {
   //   Array(character.totalSpecializations).fill(null).map((_, i) => i+1).map((index) => {
   //     const key = 'specialization' + index
@@ -328,15 +374,15 @@ export default function Page1({ character }) {
           <Age character={character} />
         </Grid>
 
-        <Grid xs={6}>
-          <BorderedContainer label="Specializations" label2="Score" height={'486px'}>
+        <Grid xs={12}>
+          <BorderedSpecializations height={'272px'} sx={{ p: 1 }}>
             <Specializations character={character} />
-          </BorderedContainer>
+          </BorderedSpecializations>
         </Grid>
 
         <Grid container xs={6} spacing={2}>
           
-          <Grid xs={6}>
+          {/* <Grid xs={6}>
             <BorderedContainer label={'Mental'} sx={{ height: '72px' }}>
               <ExtraLabels label2={'Max: 100'} />
             </BorderedContainer>
@@ -346,13 +392,13 @@ export default function Page1({ character }) {
             <BorderedContainer label={'Ego'} sx={{ height: '72px' }}>
               <ExtraLabels label2={'Max: ' + character.getMaxEgo()} />
             </BorderedContainer>
-          </Grid>
+          </Grid> */}
 
-          <Grid xs={12}>
-            <BorderedContainer label="Core Values" label2="Score" height={'398px'}>
-              <CoreValues character={character} />
-            </BorderedContainer>
-          </Grid>
+        </Grid>
+        <Grid xs={12}>
+          <BorderedContainer label="Core Values" label2="Score" height={'198px'}>
+            <CoreValues character={character} />
+          </BorderedContainer>
         </Grid>
 
         <Grid xs={12}>

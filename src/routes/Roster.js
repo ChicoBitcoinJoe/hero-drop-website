@@ -5,6 +5,7 @@ import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2'
 import { useNavigate } from 'react-router-dom'
 
+import GroupIcon from '@mui/icons-material/Group'
 import PrintIcon from '@mui/icons-material/Print'
 import HomeIcon from '@mui/icons-material/Home'
 
@@ -40,6 +41,18 @@ export default function Roster({ roster }) {
     )
   }
 
+  function CharacterSelectButton() {
+    return (
+      <Button onClick={() => { }}
+        sx={{ color: 'white', borderRadius: 0 }}  
+        size="large"
+        startIcon={<GroupIcon />}
+      >
+        Roster
+      </Button>
+    )
+  }
+
   const contentBoxStyles = {   
     backgroundColor: 'grey',
     p: '0.5in',
@@ -52,15 +65,12 @@ export default function Roster({ roster }) {
   }
 
   const toolbarStyles = { 
-    position: 'absolute', 
-    // backgroundColor: 'white',
-    color: 'white',
-    left: '0.5in',
-    top: 8,
     zIndex: 3,
+    position: 'absolute', 
+    top: '8px',
+    left: '0.5in',
     width: '216mm',
-    borderBottom: '1px solid grey',
-    // borderTop: '1px solid grey',
+    color: 'white',
   }
 
   return <>
@@ -69,9 +79,10 @@ export default function Roster({ roster }) {
         <Grid xs="auto">
           <HomeButton />
         </Grid>
-        <Grid xs>
-
+        <Grid xs="auto">
+          <CharacterSelectButton />
         </Grid>
+        <Grid xs />
         <Grid xs="auto">
           <PrintButton />
         </Grid>

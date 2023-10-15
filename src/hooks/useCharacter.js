@@ -367,7 +367,19 @@ function getAbilityScores({ specializations, abilityScoreModifiers }) {
     intelligence: getAbilityScore("INT", specializations, abilityScoreModifiers),
     wisdom: getAbilityScore("WIS", specializations, abilityScoreModifiers),
     charisma: getAbilityScore("CHA", specializations, abilityScoreModifiers),
+    magic: getAbilityScore("MAG", specializations, abilityScoreModifiers),
+    lethality: getAbilityScore("LTH", specializations, abilityScoreModifiers),
   }
+}
+
+export function convertScoreToDamageDie(score) {
+  if(score >= 6) return (score-5)+'d12'
+  else if(score === 5) return '1d10'
+  else if(score === 4) return '1d8'
+  else if(score === 3) return '1d6'
+  else if(score === 2) return '1d4'
+  else if(score === 1) return '1d2'
+  else return ''
 }
 
 export default function useCharacter(rawData) {
@@ -395,7 +407,9 @@ export default function useCharacter(rawData) {
       STR: '',
       INT: '',
       WIS: '',
-      CHA: ''
+      CHA: '',
+      MAG: '',
+      LTH: '',
     },
     version: 1,
     ...(rawData || {})

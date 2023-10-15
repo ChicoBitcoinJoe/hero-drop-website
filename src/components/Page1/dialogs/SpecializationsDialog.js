@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Unstable_Grid2'
 import ButtonBase from '@mui/material/ButtonBase'
+import Typography from '@mui/material/Typography'
 import Checkbox from '@mui/material/Checkbox'
 import { Divider, FormControlLabel } from '@mui/material'
 
@@ -115,153 +116,114 @@ export default function SpecializationDialog({ character, initialState, submit, 
   }
   
   return <>
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ maxWidth: '360px' }}>
       <Grid xs={12}>
-        <TextField fullWidth label="Specialization Name" value={state.name} onChange={event => updateState('name', event.target.value)}/>
+        <TextField fullWidth
+          label="Specialization Name" 
+          value={state.name} 
+          onChange={event => updateState('name', event.target.value)}
+        />
       </Grid>
-      <Grid xs={3}>
-        <TextField fullWidth label="Years" value={state.training.years} onChange={event => updateDeepState('training', 'years', event.target.value)}/>
+      <Grid xs={6}>
+        <TextField fullWidth
+          label="Years" 
+          value={state.training.years} 
+          onChange={event => updateDeepState('training', 'years', event.target.value)}
+        />
       </Grid>
-      <Grid xs={3}>
-        <TextField fullWidth label="Bonus Years" value={state.training.bonus} onChange={event => updateDeepState('training', 'bonus', event.target.value)}/>
+      <Grid xs={6}>
+        <TextField fullWidth
+          label="Bonus Years" 
+          value={state.training.bonus} 
+          onChange={event => updateDeepState('training', 'bonus', event.target.value)}
+        />
       </Grid>
-      <Grid xs="auto" container alignItems="center">
-        <FormControlLabel control={<Checkbox checked={state.natural} onChange={(event) => updateState('natural', event.target.checked)} />} label={'Natural ('+ current + '/' + max + ')'} />
-      </Grid>
-      <Grid xs container alignItems="center" sx={{ fontWeight: 'bold' }}>
-        Score: {score !== 0 && '+'}{score}
+      <Grid xs={12} container>
+        <Grid xs={6} container justifyContent="center" alignItems="center">
+          <FormControlLabel 
+            control={<Checkbox checked={state.natural} 
+            onChange={(event) => updateState('natural', event.target.checked)} />} 
+            label={'Natural ('+ current + '/' + max + ')'} 
+          />
+        </Grid>
+        <Grid xs={6} container justifyContent="center" alignItems="center">
+          <Typography sx={{ fontWeight: 'bold' }}>Score: {score !== 0 && '+'}{score}</Typography>
+        </Grid>
       </Grid>
       <Grid xs={12}>
-        <Divider textAlign='left'>Ability Scores</Divider>
+        <Divider textAlign='left'>Abilities</Divider>
       </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
         <TraitButton 
           initialState={state.traits['CON']} 
           years={trainedYears} 
           onChange={(value) => onTraitChange('CON', value)}
         >
           Constitution
-      </TraitButton>
+        </TraitButton>
       </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['DEX']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('DEX', value)}
-        >
-          Dexterity
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['STR']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('STR', value)}
-        >
-          Strength
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
         <TraitButton 
           initialState={state.traits['INT']} 
           years={trainedYears} 
           onChange={(value) => onTraitChange('INT', value)}
         >
           Intelligence
-      </TraitButton>
+        </TraitButton>
       </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
+        <TraitButton 
+          initialState={state.traits['DEX']} 
+          years={trainedYears} 
+          onChange={(value) => onTraitChange('DEX', value)}
+        >
+          Dexterity
+        </TraitButton>
+      </Grid>
+      <Grid xs={6}>
         <TraitButton 
           initialState={state.traits['WIS']} 
           years={trainedYears} 
           onChange={(value) => onTraitChange('WIS', value)}
         >
           Wisdom
-      </TraitButton>
+        </TraitButton>
       </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
+        <TraitButton 
+          initialState={state.traits['STR']} 
+          years={trainedYears} 
+          onChange={(value) => onTraitChange('STR', value)}
+        >
+          Strength
+        </TraitButton>
+      </Grid>
+      <Grid xs={6}>
         <TraitButton 
           initialState={state.traits['CHA']} 
           years={trainedYears} 
           onChange={(value) => onTraitChange('CHA', value)}
         >
           Charisma
-      </TraitButton>
+        </TraitButton>
       </Grid>
-      <Grid xs={12}>
-        <Divider textAlign='left'>Schools of Magic</Divider>
-      </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
         <TraitButton 
-          initialState={state.traits['ABJ']} 
+          initialState={state.traits['LTH']} 
           years={trainedYears} 
-          onChange={(value) => onTraitChange('ABJ', value)}
+          onChange={(value) => onTraitChange('LTH', value)}
         >
-          Abjuration
-      </TraitButton>
+          Lethality
+        </TraitButton>
       </Grid>
-      <Grid xs={4}>
+      <Grid xs={6}>
         <TraitButton 
-          initialState={state.traits['CNJ']} 
+          initialState={state.traits['MAG']} 
           years={trainedYears} 
-          onChange={(value) => onTraitChange('CNJ', value)}
+          onChange={(value) => onTraitChange('MAG', value)}
         >
-          Conjuration
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['DIV']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('DIV', value)}
-        >
-          Divination
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['ENC']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('ENC', value)}
-        >
-          Enchantment
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['ILL']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('ILL', value)}
-        >
-          Illusion
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['NEC']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('NEC', value)}
-        >
-          Necromancy
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['EVO']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('EVO', value)}
-        >
-          Evocation
-      </TraitButton>
-      </Grid>
-      <Grid xs={4}>
-        <TraitButton 
-          initialState={state.traits['TRA']} 
-          years={trainedYears} 
-          onChange={(value) => onTraitChange('TRA', value)}
-        >
-          Transmutation
-      </TraitButton>
+          Magic
+        </TraitButton>
       </Grid>
       <Grid xs={12} container>
         <Grid xs={4} sx={{ display: !initialState && 'none' }}>

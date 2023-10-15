@@ -1,10 +1,9 @@
 import Grid from '@mui/material/Unstable_Grid2'
 import Box from '@mui/material/Box'
 
-export function AbilityScore({ label, score }) {
-
+export function AbilityScore({ ability, score, dieFn }) {
   const outerBoxStyles = { 
-    width: 'calc(1in - 4px)', 
+    width: 'calc(1.5in - 4px)', 
     height: '.50in',
     borderRadius: '4px', // '.25in',
     border: '1px solid black',
@@ -31,23 +30,32 @@ export function AbilityScore({ label, score }) {
 
   let mod = score - 10
   mod = mod >= 0 ? Math.floor(mod / 2) : Math.round(mod / 2)
+  const die = dieFn && dieFn(mod)
   return (
     <Box sx={{ height: 'calc(.5in + 7px)' }}>
       <Box sx={outerBoxStyles}>
         <Grid container sx={{ width: '100%' }}>
-          <Grid xs={6}>
+          <Grid xs={4}>
             <Box sx={innerBoxStyles}>
               <Grid container alignItems="end" justifyContent="center" sx={{ height: '.5in' }}>
                 <Box sx={{ fontSize: '18px' }}>{score}</Box>
-                <Box sx={labelStyles}>{label}</Box>
+                <Box sx={labelStyles}>{ability}</Box>
               </Grid>
             </Box>
           </Grid>
-          <Grid xs={6}>
+          <Grid xs={4}>
             <Box sx={innerBoxStyles}>
               <Grid container alignItems="end" justifyContent="center" sx={{ height: '.5in' }}>
                 <Box sx={{ fontSize: '18px' }}>{score > 11 && '+'}{score && mod}</Box>
                 <Box sx={labelStyles}>MOD</Box>
+              </Grid>
+            </Box>
+          </Grid>
+          <Grid xs={4}>
+            <Box sx={innerBoxStyles}>
+              <Grid container alignItems="end" justifyContent="center" sx={{ height: '.5in' }}>
+                <Box sx={{ fontSize: '14px' }}>{die}</Box>
+                <Box sx={labelStyles}>DIE</Box>
               </Grid>
             </Box>
           </Grid>

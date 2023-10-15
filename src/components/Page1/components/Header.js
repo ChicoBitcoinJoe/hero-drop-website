@@ -37,9 +37,12 @@ export default function Header({ character, onClick }) {
           <div>Form</div>
         </Grid>
         <Grid xs sx={{ fontSize: '9px' }}>
-          <div>Name / Title</div>
+          <div>Character Name</div>
         </Grid>
-        <Grid xs={2.5} sx={{ fontSize: '9px' }}>
+        <Grid xs={3} sx={{ fontSize: '9px' }}>
+          <div>Title</div>
+        </Grid>
+        <Grid xs={2} sx={{ fontSize: '9px' }}>
           <div>Player Name</div>
         </Grid>
       </Grid>

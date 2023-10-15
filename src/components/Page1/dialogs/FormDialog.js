@@ -8,11 +8,10 @@ import Grid from '@mui/material/Unstable_Grid2'
 import CasinoIcon from '@mui/icons-material/Casino'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 
-import Score from './ScoreDialog'
 import Clickable from '../../Clickable'
 import { TextField, Typography } from '@mui/material'
 
-import { getSizeFromWeight, rollDice, getAgeCategoryFromScore } from '../../../hooks/useCharacter'
+import { getSizeFromWeight, rollDice, getAgeCategoryFromScore, getClassFromLevel, getClassScoreFromLevel } from '../../../hooks/useCharacter'
 
 function Die({ children, hideBorder, sx }) {
   return <>
@@ -41,32 +40,36 @@ function useDie(min, max, defaultValue) {
   ]
 }
 
-function FormScore({ label, value, subtract }) {
+function FormScore({ label, value, onClick, subtract, hide }) {
   return (
     <Grid container>
       <Grid xs={4} sm={12} sx={{ mt: 1, textAlign: 'center', p: 1, fontSize: '18px' }}>
         {label}
       </Grid> 
       <Grid container xs={8} sm={12} justifyContent="center" alignItems={'center'} sx={{ fontSize: '18px' }} >
-        <Grid>
-          <Die sx={{ color: 'white', backgroundColor: 'rgb(29,118,206)' }} hideBorder>
-            {value}
-          </Die>
+        <Grid pt={hide && 1.3}>
+          <Clickable onClick={onClick}>
+            <Die sx={{ color: 'white', backgroundColor: 'rgb(29,118,206)' }} hideBorder>
+              {value}
+            </Die>
+          </Clickable>
         </Grid>
-        <Grid xs={2} container justifyContent="center" alignItems="center" p={2}>{ subtract ? '-' : '+' }</Grid>
-        <Grid>1</Grid>
-        <Grid xs={2} container justifyContent="center" alignItems="center" p={2}>=</Grid>
-        <Grid><Die>{subtract ? value - 1 : value + 1}</Die></Grid>
+        <Grid xs={2} sx={{ display: hide && 'none'}} container justifyContent="center" alignItems="center" p={2}>
+          { subtract ? '-' : '+' }
+        </Grid>
+        <Grid sx={{ display: hide && 'none'}}>1</Grid>
+        <Grid xs={2} sx={{ display: hide && 'none'}} container justifyContent="center" alignItems="center" p={2}>=</Grid>
+        <Grid sx={{ display: hide && 'none'}}><Die>{subtract ? value - 1 : !hide ? value + 1 : value}</Die></Grid>
       </Grid>
     </Grid>
   )
 }
 
-export function FormDialog({ character, submit, close}) {
+export default function FormDialog({ character, submit, close}) {
   const [ weight, setWeight ] = React.useState(character.form.weight || '')
   const [ die1, rollDie1, setDie1 ] = useDie(1,4,character.form.style ? character.form.style-1 : 1)
   const [ die2, rollDie2, setDie2 ] = useDie(1,4,character.form.peak ? character.form.peak+1 : 1)
-  const [ die3, rollDie3, setDie3 ] = useDie(1,4,character.form.aptitude ? character.form.aptitude-1 : 1)
+  const [ die3, rollDie3, setDie3 ] = useDie(1,4,character.form.aptitude || 1)
 
   const [numberOfRolls, setNumberofRolls] = React.useState(0)
   React.useEffect(() => {
@@ -76,6 +79,7 @@ export function FormDialog({ character, submit, close}) {
       rollDie3()
       setNumberofRolls(numberOfRolls-1)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberOfRolls])
 
   function roll() {
@@ -86,17 +90,19 @@ export function FormDialog({ character, submit, close}) {
     submit({
       style: die1+1,
       peak: die2-1,
-      aptitude: die3+1,
+      aptitude: die3,
       weight,
     })
   }
 
   function swapBeautyAndPeak() {
-    
+    setDie1(die2)
+    setDie2(die1)
   }
 
   function swapPeakAndAptitude() {
-    
+    setDie2(die3)
+    setDie3(die2)
   }
 
   return <>
@@ -108,31 +114,25 @@ export function FormDialog({ character, submit, close}) {
         startIcon={<CasinoIcon />}
         onClick={roll}
       >
-        Roll 3d4
+        Roll
       </Button>
-      <Grid xs={12} sm={4}>
-        <FormScore label="Beauty" value={die1} />
+      <Grid xs={12} sm={4.5}>
+        <FormScore label="Style" value={die1} onClick={() => setDie1(die1+1 > 4 ? 1 : die1+1)} />
       </Grid>
-      <Grid xs={12} sm={4}>
-        <FormScore label="Peak" value={die2} subtract />
+      <Grid xs={12} sm={4.5}>
+        <FormScore label="Peak" value={die2} onClick={() => setDie2(die2+1 > 4 ? 1 : die2+1)} subtract />
       </Grid>
-      <Grid xs={12} sm={4}>
-        <FormScore label="Aptitude" value={die3} />
+      <Grid xs={12} sm={3}>
+        <FormScore label="Aptitude" value={die3} onClick={() => setDie3(die3+1 > 4 ? 1 : die3+1)} hide />
       </Grid>
-      <Grid xs={3.55}></Grid>
-      <Grid xs={4} sx={{ marginTop: '-94px', pl: 1,  }}>
-        <IconButton 
-          sx={{ height: '24px', width: '24px', backgroundColor: 'white' }}
-          onClick={swapBeautyAndPeak}
-        >
+      <Grid xs={4}></Grid>
+      <Grid xs={4} sx={{ marginTop: '-100px', pl: 1,  }}>
+        <IconButton onClick={swapBeautyAndPeak}>
           <SwapHorizIcon />
         </IconButton>
       </Grid>
-      <Grid xs={4} sx={{ marginTop: '-94px', pl: 1,  }}>
-        <IconButton 
-          sx={{ height: '24px', width: '24px', backgroundColor: 'white' }}
-          onClick={swapPeakAndAptitude}
-        >
+      <Grid xs={3} sx={{ marginTop: '-100px', pl: 1,  }}>
+        <IconButton onClick={swapPeakAndAptitude}>
           <SwapHorizIcon />
         </IconButton>
       </Grid>
@@ -141,7 +141,7 @@ export function FormDialog({ character, submit, close}) {
       <Grid xs={12} sm={4}></Grid>
       <Grid py={2} xs={12}><Divider /></Grid>
       <Grid xs={4}>
-        <TextField label="Weight (lbs)" value={weight} onChange={(event) => setWeight(event.target.value)} />
+        <TextField label="Weight " value={weight} onChange={(event) => setWeight(event.target.value)} />
       </Grid>
       <Grid pl={2} container xs={8} alignItems="center">
         <Grid><Typography>Size: {weight ? getSizeFromWeight(weight) : 'Unknown'}</Typography></Grid>
@@ -155,16 +155,5 @@ export function FormDialog({ character, submit, close}) {
         </Grid>
       </Grid>
     </Grid>
-  </>
-}
-
-export function Form({ character }) {
-  return <>
-    <Score label="Beauty" endLabel={character.form.style && '+' + character.form.style} />
-    <Score label="Peak" endLabel={getAgeCategoryFromScore(character.form.peak)} />
-    <Score label="Aptitude" endLabel={character.form.aptitude && '+' + character.form.aptitude} />
-    <Divider sx={{ my: .5 }} />
-    <Score label="Size" endLabel={getSizeFromWeight(character.form.weight)} />
-    <Score label="Weight (lbs)" endLabel={character.form.weight} />
   </>
 }

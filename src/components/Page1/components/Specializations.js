@@ -87,19 +87,19 @@ export function Specialization({ specialization, score }) {
       <Grid xs sx={{ fontWeight: natural && 'bold' }}>
         {name}
       </Grid>
-      <Grid xs={2} container justifyContent="center">
+      <Grid xs={3} container justifyContent="center">
         <Grid>
           {training.years || '0'} + {training.bonus || '0'}
         </Grid>
       </Grid>
-      <Grid xs={1.5} container justifyContent="center">
+      <Grid xs={2} container justifyContent="center">
         <Grid sx={{ fontWeight: natural && 'bold' }}>
           {score > 0 && '+'}{score}
         </Grid>
       </Grid>
       <Grid xs={12} sx={{ pt: .25, display: noFullTraits && noHalfTraits && 'none' }} container>
         <Grid xs={"auto"} sx={{ display: noFullTraits && 'none'}}>
-          <Box component="span">(Full)&nbsp;&nbsp;&nbsp;</Box>
+          <Box component="span">(Full)&nbsp;</Box>
           {
             Object.keys(traits).map((key) => {
               const traitType = traits[key]
@@ -115,7 +115,7 @@ export function Specialization({ specialization, score }) {
           <Box component="span" sx={{ display: noHalfTraits && 'none'}}>&nbsp;&nbsp;&nbsp;</Box>
         </Grid>
         <Grid xs="auto" sx={{ display: noHalfTraits && 'none'}}>
-          <Box component="span">(Half)&nbsp;&nbsp;&nbsp;</Box>
+          <Box component="span">(Half)&nbsp;</Box>
           {
             Object.keys(traits).map((key) => {
               const traitType = traits[key]
@@ -134,9 +134,8 @@ export function Specialization({ specialization, score }) {
   </>
 }
 
-export default function Specializations({ character, handleClickOpen }) {
-  const maxSpecializations = character.form.aptitude
-
+export default function Specializations({ character, handleDialogOpen }) {
+  
   const alignStart = {
     display: 'flex !important',
     alignItems: 'flex-start !important',
@@ -150,18 +149,18 @@ export default function Specializations({ character, handleClickOpen }) {
           const { natural, training } = specialization
           const score = getSpecializationScore(Number(training.years) + Number(training.bonus), natural)
           return <React.Fragment key={index}>
-            <Clickable square sx={{ p: 1, ...alignStart }} onClick={(event) => handleClickOpen('Specializations', event, index)}>
+            <Clickable square sx={{ p: 1, ...alignStart }} onClick={(event) => handleDialogOpen('Specializations', event, index)}>
               <Specialization specialization={specialization} score={score} />
             </Clickable>
           </React.Fragment>
         })
       }
-      <Box displayPrint="none">
+      <Box displayPrint="none" sx={{ display: character.specializations.length === 13 && 'none' }}>
         <Grid container>
           <Grid xs={12}>
             <Clickable square 
               sx={{ p: 1, ...alignStart, textAlign: 'center' }} 
-              onClick={(event) => handleClickOpen('Specializations', event, 'new')}
+              onClick={(event) => handleDialogOpen('Specializations', event, 'new')}
             >
               <Typography sx={{ fontSize: '11px' }}>
                 + add specialization 

@@ -117,7 +117,7 @@ export default function AbilityScores({ character, submit, close }) {
         <Typography variant="h5" sx={{ textAlign: 'center', pb: 2 }}>Ability Score Changes</Typography>
       </Grid>
       
-      <Grid container spacing={1} sx={{ height: '220px' }}>
+      <Grid container spacing={1} sx={{ height: '280px' }}>
         <Grid xs={6} container justifyContent="center">
           <Modifier label={'CON'} state={state} onClick={onClick} />
         </Grid>
@@ -135,6 +135,12 @@ export default function AbilityScores({ character, submit, close }) {
         </Grid>
         <Grid xs={6} container justifyContent="center">
           <Modifier label={'CHA'} state={state} onClick={onClick} />
+        </Grid>
+        <Grid xs={6} container justifyContent="center">
+          <Modifier label={'LTH'} state={state} onClick={onClick} />
+        </Grid>
+        <Grid xs={6} container justifyContent="center">
+          <Modifier label={'MAG'} state={state} onClick={onClick} />
         </Grid>
       </Grid>
 

@@ -14,7 +14,7 @@ export default function Age({ character, onClick }) {
   }
 
   const table = [
-    ['Age Category', 'Max', 'Str. Penalty', 'Current', 'Style'],
+    ['Age Category', 'Max', 'Penalty', 'Current', 'Style'],
     ['Adolescent', age.max && Math.floor(age.max * 0.15), character.level && getPenalty(-2), '', form.style && form.style - Math.abs(0 - form.peak)],
     ['Young Adult', age.max && Math.floor(age.max * 0.35), character.level && getPenalty(0), '', form.style && form.style - Math.abs(1 - form.peak)],
     ['Adult', age.max && Math.floor(age.max * 0.55), character.level && getPenalty(-1), '', form.style && form.style - Math.abs(2 - form.peak)],
@@ -40,30 +40,30 @@ export default function Age({ character, onClick }) {
           }
 
           return <Grid key={'ageRow'+index} container xs={12} sx={rowStyles}>
-            <Grid sx={{ p: .5, py: .58, width: '70px' }}>
+            <Grid sx={{ p: .5, py: .8, width: '70px' }}>
               {row[0]}
             </Grid>
             <Grid container xs
               justifyContent="center"
-              sx={{ p: .5, py: .58, borderLeft: '1px dotted black' }}
+              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
             >
               {row[3]}
             </Grid>
             <Grid container xs
               justifyContent="center" 
-              sx={{ p: .5, py: .58, borderLeft: '1px dotted black' }}
+              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
             >
               {row[1]}
             </Grid>
             <Grid container xs
               justifyContent="center" 
-              sx={{ p: .5, py: .58, borderLeft: '1px dotted black' }}
+              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
             >
              {row[2] || ''}
             </Grid>
             <Grid container xs 
               justifyContent="center"
-              sx={{ p: .5, py: .58, borderLeft: '1px dotted black' }}
+              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
             >
               {row[4] > 0 && '+'}{row[4] || ''}
             </Grid>

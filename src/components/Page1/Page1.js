@@ -4,9 +4,11 @@ import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 import Grid from '@mui/material/Unstable_Grid2'
 import Paper from '../Paper'
+import Divider from '@mui/material/Divider'
 
 import BorderedContainer, { Label } from '../BorderedContainer'
 import Clickable from '../Clickable'
+import Score from './components/Score'
 import Header from './components/Header'
 import HeaderDialog from './dialogs/HeaderDialog'
 import Form from './components/Form'
@@ -21,6 +23,20 @@ import ValuesDialog from './dialogs/ValuesDialog'
 import Miracles from './components/Miracles'
 import AbilityScore from './components/AbilityScore'
 import { getCurrentNaturals, getMaxNaturals, convertScoreToDamageDie } from '../../hooks/useCharacter'
+import { 
+  getClassFromLevel, 
+  getClassScoreFromLevel 
+} from '../../hooks/useCharacter'
+
+function Class({ character, onClick }) {
+  const className = getClassFromLevel(character.level)
+  const classScore = getClassScoreFromLevel(character.level)
+  return <>
+    <BorderedContainer label={"Class" + (character.form.name && (": " + character.form.name))} sx={{ p: 1 }}>
+      <Score label={className || <>&nbsp;</>} endLabel={(character.level && ("Score (" + (classScore>=1 ? '+' : '') + classScore  + ')'))} />
+    </BorderedContainer>
+  </>
+}
 
 export default function Page1({ character }) {  
   console.log(character)
@@ -55,6 +71,7 @@ export default function Page1({ character }) {
       if(dialog === 'Header') {
         character.updateMany([
           ['name', data.characterName],
+          ['title', data.characterTitle],
           ['form', { ...character.form, name: data.formName }],
           ['level', data.level],
           ['playerName', data.playerName],
@@ -74,11 +91,6 @@ export default function Page1({ character }) {
         if(clickedIndex === 'new') {
           character.updateMany([
             ['specializations', [...character.specializations, data]],
-          ])
-        }
-        else if(clickedIndex === 'form') {
-          character.updateMany([
-            ['form', {...character.form, ...data}],
           ])
         }
         else {
@@ -126,14 +138,15 @@ export default function Page1({ character }) {
         </Grid>
 
         <Grid xs={7} container>
-          <Grid xs={4}>
-            <BorderedContainer label={"Form" + (character.form.name && (": " + character.form.name))}>
-              <Clickable sx={{ p: 1 }} onClick={(event) => handleDialogOpen('Form', event)}>
-                <Form character={character} />
-              </Clickable>
-            </BorderedContainer>
+          <Grid xs={4.35} container>
+            <Grid xs={12}>
+              <Class character={character} />
+            </Grid>
+            <Grid xs={12}>
+              <Form character={character} onClick={(event) => handleDialogOpen('Form', event)} />
+            </Grid>
           </Grid>
-          <Grid xs={8}>
+          <Grid xs={7.65}>
             <Clickable onClick={(event) => handleDialogOpen('Age', event)}>
               <Age character={character} />
             </Clickable>
@@ -213,7 +226,7 @@ export default function Page1({ character }) {
           </Grid>
           <Grid xs={12}>
             <Clickable onClick={(event) => handleDialogOpen('?', event)}>
-              <BorderedContainer
+              <BorderedContainer label="Character Description"
                 sx={{ height: 184 }}
               >
                 
@@ -241,7 +254,7 @@ export default function Page1({ character }) {
               <BorderedContainer label={"Schools of Magic"} 
                 sx={{ height: 241 }}
               >
-                <Miracles character={character} />
+                
               </BorderedContainer>
             </Clickable>
           </Grid>
@@ -250,7 +263,7 @@ export default function Page1({ character }) {
               <BorderedContainer label={"Damage Reduction"} 
                 sx={{ height: 241 }}
               >
-                <Miracles character={character} />
+                
               </BorderedContainer>
             </Clickable>
           </Grid>

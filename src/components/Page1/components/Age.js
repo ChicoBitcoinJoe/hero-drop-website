@@ -14,7 +14,7 @@ export default function Age({ character, onClick }) {
   }
 
   const table = [
-    ['Age Category', 'Max', 'Penalty', 'Current', 'Style'],
+    ['Age Category', 'Max Age', 'STR Penalty', 'Current', 'Style'],
     ['Adolescent', age.max && Math.floor(age.max * 0.15), character.level && getPenalty(-2), '', form.style && form.style - Math.abs(0 - form.peak)],
     ['Young Adult', age.max && Math.floor(age.max * 0.35), character.level && getPenalty(0), '', form.style && form.style - Math.abs(1 - form.peak)],
     ['Adult', age.max && Math.floor(age.max * 0.55), character.level && getPenalty(-1), '', form.style && form.style - Math.abs(2 - form.peak)],
@@ -30,50 +30,82 @@ export default function Age({ character, onClick }) {
 
   return <>
     <BorderedContainer container sx={{ p: 0 }} onClick={onClick}>
+      {/* <Grid container xs={12} 
+        sx={{ 
+          fontSize: '9px', 
+          fontWeight: 'bold',
+          borderBottom: '1px dotted black' 
+        }}
+      >
+        <Grid sx={{ p: .5, py: .8, width: '70px' }}>
+          {table[0][0]}
+        </Grid>
+        <Grid container xs
+          justifyContent="center"
+          sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+        >
+          {table[0][3]}
+        </Grid>
+        <Grid container xs
+          justifyContent="center" 
+          sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+        >
+          {table[0][1]}
+        </Grid>
+        <Grid container xs
+          justifyContent="center" 
+          sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+        >
+          {table[0][2] || ''}
+        </Grid>
+      </Grid> */}
       {
         table.map((row, index) => {
           const isLast = index === table.length-1
           const rowStyles = { 
             fontSize: '9px', 
             fontWeight: index !== 0 || 'bold',
-            borderBottom: isLast ? 0 : '1px dotted black'                       
+            borderBottom: isLast ? 0 : '1px dotted black',
+            // display: index !== ageScore+1 && 'none'
           }
 
-          return <Grid key={'ageRow'+index} container xs={12} sx={rowStyles}>
-            <Grid sx={{ p: .5, py: .8, width: '70px' }}>
-              {row[0]}
+          return <>
+            <Grid key={'ageRow'+index} container xs={12} sx={rowStyles}>
+              <Grid sx={{ p: .5, py: .8, width: '70px' }}>
+                {row[0]}
+              </Grid>
+              <Grid container xs
+                justifyContent="center"
+                sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+              >
+                {row[3]}
+              </Grid>
+              <Grid container xs
+                justifyContent="center" 
+                sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+              >
+                {row[1]}
+              </Grid>
+              <Grid container xs
+                justifyContent="center" 
+                sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+              >
+                {row[2] || ''}
+              </Grid>
+              {/* <Grid container xs 
+                justifyContent="center"
+                sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
+              >
+                {row[4] > 0 && '+'}{row[4] || ''}
+              </Grid> */}
+              {/* <Grid container
+                justifyContent="center"
+                sx={{ p: .5, py: .58, width: '40px', borderLeft: '1px dotted black' }}
+              >
+                {row[5]}
+              </Grid> */}
             </Grid>
-            <Grid container xs
-              justifyContent="center"
-              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
-            >
-              {row[3]}
-            </Grid>
-            <Grid container xs
-              justifyContent="center" 
-              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
-            >
-              {row[1]}
-            </Grid>
-            <Grid container xs
-              justifyContent="center" 
-              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
-            >
-             {row[2] || ''}
-            </Grid>
-            <Grid container xs 
-              justifyContent="center"
-              sx={{ p: .5, py: .8, borderLeft: '1px dotted black' }}
-            >
-              {row[4] > 0 && '+'}{row[4] || ''}
-            </Grid>
-            {/* <Grid container
-              justifyContent="center"
-              sx={{ p: .5, py: .58, width: '40px', borderLeft: '1px dotted black' }}
-            >
-              {row[5]}
-            </Grid> */}
-          </Grid>
+          </>
         })
       }
     </BorderedContainer>

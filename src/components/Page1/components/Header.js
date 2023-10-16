@@ -1,5 +1,6 @@
 import * as React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
+import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 
 import Clickable from '../../Clickable'
@@ -16,13 +17,16 @@ export default function Header({ character, onClick }) {
         <Grid xs={0.5} sx={{ pt: '5px' }}>
           <Typography noWrap sx={{ fontSize: '12px' }}>{ character.level }</Typography>
         </Grid>
-        <Grid xs={2.5} sx={{ pt: '5px' }}>
+        <Grid xs={2} sx={{ pt: '5px' }}>
           <Typography noWrap sx={{ fontSize: '12px' }}>{ character.form.name }</Typography>
         </Grid>
-        <Grid xs sx={{ pt: '5px' }}>
+        <Grid xs={character.title ? "auto" : 4} sx={{ pt: '5px' }}>
           <Typography noWrap sx={{ fontSize: '12px' }}>{ character.name }</Typography>
         </Grid>
-        <Grid xs={2.5} sx={{ pt: '5px' }}>
+        <Grid xs sx={{ pt: '5px', display: !character.title && 'none' }}>
+          <Typography noWrap sx={{ fontSize: '12px' }}>&nbsp;{ character.title }</Typography>
+        </Grid>
+        <Grid xs={2} sx={{ pt: '5px' }}>
           <Typography noWrap sx={{ fontSize: '12px' }}>{ character.playerName }</Typography>
         </Grid>
       </Grid>
@@ -36,11 +40,11 @@ export default function Header({ character, onClick }) {
         <Grid xs={2} sx={{ fontSize: '9px' }}>
           <div>Form</div>
         </Grid>
-        <Grid xs sx={{ fontSize: '9px' }}>
+        <Grid xs={character.title ? "auto" : 4} sx={{ fontSize: '9px' }}>
           <div>Character Name</div>
         </Grid>
-        <Grid xs={3} sx={{ fontSize: '9px' }}>
-          <div>Title</div>
+        <Grid xs sx={{ fontSize: '9px' }}>
+          <Box sx={{ display: !character.title && 'none' }}>&nbsp;and Title</Box>
         </Grid>
         <Grid xs={2} sx={{ fontSize: '9px' }}>
           <div>Player Name</div>

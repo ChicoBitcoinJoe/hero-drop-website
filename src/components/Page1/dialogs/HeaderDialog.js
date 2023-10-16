@@ -5,6 +5,7 @@ import Button from '@mui/material/Button'
 
 export default function HeaderDialog({ character, submit, close }) {
   const [ characterName, setCharacterName] = React.useState(character.name || '')
+  const [ characterTitle, setCharacterTitle] = React.useState(character.title || '')
   const [ level, setLevel] = React.useState(character.level || '0')
   const [ formName, setFormName] = React.useState(character.form.name || '')
   const [ playerName, setPlayerName] = React.useState(character.playerName || '')
@@ -12,6 +13,7 @@ export default function HeaderDialog({ character, submit, close }) {
   const onClick = () => {
     submit({
       characterName,
+      characterTitle,
       formName,
       playerName,
       level,
@@ -48,9 +50,16 @@ export default function HeaderDialog({ character, submit, close }) {
       </Grid>
       <Grid xs={12}>
         <TextField fullWidth
-          label="Character Name / Title" 
+          label="Character Name" 
           value={characterName} 
           onChange={(event) => setCharacterName(event.target.value)} 
+        />
+      </Grid>
+      <Grid xs={12}>
+        <TextField fullWidth
+          label="Title" 
+          value={characterTitle} 
+          onChange={(event) => setCharacterTitle(event.target.value)} 
         />
       </Grid>
       <Grid xs={12}>

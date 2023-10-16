@@ -345,6 +345,10 @@ export function getMaxNaturals(character) {
 
 function getAbilityScores({ specializations, abilityScoreModifiers }) {
   
+  function getAgePenalty() {
+    return 0
+  }
+
   function getAbilityScore(ability, specializations, abilityScoreModifiers) {
     const hideScore = specializations.length === 0
     let years = 0
@@ -356,7 +360,8 @@ function getAbilityScores({ specializations, abilityScoreModifiers }) {
         years += Math.round((Number(sp.training.years) + Number(sp.training.bonus)) / 2)
       }
     })
-    let score = 8 + getSpecializationScore(years) + abilityScoreModifiers[ability]
+    let score = 8 + getSpecializationScore(years) + Number(abilityScoreModifiers[ability]) + (ability === "STR" ? getAgePenalty() : 0)
+    
     return hideScore ? '' : score
   }
 
@@ -386,6 +391,7 @@ export default function useCharacter(rawData) {
   const [ data, setData ] = React.useState({ 
     playerName: '',
     name: '',
+    title: '',
     level: '',
     age: {
       max: '',

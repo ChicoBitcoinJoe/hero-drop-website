@@ -16,7 +16,7 @@ import useCharacter from '../hooks/useCharacter'
 export default function Roster({ roster }) {
   const navigate = useNavigate()
   const character = useCharacter()
-
+  
   function HomeButton() {
     return (
       <Button onClick={() => navigate("/home")}
@@ -90,8 +90,8 @@ export default function Roster({ roster }) {
     </Box>
     <Box sx={contentBoxStyles}>
       <Page1 character={character} />
-      <Box displayPrint="none" sx={{ height: '.5in' }} />
-      <Page2 character={character}/>
+      {/* <Box displayPrint="none" sx={{ height: '.5in' }} /> */}
+      {/* <Page2 character={character}/> */}
     </Box>
   </>
 }

@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import Typography from '@mui/material/Typography'
+import { Divider } from '@mui/material'
 
 function AbilityScore({ label, score }) {
 
@@ -89,13 +90,7 @@ function Modifier({ label, state, onClick }){
 
 export default function AbilityScores({ character, submit, close }) {
   const [ state, setState ] = React.useState({
-    CON: 0,
-    DEX: 0,
-    STR: 0,
-    INT: 0,
-    WIS: 0,
-    CHA: 0,
-    ...character.abilityScoreModifiers || {}
+    ...character.abilityScoreChanges || {}
   })
 
   const onClick = (data) => {
@@ -117,9 +112,9 @@ export default function AbilityScores({ character, submit, close }) {
         <Typography variant="h5" sx={{ textAlign: 'center', pb: 2 }}>Ability Score Changes</Typography>
       </Grid>
       
-      <Grid container spacing={1} sx={{ height: '280px' }}>
-        <Grid xs={6} container justifyContent="center">
-          <Modifier label={'CON'} state={state} onClick={onClick} />
+      <Grid container spacing={1} sx={{ height: '420px' }}>
+      <Grid xs={6} container justifyContent="center">
+          <Modifier label={'STR'} state={state} onClick={onClick} />
         </Grid>
         <Grid xs={6} container justifyContent="center">
           <Modifier label={'INT'} state={state} onClick={onClick} />
@@ -131,16 +126,16 @@ export default function AbilityScores({ character, submit, close }) {
           <Modifier label={'WIS'} state={state} onClick={onClick} />
         </Grid>
         <Grid xs={6} container justifyContent="center">
-          <Modifier label={'STR'} state={state} onClick={onClick} />
+          <Modifier label={'CON'} state={state} onClick={onClick} />
         </Grid>
         <Grid xs={6} container justifyContent="center">
           <Modifier label={'CHA'} state={state} onClick={onClick} />
         </Grid>
-        <Grid xs={6} container justifyContent="center">
-          <Modifier label={'LTH'} state={state} onClick={onClick} />
+        <Grid xs={12}>
+          <Divider textAlign="left">Other</Divider>
         </Grid>
         <Grid xs={6} container justifyContent="center">
-          <Modifier label={'MAG'} state={state} onClick={onClick} />
+          <Modifier label={'WLT'} state={state} onClick={onClick} />
         </Grid>
       </Grid>
 

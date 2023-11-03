@@ -66,7 +66,8 @@ export function TraitButton({ children, initialState, years, onChange }) {
           {children}
         </Grid>
         <Grid xs={6} container sx={rightStyles} justifyContent="end">
-          {calculatedYears > 0 && '+'}{calculatedYears} years
+          {/* {calculatedYears > 0 && '+'}{calculatedYears} years */}
+          { isNotTrait ? '' : isFullTrait ? 'Full' : 'Half' }
         </Grid>
       </Grid>
     </ButtonBase>
@@ -207,6 +208,9 @@ export default function SpecializationDialog({ character, initialState, submit, 
           Charisma
         </TraitButton>
       </Grid>
+      <Grid xs={12}>
+        <Divider textAlign='left'>Other</Divider>
+      </Grid>
       <Grid xs={6}>
         <TraitButton 
           initialState={state.traits['LTH']} 
@@ -218,11 +222,20 @@ export default function SpecializationDialog({ character, initialState, submit, 
       </Grid>
       <Grid xs={6}>
         <TraitButton 
-          initialState={state.traits['MAG']} 
+          initialState={state.traits['SPL']} 
           years={trainedYears} 
-          onChange={(value) => onTraitChange('MAG', value)}
+          onChange={(value) => onTraitChange('SPL', value)}
         >
-          Magic
+          Spellcasting
+        </TraitButton>
+      </Grid>
+      <Grid xs={6}>
+        <TraitButton 
+          initialState={state.traits['WLTH']} 
+          years={trainedYears} 
+          onChange={(value) => onTraitChange('WLTH', value)}
+        >
+          Wealth
         </TraitButton>
       </Grid>
       <Grid xs={12} container>

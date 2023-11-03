@@ -82,56 +82,63 @@ export function Specialization({ specialization, score }) {
     if(traits[key] === 'half') noHalfTraits = false
   })
 
-  return <>
+  const scoreStyles = { 
+    width: '28px', 
+    fontSize: '12px', 
+    fontWeight: 'bold', 
+    border: natural ? '1px dotted black' : '1px solid white', 
+    p: .75, 
+    borderRadius: '6px', 
+    textAlign: 'center' 
+  }
+  
+  return (
     <Grid container xs={12} sx={{ fontSize: '9px' }}>
-      <Grid xs sx={{ fontWeight: natural && 'bold' }}>
-        {name}
-      </Grid>
-      <Grid xs={3} container justifyContent="center">
-        <Grid>
-          {training.years || '0'} + {training.bonus || '0'}
-        </Grid>
-      </Grid>
-      <Grid xs={2} container justifyContent="center">
-        <Grid sx={{ fontWeight: natural && 'bold' }}>
+      <Grid xs="auto" pr={0.5} container justifyContent="center" alignItems="center">
+        <Box sx={scoreStyles}>
           {score > 0 && '+'}{score}
-        </Grid>
+        </Box>
       </Grid>
-      <Grid xs={12} sx={{ pt: .25, display: noFullTraits && noHalfTraits && 'none' }} container>
-        <Grid xs={"auto"} sx={{ display: noFullTraits && 'none'}}>
-          <Box component="span">(Full)&nbsp;</Box>
-          {
-            Object.keys(traits).map((key) => {
-              const traitType = traits[key]
-              if(traitType === 'full') {
-                return <>
-                  {key}&nbsp;
-                </>
-              }
-
-              return null
-            })
-          }
-          <Box component="span" sx={{ display: noHalfTraits && 'none'}}>&nbsp;&nbsp;&nbsp;</Box>
+      <Grid xs container>
+        <Grid xs={12} sx={{ fontWeight: 'bold' }}>
+          {name}
         </Grid>
-        <Grid xs="auto" sx={{ display: noHalfTraits && 'none'}}>
-          <Box component="span">(Half)&nbsp;</Box>
-          {
-            Object.keys(traits).map((key) => {
-              const traitType = traits[key]
-              if(traitType === 'half') {
-                return <>
-                  {key}&nbsp;
-                </>
-              }
+        <Grid xs={12} sx={{ pt: .25, display: noFullTraits && noHalfTraits && 'none' }} container>
+          <Grid xs={"auto"} sx={{ display: noFullTraits && 'none'}}>
+            <Box component="span">(Full)&nbsp;</Box>
+            {
+              Object.keys(traits).map((key) => {
+                const traitType = traits[key]
+                if(traitType === 'full') {
+                  return <>
+                    {key}&nbsp;
+                  </>
+                }
 
-              return null
-            })
-          }
+                return null
+              })
+            }
+            <Box component="span" sx={{ display: noHalfTraits && 'none'}}>&nbsp;&nbsp;&nbsp;</Box>
+          </Grid>
+          <Grid xs="auto" sx={{ display: noHalfTraits && 'none'}}>
+            <Box component="span">(Half)&nbsp;</Box>
+            {
+              Object.keys(traits).map((key) => {
+                const traitType = traits[key]
+                if(traitType === 'half') {
+                  return <>
+                    {key}&nbsp;
+                  </>
+                }
+
+                return null
+              })
+            }
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
-  </>
+  )
 }
 
 export default function Specializations({ character, handleDialogOpen }) {
@@ -149,13 +156,13 @@ export default function Specializations({ character, handleDialogOpen }) {
           const { natural, training } = specialization
           const score = getSpecializationScore(Number(training.years) + Number(training.bonus), natural)
           return <React.Fragment key={index}>
-            <Clickable square sx={{ p: 1, ...alignStart }} onClick={(event) => handleDialogOpen('Specializations', event, index)}>
+            <Clickable square sx={{ p: 0.5, ...alignStart }} onClick={(event) => handleDialogOpen('Specializations', event, index)}>
               <Specialization specialization={specialization} score={score} />
             </Clickable>
           </React.Fragment>
         })
       }
-      <Box displayPrint="none" sx={{ display: character.specializations.length === 13 && 'none' }}>
+      <Box displayPrint="none" sx={{ display: character.specializations.length === 14 && 'none' }}>
         <Grid container>
           <Grid xs={12}>
             <Clickable square 

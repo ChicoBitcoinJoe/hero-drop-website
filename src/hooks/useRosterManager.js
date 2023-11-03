@@ -8,23 +8,26 @@ export default function useRosterManager(key) {
 
   const [roster, setRoster] = React.useState()
 
-  React.useEffect(() => {    
+  React.useEffect(() => {  
+    async function loadRoster() {
+      console.log({ ipfsReady })
+      if(!ipfsReady) return
+    
+      if(rosterPath) {
+        const initialRoster = await loadJSON(rosterPath)
+        setRoster(initialRoster)
+        console.log('Loaded roster', initialRoster)
+      }
+      else {
+        console.log('No roster saved')
+        setRoster([])
+      }
+    }
+
     loadRoster()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ipfsReady])
 
-  async function loadRoster() {
-    if(!ipfsReady) return
-
-    if(rosterPath) {
-      const initialRoster = await loadJSON(rosterPath)
-      setRoster(initialRoster)
-      console.log('Loaded roster', initialRoster)
-    }
-    else {
-      console.log('No roster saved')
-      setRoster([])
-    }
-  }
 
   async function saveRoster(newRoster) {
     console.log('saving roster:', newRoster)
@@ -68,7 +71,7 @@ export default function useRosterManager(key) {
   }
 
   return {
-    ready: roster,
+    ready: !!roster,
     list: roster,
     history,
     isMember,

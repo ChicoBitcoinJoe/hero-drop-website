@@ -14,8 +14,8 @@ export default function Header({ character, onClick }) {
         <Grid xs={2.5}>
           <h1 style={{ margin: 0, marginBottom: '-5px', fontSize: '24px' }}>Hero Drop</h1>
         </Grid>
-        <Grid xs={0.5} sx={{ pt: '5px' }}>
-          <Typography noWrap sx={{ fontSize: '12px' }}>{ character.level }</Typography>
+        <Grid xs={1.5} sx={{ pt: '5px' }}>
+          <Typography noWrap sx={{ fontSize: '12px' }}>{character.class.category} { character.level }</Typography>
         </Grid>
         <Grid xs={2} sx={{ pt: '5px' }}>
           <Typography noWrap sx={{ fontSize: '12px' }}>{ character.form.name }</Typography>
@@ -34,8 +34,8 @@ export default function Header({ character, onClick }) {
         <Grid xs={2.5} sx={{ fontSize: '9px' }}>
           <div>Character Sheet</div>
         </Grid>
-        <Grid xs={0.5} sx={{ fontSize: '9px' }}>
-          <div>Level</div>
+        <Grid xs={1.5} sx={{ fontSize: '9px' }}>
+          <div>Class / Level</div>
         </Grid>
         <Grid xs={2} sx={{ fontSize: '9px' }}>
           <div>Form</div>

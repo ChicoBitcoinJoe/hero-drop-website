@@ -57,7 +57,7 @@ export default function HeaderDialog({ character, submit, close }) {
       </Grid>
       <Grid xs={12}>
         <TextField fullWidth
-          label="Title" 
+          label="Character Title" 
           value={characterTitle} 
           onChange={(event) => setCharacterTitle(event.target.value)} 
         />

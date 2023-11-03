@@ -106,8 +106,8 @@ export default function FormDialog({ character, submit, close}) {
   }
 
   return <>
-    <Grid container>
-      <Button fullWidth 
+    <Grid container spacing={2} sx={{ maxWidth: '440px' }}>
+      {/* <Button fullWidth 
         variant="outlined" 
         sx={{ py: 4, mb: 2 }} 
         size="large" 
@@ -139,20 +139,18 @@ export default function FormDialog({ character, submit, close}) {
       <Grid xs={12} sm={4}></Grid>
       <Grid xs={12} sm={4} sx={{ textAlign: 'center' }}>Category: {getAgeCategoryFromScore(die2-1)}</Grid>
       <Grid xs={12} sm={4}></Grid>
-      <Grid py={2} xs={12}><Divider /></Grid>
-      <Grid xs={4}>
-        <TextField label="Weight " value={weight} onChange={(event) => setWeight(event.target.value)} />
+      <Grid py={2} xs={12}><Divider /></Grid> */}
+      <Grid xs={6}>
+        <TextField fullWidth label="Weight " value={weight} onChange={(event) => setWeight(event.target.value)} />
       </Grid>
-      <Grid pl={2} container xs={8} alignItems="center">
+      <Grid xs={6} container alignItems="center" pl={2} >
         <Grid><Typography>Size: {weight ? getSizeFromWeight(weight) : 'Unknown'}</Typography></Grid>
       </Grid>
-      <Grid container xs={12} sx={{ pt: 2 }}>
-        <Grid xs={6} sx={{ pr: 1 }}>
-          <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={close}>Cancel</Button>
-        </Grid>
-        <Grid xs={6} sx={{ pl: 1 }}>
-          <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={onClick}>Continue</Button>
-        </Grid>
+      <Grid xs={6}>
+        <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={close}>Cancel</Button>
+      </Grid>
+      <Grid xs={6}>
+        <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={onClick}>Continue</Button>
       </Grid>
     </Grid>
   </>

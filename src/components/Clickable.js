@@ -5,7 +5,9 @@ export default function Clickable({ children, onClick, disabled, sx, square }) {
   return (
     <Card square={square} elevation={0} sx={{ overflow: 'visible', height: '100%' }}>
       <CardActionArea onClick={onClick} sx={{ height: '100%', ...sx }} disabled={disabled}>
-        {children}
+        <div style={{ height: '100%', width: '100%' }}>
+          {children}
+        </div>
       </CardActionArea>
     </Card>
   )

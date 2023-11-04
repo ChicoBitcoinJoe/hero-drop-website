@@ -240,6 +240,7 @@ export default function Page1({ character }) {
   return (
     <Paper size="Letter" margin={'0.5in'}>
       <Grid container spacing={2}>
+
         <Grid xs={12}>
           <Header character={character} onClick={(event) => handleDialogOpen('Header', event)}/>
         </Grid>
@@ -255,7 +256,7 @@ export default function Page1({ character }) {
             </Grid>
             <Grid xs={6.8}>
               <Clickable>
-                <HorizontalInput label="Proficiency Bonus" />
+                <HorizontalInput label="Proficiency Bonus" orientation="right" />
               </Clickable>
             </Grid>
           </Grid>
@@ -493,21 +494,19 @@ export default function Page1({ character }) {
         <Box p={2}>
           {
             dialog === 'Header' ?
-              <HeaderDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <HeaderDialog character={character} close={handleDialogClose} />
             : dialog === 'Form' ? 
-              <FormDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <FormDialog character={character} close={handleDialogClose} />
             : dialog === 'Age' ? 
-              <AgeDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <AgeDialog character={character} close={handleDialogClose} />
             : dialog === 'Specializations' ? 
-              <SpecializationDialog character={character} initialState={initialState} submit={handleDialogClose} close={() => handleDialogClose()} remove={remove} />
+              <SpecializationDialog character={character} initialState={initialState} close={handleDialogClose} remove={remove} />
             : dialog === 'AbilityScoreChanges' ? 
-              <AbilityScoreDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <AbilityScoreDialog character={character} close={handleDialogClose} />
             : dialog === 'CoreValues' ? 
-              <ValuesDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <ValuesDialog character={character} close={handleDialogClose} />
             : dialog === 'Class' ? 
-              <ClassDialog character={character} submit={handleDialogClose} close={() => handleDialogClose()} />
-            : dialog === 'SchoolsOfMagic' ? 
-              <SchoolsOfMagicDialog character={character} initialState={initialState} submit={handleDialogClose} close={() => handleDialogClose()} />
+              <ClassDialog character={character} close={handleDialogClose} />
             : null
           }
         </Box>

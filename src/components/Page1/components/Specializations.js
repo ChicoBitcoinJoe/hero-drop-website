@@ -74,7 +74,7 @@ export function Specialization({ specialization, score }) {
   const { name, training, traits, natural } = specialization
   // console.log({ name, training, score, traits, natural })
 
-  const keys = Object.keys(traits)
+  const keys = Object.keys(training)
   let noFullTraits = true
   let noHalfTraits = true
   keys.forEach((key) => {
@@ -107,7 +107,7 @@ export function Specialization({ specialization, score }) {
           <Grid xs={"auto"} sx={{ display: noFullTraits && 'none'}}>
             <Box component="span">(Full)&nbsp;</Box>
             {
-              Object.keys(traits).map((key) => {
+              Object.keys(training).map((key) => {
                 const traitType = traits[key]
                 if(traitType === 'full') {
                   return <>
@@ -123,7 +123,7 @@ export function Specialization({ specialization, score }) {
           <Grid xs="auto" sx={{ display: noHalfTraits && 'none'}}>
             <Box component="span">(Half)&nbsp;</Box>
             {
-              Object.keys(traits).map((key) => {
+              Object.keys(training).map((key) => {
                 const traitType = traits[key]
                 if(traitType === 'half') {
                   return <>
@@ -148,6 +148,16 @@ export default function Specializations({ character, handleDialogOpen }) {
     alignItems: 'flex-start !important',
   }
 
+  const emptySpecializations = new Array(10 - character.specializations.length).fill({
+    name: '',
+    score: '',
+    natural: false,
+    training: {
+    // dexterity: 'full',
+    // constitution: 'half',
+    }
+  })
+
   return <>
     <Box sx={{ width: '100%' }} >
       {
@@ -162,6 +172,18 @@ export default function Specializations({ character, handleDialogOpen }) {
           </React.Fragment>
         })
       }
+      {
+        emptySpecializations.map((specialization, index) => {
+          const { natural, training } = specialization
+          const score = getSpecializationScore(Number(training.years) + Number(training.bonus), natural)
+          return <React.Fragment key={index}>
+            <Clickable square sx={{ p: 0.5, ...alignStart }} onClick={(event) => handleDialogOpen('Specializations', event, index)}>
+              <Specialization specialization={specialization} score={score} />
+            </Clickable>
+          </React.Fragment>
+        })
+      }
+      
       <Box displayPrint="none" sx={{ display: character.specializations.length === 14 && 'none' }}>
         <Grid container>
           <Grid xs={12}>

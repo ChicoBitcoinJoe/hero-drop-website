@@ -11,24 +11,13 @@ import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
 
 import PrintIcon from '@mui/icons-material/Print'
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import TwitterIcon from '@mui/icons-material/Twitter'
 import { FaDiscord as DiscordIcon } from "react-icons/fa"
-import { Divider } from '@mui/material'
+import { Divider, Link } from '@mui/material'
 
-function useWindowWidth() {
-  
-  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
-  React.useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [])
-
-  return windowWidth
-}
+import Box from '@mui/material/Box'
+import Paper from '../components/Paper'
 
 const Links = {
   Rulebook: "https://docs.google.com/document/d/1zG7CW7Y7-6wxZP_4bRODPPCcrxyXFQ43CUDYZCQ4TbU/edit?usp=sharing",
@@ -36,98 +25,191 @@ const Links = {
   Twitter: "https://twitter.com/HeroDropTTRPG",
 }
 
-function ImageCard({ title, body, height, href, img, onClick }) {
-  const textStyles = {
-    // '-webkit-text-stroke-width': '0.5px',
-    // '-webkit-text-stroke-color': 'white',
-    color: 'black',
-    fontWeight: 'bold',
-    backgroundColor: 'white',
-    borderRadius: '4px'
+function buttonStyles(disabled){
+  return {
+    width: '100%', 
+    color: disabled ? 'grey' : 'black',
+    webkitUserSelect: disabled && 'none', /* Safari */
+    msUserSelect: disabled && 'none', /* IE 10 and IE 11 */
+    userSelect: disabled && 'none', /* Standard syntax */
+  }
+}
+
+function Heading({ text, page, onClick }) {
+  const disabled = !onClick
+  return (
+    <Grid xs={12}>
+      <Link component={!disabled && "button"} onClick={onClick} 
+        sx={{ 
+          mt: 2, 
+          fontSize: '20px',  
+          textTransform: 'uppercase',
+          ...buttonStyles(disabled)
+        }} 
+        underline="none"
+      >
+        <Grid xs={12} container>
+          <Grid xs="auto">
+            {text}
+          </Grid>
+          <Grid xs />
+          <Grid xs="auto">
+            {page}
+          </Grid>
+          <Grid xs={12}>
+            <Divider />
+          </Grid>
+        </Grid>
+      </Link>
+    </Grid>
+  )
+}
+
+function Item({ text, page, onClick }) {
+  const disabled = !onClick
+  return (
+    <Grid xs={12} pt={1}>
+      <Link component={!disabled && "button"} onClick={onClick} 
+        sx={{ 
+          width: '100%', 
+          fontSize: '16px', 
+          ...buttonStyles(disabled)
+        }} 
+        underline="none"
+      >
+        <Grid xs={12} container>
+          <Grid xs="auto">
+            {text}
+          </Grid>
+          <Grid xs>
+            <Typography noWrap>......................................................</Typography>
+          </Grid>
+          <Grid xs="auto">
+            {page}
+          </Grid>
+        </Grid>
+      </Link>
+    </Grid>
+  )
+}
+
+function Footer() {
+  return (
+    <Grid container pt={70}>
+      <Grid xs={12} pb={0.5}>
+        <Divider />
+      </Grid>
+      <Grid xs="auto">
+        <Typography sx={{ color: 'grey !important' }}>
+          Created by Joseph Reed
+        </Typography>
+      </Grid>
+      <Grid xs></Grid>
+      <Grid xs="auto">
+        <Typography sx={{ color: 'black' }}>
+          <Link color="inherit" 
+            href="mailto:support@herodrop.org" 
+            target="_blank" 
+            underline="none"
+          >
+            Contact us
+          </Link>
+        </Typography>
+      </Grid>
+    </Grid>
+  )
+}
+
+function Page1({ navigate }) {
+  const [section, setSection] = React.useState(null)
+
+  const toggleSection = (toggledSection) => {
+    const newSection = toggledSection !== section ? toggledSection : null
+    console.log({ section, toggledSection, newSection })
+    setSection(newSection)
   }
 
   return <>
-    <Card sx={{ background: 'rgba(0,0,0,0.8)', border: '0.5px solid grey', width: '100%' }}>
-      <CardActionArea sx={{ position: 'relative' }} href={href} onClick={onClick} target="_blank">
-        <CardMedia
-          component="img"
-          height={ height || "200" }
-          image={img}
-          alt={"placeholder"}
-        />        
-        <CardContent sx={{ p: 1, pl: 0, position: 'absolute', bottom: '0px', left: '0px' }}>
-          { title && <Typography sx={{ ...textStyles, p: 1, ml: 1, mb: 0 }} gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>}
-          { 
-            body && 
-            <Typography sx={{ ...textStyles, p: 1, ml: 1, mb: 0, mt: '-16px' }} variant="body2">
-              {body}
-            </Typography>
-          }
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  </>
-}
+    <Paper size="Letter" margin={'0.5in'}>
+      <Grid container >
+        <Grid xs={12}>
+          <Typography sx={{ fontSize: '48px', fontWeight: 'bold' }}>
+            HERO DROP
+          </Typography>
+        </Grid>
 
-function Header() {
-  const windowWidth = useWindowWidth()
-  let navigate = useNavigate()
-  return <>
-    <Grid container xs={12} sx={{ pl: 1 }} spacing={2} alignItems="center">
-      <Grid>
-        <Button sx={{ color: 'black !important' }} disabled>Hero Drop</Button>
+        <Grid xs={6} container pr={4}>
+          <Heading text="About" page={1} onClick={() => toggleSection('about')}/>
+          <Heading text="Introduction" page={2} onClick={() => toggleSection('intro')} />
+          <Box sx={{ display: (section !== 'intro') && 'none' }}>
+            <Typography variant="subtitle2">
+              The player's handbook is useful for new player's learning how to play the game. The Bard's Guide is useful for learning how to run a Hero Drop game.
+            </Typography>
+          </Box>
+          <Item text="Player's Handbook" page={3}  onClick={null} />
+          <Item text="Bard's Guide" page={4}  onClick={null} />
+          <Heading text="Lore" page={5}  onClick={null} />
+          <Item text="Primordials, Gods, and Heroes" page={6}  onClick={null} />
+          <Item text="The Continents of Planar" page={7}  onClick={null} />
+          <Item text="Beyond the Edge of the World" page={8}  onClick={null} />
+        </Grid>
+        <Grid xs={6} pl={4}>
+          <Grid container>
+            <Heading text="Character Sheet" page={9}  onClick={() => navigate('/character-sheet')} />
+            <Heading text="Log in" page={10} onClick={null}/>
+          </Grid>
+        </Grid>
+
+        <Grid xs={12}>
+          <Footer />
+        </Grid>
       </Grid>
-      <Grid xs>
-        <IconButton href={Links.Twitter} target="_blank">
-          <TwitterIcon sx={{ color: "#000" }} />
-        </IconButton>
-        &nbsp;
-        <IconButton href={Links.Discord} target="_blank">
-          <DiscordIcon color="#000" />
-        </IconButton>
-      </Grid>
-      <Grid>
-        <Button sx={{ color: 'black' }} onClick={() => navigate("/print")} startIcon={<PrintIcon sx={{ color: "#000" }} />}>
-          { windowWidth <= 375 ? "Print" : "Quick Print" }
-        </Button>
-      </Grid>
-    </Grid>
+    </Paper>
   </>
 }
 
 export default function Home() {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
+  
+  const contentBoxStyles = {   
+    backgroundColor: 'grey',
+    p: '0.5in',
+    pt: 'calc(.5in + 8px)',
+    '@media print': { 
+      minWidth: '100%',
+      m: 0, 
+      p: 0, 
+    } 
+  }
+
+  const toolbarStyles = { 
+    zIndex: 3,
+    position: 'absolute', 
+    top: '8px',
+    left: '0.5in',
+    width: '216mm',
+    color: 'white',
+  }
 
   return <>
-    <Grid container sx={{ p: 2, height: '100vh' }} justifyContent="center" alignItems="center">
-      <Grid container xs sx={{ maxWidth: '768px' }} spacing={2}>
-        <Header />
+    <Box displayPrint={'none'} sx={toolbarStyles}>
+      <Grid container>
+        <Grid xs="auto">
           
-        <Grid container xs={12}>
-          <Grid xs={12} sm={6}>
-            <ImageCard title={"Read the Rules"} body="(opens a google document)" href={Links.Rulebook} height={346}/>
-          </Grid>
-          <Grid container xs={12} sm={6}>
-            <Grid xs={12}>
-              <ImageCard title={"Create a Character"} img={null} onClick={() => navigate('/wizard')} />
-            </Grid>
-            <Grid xs={6}>
-              <ImageCard body={"My Roster"} height={128} img={null} onClick={() => navigate('/roster')} />
-            </Grid>
-            <Grid xs={6}>
-              <ImageCard body={"Email Support"} height={128} href="mailto:support@herodrop.org" />
-            </Grid>
-          </Grid>
         </Grid>
-        <Grid xs={12}><Divider sx={{ my: 4 }} /></Grid>
-        <Grid xs={12} container justifyContent="center">
-          <Grid>Hero Drop is created by Joseph Reed</Grid>
-          <Grid xs={12} />
-          <Grid>All Rights Reserved</Grid>
+        <Grid xs="auto">
+          
+        </Grid>
+        <Grid xs />
+        <Grid xs="auto">
+          
         </Grid>
       </Grid>
-    </Grid>
+    </Box>
+    <Box sx={contentBoxStyles}>
+      <Page1 navigate={navigate} />
+      {/* <Box displayPrint="none" sx={{ height: '.5in' }} /> */}
+      {/* <Page2 character={character}/> */}
+    </Box>
   </>
 }

@@ -13,7 +13,7 @@ import Page1 from '../components/Page1/Page1'
 import Page2 from '../components/Page2/Page2'
 import useCharacter from '../hooks/useCharacter'
 
-export default function Roster({ roster }) {
+export default function CharacterSheet({ roster }) {
   const navigate = useNavigate()
   const character = useCharacter()
   

@@ -5,20 +5,10 @@ import CssBaseline from '@mui/material/CssBaseline'
 
 import './App.css'
 import Home from './routes/Home'
-import CharacterSheet from './routes/CharacterSheet'
+import CharacterSheet from './routes/CharacterSheet/CharacterSheet'
 import useRosterManager from './hooks/useRosterManager'
 
-const appTheme = createTheme({
-  components: {
-    MuiAppBar: {
-      styleOverrides: {
-        colorPrimary: {
-          backgroundColor: "#456"
-        }
-      }
-    }
-  }
-})
+const appTheme = createTheme()
 
 function App() {
   const rosterKey ='HeroDrop-v0.0.1'
@@ -31,9 +21,6 @@ function App() {
         <Routes>
           <Route exact path="/home" element={<Home />} />
           <Route path="/character-sheet/*" element={<CharacterSheet roster={roster} />} />
-          {/* <Route path="/roster/*" element={<List roster={roster} />} /> */}
-      {/* <Route path="/wizard/*" element={<Wizard roster={roster} />} /> */}
-      {/* <Route path="/print/*" element={<Print roster={roster} />} /> */}
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </Router>

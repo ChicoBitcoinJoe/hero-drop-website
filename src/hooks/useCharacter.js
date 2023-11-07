@@ -12,7 +12,7 @@ export function rollDice(min, max) {
 
 export const utils = {
   rollDice,
-  getSpecializationScore,
+  getAbilityModifier,
   traits: [
     'Agility',
     'Alertness',
@@ -102,21 +102,9 @@ const template = {
   version: 'HeroDrop-v0.0.1',
 }
 
-export function getSpecializationScore(years, isNatural) {
-  let score = 0
-  if(years >= 1024) score = 10
-  else if(years >= 512) score = 9
-  else if(years >= 256) score = 8
-  else if(years >= 128) score = 7
-  else if(years >= 64) score = 6
-  else if(years >= 32) score = 5
-  else if(years >= 16) score = 4
-  else if(years >= 8) score = 3
-  else if(years >= 4) score = 2
-  else if(years >= 2) score = 1
-  else if(years >= 1) score = 0
-  if(isNatural) return score + 1
-  return score
+export function getAbilityModifier(score) {
+  let mod = score - 10
+  return mod >= 0 ? Math.floor(mod / 2) : Math.round(mod / 2)
 }
 
 export function useCharacter2(path) {
@@ -355,35 +343,35 @@ export function convertScoreToDamageDie(score) {
   else return ''
 }
 
-function getAbilitiesObject(data) {
+function getAbility(ability, character) {
+  const { specializations, abilityScoreChanges } = character
 
-  function getAbility(ability, character) {
-    const { specializations, abilityScoreChanges } = character
-  
-    function getAgePenalty() {
-      return 0
-    }
-    
-    let years = 0
-    specializations.map((sp) => {
-      if(sp.traits[ability] === 'full') {
-        years += Number(sp.training.years) + Number(sp.training.bonus)
-      }
-      else if(sp.traits[ability] === 'half') {
-        years += Math.round((Number(sp.training.years) + Number(sp.training.bonus)) / 2)
-      }
-    })
-    let score = 8 + getSpecializationScore(years) 
-      + Number(abilityScoreChanges[ability]) 
-      + (ability === "strength" ? getAgePenalty() : 0)
-      + (ability === "dexterity" ? getAgePenalty() : 0)
-    
-    return {
-      score: score,
-      modifier: getSpecializationScore(score)
-    }
+  function getAgePenalty() {
+    return 0
   }
+  
+  let scoreFromProficiencies = 0
+  specializations.forEach(sp => {
+    console.log(sp)
+  })
+  
+  let score = 8 + scoreFromProficiencies 
+    + Number(abilityScoreChanges[ability]) 
+    + (ability === "dexterity" ? getAgePenalty() : 0)
+    + (ability === "strength" ? getAgePenalty() : 0)
+    + (ability === "constitution" ? getAgePenalty() : 0)
+  
+  const modifier = getAbilityModifier(score)
+  const die = convertScoreToDamageDie(modifier)
 
+  return {
+    score,
+    modifier,
+    die,
+  }
+}
+
+function getAbilitiesObject(data) {
   return {
     constitution: getAbility('constitution', data),
     dexterity: getAbility('dexterity', data),
@@ -421,9 +409,9 @@ function getFormObject(data) {
 }
 
 function getInitiative(data) {
-  if(data.specializations.length === 0) return ''
+  if(data.specializations.length === 0) return 0
 
-  return getAbilitiesObject(data).dexterity.mod
+  return getAbility('dexterity').mod + data.initiativeBonus
 }
 
 export default function useCharacter(rawData) {
@@ -451,6 +439,8 @@ export default function useCharacter(rawData) {
       wealth: '',
     },
     inspiration: '',
+    initiativeBonus: '',
+    hitDice: '',
     version: 1,
     ...(rawData || {})
   })
@@ -478,9 +468,10 @@ export default function useCharacter(rawData) {
     ...data,
     update,
     updateMany,
-    
+    proficiencyBonus: 2 + getClassScoreFromLevel(data.level),
     class: getClassObject(data),
     abilities: getAbilitiesObject(data),
+    // ...getAbilitiesObject(data),
     form: getFormObject(data),
     initiative: getInitiative(data)
   }

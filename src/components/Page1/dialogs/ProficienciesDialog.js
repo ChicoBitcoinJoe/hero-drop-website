@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography'
 import Checkbox from '@mui/material/Checkbox'
 import { Divider, FormControlLabel } from '@mui/material'
 
-import { getCurrentNaturals, getMaxNaturals, getSpecializationScore } from '../../../hooks/useCharacter'
+import { getCurrentNaturals, getMaxNaturals, getAbilityModifier } from '../../../hooks/useCharacter'
 import { useObject } from '../../../hooks/useObject'
 
 export function TraitButton({ children, initialState, years, onChange }) {
@@ -87,7 +87,7 @@ export default function SpecializationDialog({ character, initialState, submit, 
   })
 
   const trainedYears = Number(state.training.years) + Number(state.training.bonus)
-  const score = getSpecializationScore(trainedYears) + (state.natural ? 1 : 0)
+  const score = getAbilityModifier(trainedYears) + (state.natural ? 1 : 0)
   
   const onClick = () => {
     console.log(state)

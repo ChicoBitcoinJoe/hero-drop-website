@@ -9,9 +9,9 @@ import GroupIcon from '@mui/icons-material/Group'
 import PrintIcon from '@mui/icons-material/Print'
 import HomeIcon from '@mui/icons-material/Home'
 
-import Page1 from '../components/Page1/Page1'
-import Page2 from '../components/Page2/Page2'
-import useCharacter from '../hooks/useCharacter'
+import Page1 from './Page1'
+import Page2 from '../../components/Page2/Page2'
+import useCharacter from '../../hooks/useCharacter'
 
 export default function CharacterSheet({ roster }) {
   const navigate = useNavigate()
@@ -53,8 +53,7 @@ export default function CharacterSheet({ roster }) {
     )
   }
 
-  const contentBoxStyles = {   
-    backgroundColor: 'grey',
+  const contentBoxStyles = {
     p: '0.5in',
     pt: 'calc(.5in + 8px)',
     '@media print': { 
@@ -80,7 +79,7 @@ export default function CharacterSheet({ roster }) {
           <HomeButton />
         </Grid>
         <Grid xs="auto">
-          <CharacterSelectButton />
+          {/* <CharacterSelectButton /> */}
         </Grid>
         <Grid xs />
         <Grid xs="auto">

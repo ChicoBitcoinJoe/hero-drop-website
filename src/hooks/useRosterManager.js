@@ -10,9 +10,6 @@ export default function useRosterManager(key) {
 
   React.useEffect(() => {  
     async function loadRoster() {
-      console.log({ ipfsReady })
-      if(!ipfsReady) return
-    
       if(rosterPath) {
         const initialRoster = await loadJSON(rosterPath)
         setRoster(initialRoster)
@@ -24,6 +21,8 @@ export default function useRosterManager(key) {
       }
     }
 
+    console.log({ ipfsReady })
+    if(!ipfsReady) return
     loadRoster()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ipfsReady])

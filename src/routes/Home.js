@@ -1,22 +1,14 @@
 import * as React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActionArea from '@mui/material/CardActionArea'
-import CardMedia from '@mui/material/CardMedia'
 import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
-
-import PrintIcon from '@mui/icons-material/Print'
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import TwitterIcon from '@mui/icons-material/Twitter'
-import { FaDiscord as DiscordIcon } from "react-icons/fa"
-import { Divider, Link } from '@mui/material'
-
+import Link from '@mui/material/Link'
+import Divider from '@mui/material/Divider'
 import Box from '@mui/material/Box'
+// import TwitterIcon from '@mui/icons-material/Twitter'
+// import { FaDiscord as DiscordIcon } from "react-icons/fa"
+
 import Paper from '../components/Paper'
 
 const Links = {
@@ -39,7 +31,7 @@ function Heading({ text, page, onClick }) {
   const disabled = !onClick
   return (
     <Grid xs={12}>
-      <Link component={!disabled && "button"} onClick={onClick} 
+      <Link component={!disabled ? "button" : "div"} onClick={onClick} 
         sx={{ 
           mt: 2, 
           fontSize: '20px',  
@@ -69,7 +61,7 @@ function Item({ text, page, onClick }) {
   const disabled = !onClick
   return (
     <Grid xs={12} pt={1}>
-      <Link component={!disabled && "button"} onClick={onClick} 
+      <Link component={!disabled ? "button" : "div"} onClick={onClick} 
         sx={{ 
           width: '100%', 
           fontSize: '16px', 
@@ -100,7 +92,7 @@ function Footer() {
         <Divider />
       </Grid>
       <Grid xs="auto">
-        <Typography sx={{ color: 'grey !important' }}>
+        <Typography>
           Created by Joseph Reed
         </Typography>
       </Grid>
@@ -130,41 +122,56 @@ function Page1({ navigate }) {
   }
 
   return <>
-    <Paper size="Letter" margin={'0.5in'}>
-      <Grid container >
-        <Grid xs={12}>
-          <Typography sx={{ fontSize: '48px', fontWeight: 'bold' }}>
-            HERO DROP
-          </Typography>
-        </Grid>
+    <Box sx={{ width: 'calc(216mm + 56px)', pr: '56px' }}>
+      <Paper size="Letter" margin={'0.5in'}>
+        <Grid container>
+          <Grid xs={12} container >
+            <Grid xs={5}>
+              <Typography sx={{ fontSize: '48px', fontWeight: 'bold' }}>
+                HERO DROP
+              </Typography>
+            </Grid>
+            <Grid xs container alignItems={'end'} pb={1.25}>
+              <Typography sx={{ fontSize: '24px', fontWeight: 'bold', color: 'grey !important' }}>
+                TTRPG
+              </Typography>
+            </Grid>
+          </Grid>
 
-        <Grid xs={6} container pr={4}>
-          <Heading text="About" page={1} onClick={() => toggleSection('about')}/>
-          <Heading text="Introduction" page={2} onClick={() => toggleSection('intro')} />
-          <Box sx={{ display: (section !== 'intro') && 'none' }}>
-            <Typography variant="subtitle2">
-              The player's handbook is useful for new player's learning how to play the game. The Bard's Guide is useful for learning how to run a Hero Drop game.
-            </Typography>
-          </Box>
-          <Item text="Player's Handbook" page={3}  onClick={null} />
-          <Item text="Bard's Guide" page={4}  onClick={null} />
-          <Heading text="Lore" page={5}  onClick={null} />
-          <Item text="Primordials, Gods, and Heroes" page={6}  onClick={null} />
-          <Item text="The Continents of Planar" page={7}  onClick={null} />
-          <Item text="Beyond the Edge of the World" page={8}  onClick={null} />
-        </Grid>
-        <Grid xs={6} pl={4}>
-          <Grid container>
-            <Heading text="Character Sheet" page={9}  onClick={() => navigate('/character-sheet')} />
-            <Heading text="Log in" page={10} onClick={null}/>
+
+          <Grid xs={6} container pr={4}>
+            <Heading text="About" page={1} onClick={null}/>
+            {/* <Box sx={{ display: (section !== 'about') && 'none' }}>
+              <Typography variant="subtitle2">
+                Hero Drop is a tabletop role-playing game.
+              </Typography>
+            </Box> */}
+            <Heading text="Introduction" page={2} onClick={null} />
+            {/* <Box sx={{ display: (section !== 'intro') && 'none' }}>
+              <Typography variant="subtitle2">
+                The player's handbook is useful for new player's learning how to play the game. The Bard's Guide is useful for learning how to run a Hero Drop game.
+              </Typography>
+            </Box> */}
+            <Item text="Player's Handbook" page={3}  onClick={null} />
+            <Item text="Bard's Guide" page={4}  onClick={null} />
+            <Heading text="Lore" page={5}  onClick={null} />
+            <Item text="Primordials, Gods, and Heroes" page={6}  onClick={null} />
+            <Item text="The Continents of Planar" page={7}  onClick={null} />
+            <Item text="Beyond the Edge of the World" page={8}  onClick={null} />
+          </Grid>
+          <Grid xs={6} pl={4}>
+            <Grid container>
+              <Heading text="Character Sheet" page={9}  onClick={() => navigate('/character-sheet')} />
+              <Heading text="Log in" page={10} onClick={null}/>
+            </Grid>
+          </Grid>
+
+          <Grid xs={12}>
+            <Footer />
           </Grid>
         </Grid>
-
-        <Grid xs={12}>
-          <Footer />
-        </Grid>
-      </Grid>
-    </Paper>
+      </Paper>
+    </Box>
   </>
 }
 
@@ -172,7 +179,6 @@ export default function Home() {
   const navigate = useNavigate()
   
   const contentBoxStyles = {   
-    backgroundColor: 'grey',
     p: '0.5in',
     pt: 'calc(.5in + 8px)',
     '@media print': { 

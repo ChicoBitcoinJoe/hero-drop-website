@@ -3,14 +3,13 @@ import Grid from '@mui/material/Unstable_Grid2'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
-import HorizontalInput from '../HorizontalInput'
+import Clickable from '../../../components/Clickable'
+import HorizontalInput from '../../../components/HorizontalInput'
 
 function EditDialog({ character, submit, close }) {
-  const [ value, setValue] = React.useState(character.initiative || '')
+  const [ value, setValue] = React.useState(character.inspiration || '')
 
   const onSubmit = () => {
     submit(value)
@@ -19,18 +18,14 @@ function EditDialog({ character, submit, close }) {
   return <>
     <Box sx={{ p: 2 }}>
       <Grid container spacing={2}>
-        <Grid xs="auto">
-          <Typography variant="h5" pt={1.75}>&nbsp;{character.abilities.dexterity.modifier} +</Typography>
-        </Grid>
-        <Grid xs>
+        <Grid xs={12}>
           <TextField fullWidth 
             type="number"
-            label="Initiative Bonuses"
+            label="Inspiration"
             value={value} 
             onChange={(event) => setValue(event.target.value)} 
           />
         </Grid>
-        <Grid xs={12} p={0} />
         <Grid xs={6}>
           <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={close}>cancel</Button>
         </Grid>
@@ -42,7 +37,7 @@ function EditDialog({ character, submit, close }) {
   </>
 }
 
-export default function Initiative({ character }) {
+export default function Inspiration({ character }) {
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
   const openDialog = () => {
@@ -58,7 +53,7 @@ export default function Initiative({ character }) {
     if(!data) return
     
     character.updateMany([
-      ['initiativeBonus', data]
+      ['inspiration', data]
     ])
   }
 
@@ -67,7 +62,7 @@ export default function Initiative({ character }) {
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Initiative" value={character.specializations.length > 0 && character.initiative}/>
+      <HorizontalInput label="Inspiration" value={character.inspiration}/>
     </Clickable>
   </>
 }

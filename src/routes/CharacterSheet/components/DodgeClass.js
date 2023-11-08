@@ -5,11 +5,11 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
-import HorizontalInput from '../HorizontalInput'
+import Clickable from '../../../components/Clickable'
+import HorizontalInput from '../../../components/HorizontalInput'
 
 function EditDialog({ character, submit, close }) {
-  const [ value, setValue] = React.useState(character.inspiration || '')
+  const [ value, setValue] = React.useState(character.dodgeClass || '')
 
   const onSubmit = () => {
     submit(value)
@@ -21,7 +21,7 @@ function EditDialog({ character, submit, close }) {
         <Grid xs={12}>
           <TextField fullWidth 
             type="number"
-            label="Inspiration"
+            label="Dodge Class"
             value={value} 
             onChange={(event) => setValue(event.target.value)} 
           />
@@ -37,7 +37,7 @@ function EditDialog({ character, submit, close }) {
   </>
 }
 
-export default function Inspiration({ character }) {
+export default function DodgeClass({ character }) {
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
   const openDialog = () => {
@@ -53,7 +53,7 @@ export default function Inspiration({ character }) {
     if(!data) return
     
     character.updateMany([
-      ['inspiration', data]
+      ['dodgeClass', data]
     ])
   }
 
@@ -62,7 +62,7 @@ export default function Inspiration({ character }) {
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Inspiration" value={character.inspiration}/>
+      <HorizontalInput label="Dodge Class" value={character.dodgeClass} orientation="right" />
     </Clickable>
   </>
 }

@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
+import Clickable from '../../../components/Clickable'
 
 function EditDialog({ character, submit, close }) {
   const [ level, setLevel] = React.useState(character.level || '0')

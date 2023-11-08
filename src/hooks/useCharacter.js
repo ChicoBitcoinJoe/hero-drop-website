@@ -1,5 +1,4 @@
 import * as React from 'react'
-import useIpfs from './useIpfs'
 
 export function rollDice(min, max) {
   if(!max) {
@@ -10,230 +9,12 @@ export function rollDice(min, max) {
   return min + Math.floor(Math.random() * (max - min + 1));
 }
 
-export const utils = {
-  rollDice,
-  getAbilityModifier,
-  traits: [
-    'Agility',
-    'Alertness',
-    'Charisma',
-    'Constitution',
-    'Insight',
-    'Lethal',
-    'Luck',
-    'Movement Speed',
-    'Spellcasting',
-    'Strength',
-    'Wealth',
-  ],
-  schools: [
-    'Abjuration',
-    'Conjuration',
-    'Divination',
-    'Enchantment',
-    'Evocation',
-    'Illusion',
-    'Necromancy',
-    'Transmutation',
-  ],
-  damageTypes: [
-    'Slashing',
-    'Bludgeoning',
-    'Piercing',
-    'Fire',
-    'Cold',
-    'Lightning',
-    'Thunder',
-    'Poison',
-    'Acid',
-    'Psychic',
-    'Radiant',
-    'Necrotic',
-    'Force'
-  ],
-}
-
-const template = {
-  details: {
-    playerName: '',
-    characterName: '',
-    class: '',
-    description: '',
-  },
-  sentience: {
-    name: '',
-    score: 0,
-    weight: 0,
-    years: 0,
-    bonusYears: 0,
-    traits: {
-    //  traitName: 'half' || 'full'
-    },
-  },
-  age: {
-    current: 0,
-    max: 0,
-    maxBeautyScore: 0,
-    peakBeauty: 0,
-  },
-  specializations: [
-    //{
-    //  name: '',
-    //  years: 0,
-    //  bonusYears: 0,
-    //  isNatural: false,
-    //  traits: {
-    //    traitName: 'half' || 'full'
-    //  },
-    //}
-  ],
-  coreValues: [
-    // {
-    //   text: '',
-    //   conviction: 0    // A value between 0 and 100
-    // }
-  ],
-  miracles: [
-    // {
-    //   title: ''
-    //   text: '',
-    // }
-  ],
-  version: 'HeroDrop-v0.0.1',
-}
-
-export function getAbilityModifier(score) {
+function getAbilityModifier(score) {
   let mod = score - 10
   return mod >= 0 ? Math.floor(mod / 2) : Math.round(mod / 2)
 }
 
-export function useCharacter2(path) {
-  const { ipfsReady, loadJSON } = useIpfs()
-  const [ data, setData ] = React.useState()
-
-  React.useState(() => {
-    loadCharacter()
-  }, [ipfsReady])
-
-  async function loadCharacter() {
-    if(!ipfsReady) return
-
-    if(path) {
-      const character = await loadJSON(path)
-      setData(character)
-      console.log('Loaded character', character)
-    }
-    else {
-      console.log('No roster saved')
-      setData(template)
-    }
-  }
-
-  function update(id, value) {
-    let newData = {}
-    newData[id] = value
-    setData(oldData => {return {...oldData, ...newData}})
-  }
-
-  function getDetails() {
-    return {
-      ...data.sentience,
-      set: (id, value) => {
-        if(['playerName', 'characterName', 'class', 'description'].indexOf(id) === -1) return
-
-        update('details', { 
-          ...data.sentience, 
-          [id]: value
-        })
-      }
-    }
-  }
-
-  function getSentience() {
-    return {
-      ...data.sentience,
-      set: (id, value) => {
-        if(['name', 'score', 'weight', 'years', 'bonusYears', 'traits'].indexOf(id) === -1) return
-
-        update('sentience', { 
-          ...data.sentience, 
-          [id]: value
-        })
-      }
-    }
-  }
-  
-  function getAge() {
-    return {
-      ...data.sentience,
-      set: (id, value) => {
-        if(['current', 'max', 'maxBeautyScore', 'peakBeauty'].indexOf(id) === -1) return
-        update('age', { 
-          ...data.age, 
-          [id]: value
-        })
-      }
-    }
-  }
-
-  function getSpecializations() {
-
-    // for each speciliazation return a rich object specialization
-
-    return {
-      list: data.specializations,
-      add: (value) => {
-        update('specialization', [...data.specialization, value])
-      },
-      update: (index, value) => {
-        const newList = [...data.specialization]
-        newList[index] = value
-        update('specialization', newList)
-      },
-      remove: (index) => {
-        let newList = [...data.specialization]
-        newList.slice(index,1)
-        update('specialization', newList)
-      }
-    }
-  }
-
-  function get(id) {
-    return {
-      list: data[id],
-      add: (value) => {
-        update('id', [...data[id], value])
-      },
-      update: (index, value) => {
-        const newList = [...data[id]]
-        newList[index] = value
-        update('id', newList)
-      },
-      remove: (index) => {
-        let newList = [...data[id]]
-        newList.slice(index,1)
-        update('id', newList)
-      }
-    }
-  }
-
-  return {
-    data,
-    getDetails,
-    getSentience,
-    getAge,
-    getSpecializations,
-    getCoreValues: () => get('coreValues'),
-    getMiracles: () => get('miracles'),
-    set: {
-      playerName: (value) => update('playerName', value),
-      name: (value) => update('name', value),
-      class: (value) => update('class', value),
-    }
-  }
-}
-
-export function getClassFromLevel(level) {
+function getClassFromLevel(level) {
   if(!level) return ''
   level = Number(level)
   let className = null
@@ -248,7 +29,7 @@ export function getClassFromLevel(level) {
   return className
 }
 
-export function getClassScoreFromLevel(level) {
+function getClassScoreFromLevel(level) {
   if(!level) return ''
   level = Number(level)
   let classScore = null
@@ -291,7 +72,7 @@ export function getSizeFromWeight(weight) {
   else return ''
 }
 
-export function getAgeCategoryFromScore(score) {
+function getAgeCategoryFromScore(score) {
   if(score === 0) return 'Adolescant'
   else if(score === 1) return 'Young Adult'
   else if(score === 2) return 'Adult'
@@ -300,17 +81,17 @@ export function getAgeCategoryFromScore(score) {
   else if(score === 5) return 'Ancient'
 }
 
-export function getCurrentAge(specializations) {
+function getCurrentAge(proficiencies) {
   let age = 0
-  specializations.map((sp) => {
+  proficiencies.map((sp) => {
     age += Number(sp.training.years)
   })
   
   return age
 }
 
-export function getAgeScore(specializations, maxAge) {
-  const age = getCurrentAge(specializations)
+function getAgeScore(proficiencies, maxAge) {
+  const age = getCurrentAge(proficiencies)
   if(age <= maxAge * 0.15) return 0
   else if(age <= maxAge * 0.35) return 1
   else if(age <= maxAge * 0.55) return 2
@@ -320,20 +101,20 @@ export function getAgeScore(specializations, maxAge) {
   else return 6
 }
 
-export function getCurrentNaturals(specializations) {
+function getCurrentNaturals(proficiencies) {
   let naturals = 0
-  specializations.map((sp) => {
+  proficiencies.map((sp) => {
     naturals += sp.natural && 1
   })
-  // console.log({ specializations, naturals })
+  // console.log({ proficiencies, naturals })
   return naturals
 }
 
-export function getMaxNaturals(level) {
+function getMaxNaturals(level) {
   return 1 + getClassScoreFromLevel(level)
 }
 
-export function convertScoreToDamageDie(score) {
+function convertScoreToDamageDie(score) {
   if(score >= 6) return (score-5)+'d12'
   else if(score === 5) return '1d10'
   else if(score === 4) return '1d8'
@@ -343,16 +124,17 @@ export function convertScoreToDamageDie(score) {
   else return ''
 }
 
-function getAbility(ability, character) {
-  const { specializations, abilityScoreChanges } = character
+function getAbility(ability, data) {
+  const { proficiencies, abilityScoreChanges } = data
 
   function getAgePenalty() {
     return 0
   }
   
   let scoreFromProficiencies = 0
-  specializations.forEach(sp => {
-    console.log(sp)
+  proficiencies.forEach(sp => {
+    if(sp.abilities[ability] === '') return
+    scoreFromProficiencies += Number(sp.score) / (sp.abilities[ability] === 'half' ? 2 : 1)
   })
   
   let score = 8 + scoreFromProficiencies 
@@ -371,7 +153,7 @@ function getAbility(ability, character) {
   }
 }
 
-function getAbilitiesObject(data) {
+function getAbilities(data) {
   return {
     constitution: getAbility('constitution', data),
     dexterity: getAbility('dexterity', data),
@@ -389,7 +171,7 @@ function getClassObject(data) {
     score: getClassScoreFromLevel(data.level),
     expertises: {
       max: getMaxNaturals(data.level),
-      current: getCurrentNaturals(data.specializations)
+      current: getCurrentNaturals(data.proficiencies)
     },
   }
 }
@@ -409,9 +191,9 @@ function getFormObject(data) {
 }
 
 function getInitiative(data) {
-  if(data.specializations.length === 0) return 0
+  if(data.proficiencies.length === 0) return 0
 
-  return getAbility('dexterity').mod + data.initiativeBonus
+  return getAbility('dexterity', data).modifier + Number(data.initiativeBonus)
 }
 
 export default function useCharacter(rawData) {
@@ -426,7 +208,7 @@ export default function useCharacter(rawData) {
       maxAge: '',
       speed: '',      
     },
-    specializations: [],
+    proficiencies: [],
     coreValues: [],
     miracles: [],
     abilityScoreChanges: {
@@ -436,7 +218,6 @@ export default function useCharacter(rawData) {
       intelligence: '',
       wisdom: '',
       charisma: '',
-      wealth: '',
     },
     inspiration: '',
     initiativeBonus: '',
@@ -470,8 +251,7 @@ export default function useCharacter(rawData) {
     updateMany,
     proficiencyBonus: 2 + getClassScoreFromLevel(data.level),
     class: getClassObject(data),
-    abilities: getAbilitiesObject(data),
-    // ...getAbilitiesObject(data),
+    ...getAbilities(data),
     form: getFormObject(data),
     initiative: getInitiative(data)
   }

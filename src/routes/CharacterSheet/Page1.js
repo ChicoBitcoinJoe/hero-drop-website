@@ -4,11 +4,6 @@ import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 import Grid from '@mui/material/Unstable_Grid2'
 import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-
-import { convertScoreToDamageDie } from '../../hooks/useCharacter'
 
 import BorderedContainer, { Label } from '../../components/BorderedContainer'
 import Clickable from '../../components/Clickable'
@@ -17,52 +12,26 @@ import Paper from '../../components/Paper'
 
 import FormDialog from '../../components/Page1/dialogs/FormDialog'
 import AgeDialog from '../../components/Page1/dialogs/AgeDialog'
-import SpecializationDialog from '../../components/Page1/dialogs/ProficienciesDialog'
 import ValuesDialog from '../../components/Page1/dialogs/ValuesDialog'
 import ClassDialog from '../../components/Page1/dialogs/ClassDialog'
 
 import Form from '../../components/Page1/components/Form'
 import Age from '../../components/Page1/components/Age'
-import Header from '../../components/Page1/Header'
-import AbilityScores from '../../components/Page1/AbilityScores'
-import Specializations from '../../components/Page1/Proficiencies'
+import Header from './components/Header'
+import AbilityScores from './components/AbilityScores'
+import Specializations from './components/Proficiencies'
 import Values from '../../components/Page1/components/Values'
 import Miracles from '../../components/Page1/components/Miracles'
-import Inspiration from '../../components/Page1/Inspiration'
-import Speed from '../../components/Page1/Speed'
-import DodgeClass from '../../components/Page1/DodgeClass'
-import Initiative from '../../components/Page1/Initiative'
-import HitDice from '../../components/Page1/HitDice'
+import Inspiration from './components/Inspiration'
+import Speed from './components/Speed'
+import DodgeClass from './components/DodgeClass'
+import Initiative from './components/Initiative'
+import HitDice from './components/HitDice'
 
 export default function Page1({ character }) {  
   console.log(character)
   const [dialog, setDialog] = React.useState(null)
-  const [initialState, setInitialState] = React.useState(null)
   const [clickedIndex, setClickedIndex] = React.useState(null)
-
-  const handleDialogOpen = (dialogId, event, index) => {
-    // console.log({ dialogId, event, index })
-    setDialog(dialogId)
-    if(dialogId === "Specializations") {
-      setClickedIndex(index)
-      if(index === 'new') {
-        setInitialState(null)
-      }
-      else if(index === 'form') {
-        setInitialState(character.form)
-      }
-      else {
-        setInitialState(character.specializations[index])
-      }
-    }
-    else if(dialogId === 'SchoolsOfMagic') {
-      setInitialState(character.schoolsOfMagic)
-    }
-    else {
-      setInitialState(null)
-      setClickedIndex(null)
-    }
-  }
 
   const handleDialogClose = (data) => {
     console.log({ dialog, data, clickedIndex })
@@ -96,7 +65,6 @@ export default function Page1({ character }) {
           ])
         }
         setClickedIndex(null)
-        setInitialState(null)
       }
       else if(dialog === "AbilityScoreChanges") {
         character.updateMany([
@@ -118,14 +86,6 @@ export default function Page1({ character }) {
     setDialog(null)
   }
 
-  const remove = () => {
-    let newSpecializations = [...character.specializations]
-    newSpecializations.splice(clickedIndex, 1)
-    character.updateMany([
-      ['specializations', newSpecializations]
-    ])
-  }
-
   return (
     <Paper size="Letter" margin={'0.5in'}>
       <Grid container spacing={2}>
@@ -135,7 +95,6 @@ export default function Page1({ character }) {
         </Grid>
 
         <Grid xs={12} container>
-          
           {/* LEFT COLUMN */}
           <Grid xs container>
 
@@ -157,7 +116,7 @@ export default function Page1({ character }) {
             </Grid>
             
             <Grid xs={12}>
-              <BorderedContainer label={"Proficiencies "} sx={{ height: 431, overflow: 'hidden', pt: 0.5 }}>
+              <BorderedContainer label={"Proficiencies "} sx={{ height: 431, overflow: 'hidden' }}>
                 <Specializations character={character} />
               </BorderedContainer>
             </Grid>
@@ -170,14 +129,13 @@ export default function Page1({ character }) {
 
             <Grid xs={12}>
               <BorderedContainer label ="Other Proficiencies & Languages" sx={{ height: 180 }}>
-                <Clickable onClick={() => handleDialogOpen('Languages')}>
+                <Clickable onClick={null}>
 
                 </Clickable>
               </BorderedContainer>
             </Grid>
 
           </Grid>
-
           {/* MIDDLE COLUMN */}
           <Grid xs>
             <div>
@@ -200,14 +158,14 @@ export default function Page1({ character }) {
 
                 <Grid xs={12} container>
                   <Grid xs={8}>
-                    <BorderedContainer label="Hit Points (HP)" sx={{ height: 96 }}>
+                    <BorderedContainer label="Hit Points (HP)" sx={{ height: 88 }}>
                       <Clickable>
                         <Typography sx={{ pl: 0.5, pt: 0.75, fontSize: '9px' }}>Max: ______________________</Typography>
                       </Clickable>
                     </BorderedContainer>                  
                   </Grid>
                   <Grid xs={4}>
-                    <BorderedContainer label="Temp. HP" sx={{ height: 96 }}>
+                    <BorderedContainer label="Temp. HP" sx={{ height: 88 }}>
                       <Clickable>
                         <Typography sx={{ pl: 0.5, pt: 0.75, fontSize: '9px' }}></Typography>
                       </Clickable>
@@ -216,14 +174,14 @@ export default function Page1({ character }) {
                 </Grid>
                 <Grid xs={12} container>
                   <Grid xs={8}>
-                    <BorderedContainer label="Ego" sx={{ height: 96 }}>
+                    <BorderedContainer label="Ego" sx={{ height: 88 }}>
                       <Clickable>
                         <Typography sx={{ pl: 0.5, pt: 0.75, fontSize: '9px' }}>Max: ______________________</Typography>
                       </Clickable>
                     </BorderedContainer>                  
                   </Grid>
                   <Grid xs={4}>
-                    <BorderedContainer label="Temp. Ego" sx={{ height: 96 }}>
+                    <BorderedContainer label="Temp. Ego" sx={{ height: 88 }}>
                       <Clickable>
                         <Typography sx={{ pl: 0.5, pt: 0.75, fontSize: '9px' }}></Typography>
                       </Clickable>
@@ -232,14 +190,14 @@ export default function Page1({ character }) {
                 </Grid>
 
                 <Grid xs={8}>
-                  <BorderedContainer label={"Damage Reduction"} sx={{ height: 71 }}>
+                  <BorderedContainer label={"Damage Reduction"} sx={{ height: 88 }}>
                     <Clickable onClick={null}>
                       
                     </Clickable>
                   </BorderedContainer>
                 </Grid>
                 <Grid xs={4}>
-                  <BorderedContainer label={"Armor"} sx={{ height: 71 }}>
+                  <BorderedContainer label={"Armor"} sx={{ height: 88 }}>
                     <Clickable onClick={null}>
                       
                     </Clickable>
@@ -247,15 +205,15 @@ export default function Page1({ character }) {
                 </Grid>
                 
                 <Grid xs={12}>
-                  <BorderedContainer label="Attacks and Spellcasting" sx={{ height: 256 }}>
-                    <Clickable onClick={(event) => handleDialogOpen('?', event)}>
+                  <BorderedContainer label="Attacks and Spellcasting" sx={{ height: 253 }}>
+                    <Clickable onClick={null}>
                       
                     </Clickable>
                   </BorderedContainer>
                 </Grid>
                 <Grid xs={12}>
                   <BorderedContainer label ="Equipment" sx={{ height: 232 }}>
-                    <Clickable onClick={() => handleDialogOpen('Languages')}>
+                    <Clickable onClick={null}>
 
                     </Clickable>
                   </BorderedContainer>
@@ -265,15 +223,14 @@ export default function Page1({ character }) {
             </div>
 
           </Grid>
-
           {/* RIGHT COLUMN */}
           <Grid xs container>
 
           <Grid xs={12}>
-            <Form character={character} onClick={(event) => handleDialogOpen('Form', event)} />
+            <Form character={character} />
           </Grid>
           <Grid xs={12}>
-            <Age character={character} onClick={(event) => handleDialogOpen('Age', event)} />
+            <Age character={character} />
           </Grid>
 
           <Grid xs={12}>
@@ -282,7 +239,7 @@ export default function Page1({ character }) {
               extraLabels={<Label left="188px">Cnv.</Label>}
               sx={{ height: 273.5 }}
             >
-              <Clickable onClick={(event) => handleDialogOpen('CoreValues', event)}>
+              <Clickable onClick={null}>
                 <Values character={character} />
               </Clickable>
             </BorderedContainer>
@@ -292,7 +249,7 @@ export default function Page1({ character }) {
               label={"Miracles"} 
               sx={{ height: 439 }}
             >
-              <Clickable onClick={(event) => handleDialogOpen('Miracles', event)}>
+              <Clickable onClick={null}>
                 <Miracles character={character} />
               </Clickable>
             </BorderedContainer>
@@ -315,7 +272,6 @@ export default function Page1({ character }) {
             </BorderedContainer>
           </Grid> */}
           </Grid>
-
         </Grid>
 
       </Grid>
@@ -326,8 +282,6 @@ export default function Page1({ character }) {
               <FormDialog character={character} close={handleDialogClose} />
             : dialog === 'Age' ? 
               <AgeDialog character={character} close={handleDialogClose} />
-            : dialog === 'Specializations' ? 
-              <SpecializationDialog character={character} initialState={initialState} close={handleDialogClose} remove={remove} />
             : dialog === 'CoreValues' ? 
               <ValuesDialog character={character} close={handleDialogClose} />
             : dialog === 'Class' ? 

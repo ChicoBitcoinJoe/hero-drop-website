@@ -5,11 +5,11 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
-import HorizontalInput from '../HorizontalInput'
+import Clickable from '../../../components/Clickable'
+import HorizontalInput from '../../../components/HorizontalInput'
 
 function EditDialog({ character, submit, close }) {
-  const [ value, setValue] = React.useState(character.dodgeClass || '')
+  const [ value, setValue] = React.useState(character.hitDice || '')
 
   const onSubmit = () => {
     submit(value)
@@ -21,7 +21,7 @@ function EditDialog({ character, submit, close }) {
         <Grid xs={12}>
           <TextField fullWidth 
             type="number"
-            label="Dodge Class"
+            label={"Hit Dice (max: " + (character.level || '0') + ")"}
             value={value} 
             onChange={(event) => setValue(event.target.value)} 
           />
@@ -37,7 +37,7 @@ function EditDialog({ character, submit, close }) {
   </>
 }
 
-export default function DodgeClass({ character }) {
+export default function HitDice({ character }) {
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
   const openDialog = () => {
@@ -53,7 +53,7 @@ export default function DodgeClass({ character }) {
     if(!data) return
     
     character.updateMany([
-      ['dodgeClass', data]
+      ['hitDice', data]
     ])
   }
 
@@ -62,7 +62,7 @@ export default function DodgeClass({ character }) {
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Dodge Class" value={character.dodgeClass} orientation="right" />
+      <HorizontalInput label="Hit Dice" value={character.dodgeClass} orientation="right" />
     </Clickable>
   </>
 }

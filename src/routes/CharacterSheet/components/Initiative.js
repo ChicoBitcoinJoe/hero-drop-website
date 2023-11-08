@@ -3,13 +3,14 @@ import Grid from '@mui/material/Unstable_Grid2'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
-import HorizontalInput from '../HorizontalInput'
+import Clickable from '../../../components/Clickable'
+import HorizontalInput from '../../../components/HorizontalInput'
 
 function EditDialog({ character, submit, close }) {
-  const [ value, setValue] = React.useState(character.hitDice || '')
+  const [ value, setValue] = React.useState(character.initiativeBonus || '')
 
   const onSubmit = () => {
     submit(value)
@@ -18,14 +19,18 @@ function EditDialog({ character, submit, close }) {
   return <>
     <Box sx={{ p: 2 }}>
       <Grid container spacing={2}>
-        <Grid xs={12}>
+        <Grid xs="auto">
+          <Typography variant="h5" pt={1.75}>&nbsp;{character.dexterity.modifier} +</Typography>
+        </Grid>
+        <Grid xs>
           <TextField fullWidth 
             type="number"
-            label={"Hit Dice (max: " + (character.level || '0') + ")"}
+            label="Initiative Bonuses"
             value={value} 
             onChange={(event) => setValue(event.target.value)} 
           />
         </Grid>
+        <Grid xs={12} p={0} />
         <Grid xs={6}>
           <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={close}>cancel</Button>
         </Grid>
@@ -37,7 +42,7 @@ function EditDialog({ character, submit, close }) {
   </>
 }
 
-export default function HitDice({ character }) {
+export default function Initiative({ character }) {
   const [dialogOpen, setDialogOpen] = React.useState(false)
 
   const openDialog = () => {
@@ -53,16 +58,17 @@ export default function HitDice({ character }) {
     if(!data) return
     
     character.updateMany([
-      ['hitDice', data]
+      ['initiativeBonus', data]
     ])
   }
 
+  const value = character.proficiencies.length > 0 && (character.initiative > 0 && '+') + character.initiative
   return <>
     <Dialog onClose={closeDialog} open={dialogOpen}>
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Hit Dice" value={character.dodgeClass} orientation="right" />
+      <HorizontalInput label="Initiative" value={value}/>
     </Clickable>
   </>
 }

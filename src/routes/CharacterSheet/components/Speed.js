@@ -5,8 +5,8 @@ import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import Dialog from '@mui/material/Dialog'
 
-import Clickable from '../Clickable'
-import HorizontalInput from '../HorizontalInput'
+import Clickable from '../../../components/Clickable'
+import HorizontalInput from '../../../components/HorizontalInput'
 
 function SpeedDialog({ character, submit, close }) {
   const [ value, setValue] = React.useState(character.speed || '')

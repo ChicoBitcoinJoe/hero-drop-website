@@ -237,32 +237,32 @@ export default function AbilityScores({ character }) {
       <Grid container spacing={.5}>
         <Grid xs={4}>
           <AbilityScore label="DEX" 
-            ability={character.proficiencies.length > 0 && character.dexterity}
+            ability={character.level && character.dexterity}
           />
         </Grid>
         <Grid xs={4} pb={1}>
           <AbilityScore label="STR" 
-            ability={character.proficiencies.length > 0 && character.strength}
+            ability={character.level && character.strength}
           />
         </Grid>
         <Grid xs={4}>
           <AbilityScore label="CON" 
-            ability={character.proficiencies.length > 0 && character.constitution}
+            ability={character.level && character.constitution}
           />
         </Grid>
         <Grid xs={4}>
           <AbilityScore label="INT" 
-            ability={character.proficiencies.length > 0 && character.intelligence}
+            ability={character.level && character.intelligence}
           />
         </Grid>
         <Grid xs={4}>
           <AbilityScore label="WIS" 
-            ability={character.proficiencies.length > 0 && character.wisdom}
+            ability={character.level && character.wisdom}
           />
         </Grid>
         <Grid xs={4}>
           <AbilityScore label="CHA" 
-            ability={character.proficiencies.length > 0 && character.charisma}
+            ability={character.level && character.charisma}
           />
         </Grid>
       </Grid>

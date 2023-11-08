@@ -10,7 +10,7 @@ export default function Age({ character, onClick }) {
   return (
     <BorderedContainer label="Age">
       <Clickable onClick={onClick} sx={{ p: 1 }}>
-        <Score label="Current / Maxixum" endLabel={'years'} />
+        <Score label="Current / Maximum" endLabel={'years'} />
         <Score label="Category" endLabel={character.form.maxAge && character.age.category} />
         <Score label="Penalty" endLabel={character.form.maxAge && character.form.agePenalty} />
       </Clickable>

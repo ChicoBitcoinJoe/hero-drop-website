@@ -62,7 +62,7 @@ export default function Initiative({ character }) {
     ])
   }
 
-  const value = character.proficiencies.length > 0 && (character.initiative > 0 && '+') + character.initiative
+  const value = character.level && (character.initiative > 0 && '+') + character.initiative
   return <>
     <Dialog onClose={closeDialog} open={dialogOpen}>
       <EditDialog character={character} submit={submit} close={closeDialog} />

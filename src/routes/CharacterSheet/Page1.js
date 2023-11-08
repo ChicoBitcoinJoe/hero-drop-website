@@ -111,12 +111,12 @@ export default function Page1({ character }) {
               </Grid>
             </Grid>
 
-            <Grid xs={12} pb={2}>
+            <Grid xs={12} pb={1.25}>
               <AbilityScores character={character} />
             </Grid>
             
             <Grid xs={12}>
-              <BorderedContainer label={"Proficiencies "} sx={{ height: 431, overflow: 'hidden' }}>
+              <BorderedContainer label={"Proficiencies "} sx={{ height: 437, overflow: 'hidden' }}>
                 <Specializations character={character} />
               </BorderedContainer>
             </Grid>

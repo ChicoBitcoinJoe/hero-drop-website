@@ -134,7 +134,7 @@ function getAbility(ability, data) {
   let scoreFromProficiencies = 0
   proficiencies.forEach(sp => {
     if(sp.abilities[ability] === '') return
-    scoreFromProficiencies += Number(sp.score) / (sp.abilities[ability] === 'half' ? 2 : 1)
+    scoreFromProficiencies += Math.floor(Number(sp.score) / (sp.abilities[ability] === 'half' ? 2 : 1))
   })
   
   let score = 8 + scoreFromProficiencies 
@@ -208,7 +208,19 @@ export default function useCharacter(rawData) {
       maxAge: '',
       speed: '',      
     },
-    proficiencies: [],
+    proficiencies: Array(11).fill({
+      name: '',
+      score: '',
+      expert: false,
+      abilities: {
+        dexterity: '',
+        strength: '',
+        constitution: '',
+        intelligence: '',
+        wisdom: '',
+        charisma: '',
+      },
+    }),
     coreValues: [],
     miracles: [],
     abilityScoreChanges: {

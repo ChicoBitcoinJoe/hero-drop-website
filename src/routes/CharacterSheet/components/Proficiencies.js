@@ -112,7 +112,7 @@ function EditDialog({ character, index, close }) {
   }
   
   return <>
-    <Grid container spacing={2} sx={{ maxWidth: '360px' }}>
+    <Grid container spacing={2} sx={{ maxWidth: '520px' }}>
       <Grid xs={12}>
         <TextField fullWidth
           label="Proficiency Name" 
@@ -128,60 +128,63 @@ function EditDialog({ character, index, close }) {
           onChange={event => updateState('score', event.target.value)}
         />
       </Grid>
-      <Grid xs container justifyContent="center" alignItems="center">
+      <Grid xs={4} container justifyContent="center" alignItems="center">
         <FormControlLabel 
           control={<Checkbox checked={state.expert} 
           onChange={(event) => updateState('expert', event.target.checked)} />} 
           label={"Expert (+" + character.proficiencyBonus + ")"}
         />
       </Grid>
+      <Grid xs={4}>
+        {/* <Button fullWidth sx={{ p: 1.75 }} variant="outlined">Roll</Button> */}
+      </Grid>
       <Grid xs={12}>
         <Divider textAlign='left'>Abilities</Divider>
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Constitution" 
           state={state.abilities['constitution']}
           onClick={() => toggleAbility('constitution')}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Intelligence" 
           state={state.abilities['intelligence']}
           onClick={() => toggleAbility('intelligence')}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Dexterity" 
           state={state.abilities['dexterity']}
           onClick={() => toggleAbility('dexterity')}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Wisdom" 
           state={state.abilities['wisdom']}
           onClick={() => toggleAbility('wisdom')}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Strength" 
           state={state.abilities['strength']}
           onClick={() => toggleAbility('strength')}
         />
       </Grid>
-      <Grid xs={6}>
+      <Grid xs={4}>
         <TraitButton label="Charisma" 
           state={state.abilities['charisma']}
           onClick={() => toggleAbility('charisma')}
         />
       </Grid>
       <Grid xs={12} container>
-        <Grid xs={4} sx={{ display: index === undefined && 'none' }}>
+        {/* <Grid xs={4} sx={{ display: index === undefined && 'none' }}>
           <Button fullWidth color="warning" variant="outlined" sx={{ py: 2 }} onClick={removeProficiency}>unlearn</Button>
-        </Grid>
-        <Grid xs={index !== undefined ? 4 : 6}>
+        </Grid> */}
+        <Grid xs={index !== undefined ? 6 : 6}>
           <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={close}>cancel</Button>
         </Grid>
-        <Grid xs={index !== undefined ? 4 : 6}>
+        <Grid xs={index !== undefined ? 6 : 6}>
           <Button fullWidth variant="outlined" sx={{ py: 2 }} onClick={onClick}>Continue</Button>
         </Grid>
       </Grid>
@@ -230,7 +233,7 @@ function Proficiency({ specialization, proficiencyBonus }) {
   const fullScore = Number(score) + (expert ? Number(proficiencyBonus) : 0)
   
   return <>
-    <Grid container xs={12} sx={{ fontSize: '9px', position: 'relative' }}>
+    <Grid container xs={12} sx={{ py: .11, fontSize: '9px', position: 'relative' }}>
       <ExpertCircle />
       <Grid xs="auto" pr={0.5} container justifyContent="center" alignItems="center">
         <Box sx={scoreStyles}>

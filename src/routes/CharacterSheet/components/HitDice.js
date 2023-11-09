@@ -62,7 +62,7 @@ export default function HitDice({ character }) {
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Hit Dice" value={character.dodgeClass} orientation="right" />
+      <HorizontalInput label="Hit Dice" value={character.hitDice} orientation="right" />
     </Clickable>
   </>
 }

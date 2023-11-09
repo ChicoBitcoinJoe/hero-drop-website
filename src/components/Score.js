@@ -4,7 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 
 export default function Score({ label, endLabel, bold }) {
   return <>
-    <Grid container xs={12} sx={{ py: .5, fontWeight: bold && 'bold', fontSize: '9px' }}>
+    <Grid container xs={12} sx={{ py: .62, fontWeight: bold && 'bold', fontSize: '9px' }}>
       <Grid xs="auto" sx={{ fontWeight: 'bold' }}>
         {label} 
       </Grid>

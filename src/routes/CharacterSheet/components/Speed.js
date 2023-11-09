@@ -16,7 +16,7 @@ function SpeedDialog({ character, submit, close }) {
   }
 
   return <>
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, maxWidth: 256 }}>
       <Grid container spacing={2}>
         <Grid xs={12}>
           <TextField fullWidth 
@@ -62,7 +62,7 @@ export default function Speed({ character }) {
       <SpeedDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
     <Clickable onClick={openDialog}>
-      <HorizontalInput label="Speed" value={character.speed}/>
+      <HorizontalInput label="Speed" value={character.speed} orientation="right" />
     </Clickable>
   </>
 }

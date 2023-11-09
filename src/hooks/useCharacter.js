@@ -81,23 +81,26 @@ function getAgeCategoryFromScore(score) {
   else if(score === 5) return 'Ancient'
 }
 
-function getCurrentAge(proficiencies) {
-  let age = 0
-  proficiencies.map((sp) => {
-    age += Number(sp.training.years)
-  })
-  
-  return age
+function getAgePenalty(data) {
+  const score = getAgeScore(data)
+  let penalty = null
+  if(score === 0) penalty = -2
+  else if(score === 1) penalty = 0
+  else if(score === 2) penalty = -1
+  else if(score === 3) penalty = -2
+  else if(score === 4) penalty = -3
+  else if(score === 5) penalty = -4
+  return penalty + getClassScoreFromLevel(data.level)
 }
 
-function getAgeScore(proficiencies, maxAge) {
-  const age = getCurrentAge(proficiencies)
-  if(age <= maxAge * 0.15) return 0
-  else if(age <= maxAge * 0.35) return 1
-  else if(age <= maxAge * 0.55) return 2
-  else if(age <= maxAge * 0.7) return 3
-  else if(age <= maxAge * 0.85) return 4
-  else if(age <= maxAge) return 5
+function getAgeScore(data) {
+  const { currentAge, maxAge } = data.form
+  if(currentAge <= maxAge * 0.15) return 0
+  else if(currentAge <= maxAge * 0.35) return 1
+  else if(currentAge <= maxAge * 0.55) return 2
+  else if(currentAge <= maxAge * 0.70) return 3
+  else if(currentAge <= maxAge * 0.85) return 4
+  else if(currentAge <= maxAge) return 5
   else return 6
 }
 
@@ -125,11 +128,7 @@ function convertScoreToDamageDie(score) {
 }
 
 function getAbility(ability, data) {
-  const { proficiencies, abilityScoreChanges } = data
-
-  function getAgePenalty() {
-    return 0
-  }
+  const { proficiencies, abilityScoreChanges } = data  
   
   let scoreFromProficiencies = 0
   proficiencies.forEach(sp => {
@@ -139,9 +138,9 @@ function getAbility(ability, data) {
   
   let score = 8 + scoreFromProficiencies 
     + Number(abilityScoreChanges[ability]) 
-    + (ability === "dexterity" ? getAgePenalty() : 0)
-    + (ability === "strength" ? getAgePenalty() : 0)
-    + (ability === "constitution" ? getAgePenalty() : 0)
+    + (ability === "dexterity" ? getAgePenalty(data) : 0)
+    + (ability === "strength" ? getAgePenalty(data) : 0)
+    + (ability === "constitution" ? getAgePenalty(data) : 0)
   
   const modifier = getAbilityModifier(score)
   const die = convertScoreToDamageDie(modifier)
@@ -176,10 +175,6 @@ function getClassObject(data) {
   }
 }
 
-function getAgePenalty(age, maxAge) {
-  return 0
-}
-
 function getFormObject(data) {
   return {
     ...data.form,
@@ -187,6 +182,7 @@ function getFormObject(data) {
     damageReduction: getSizeScoreFromWeight(data.form.weight),
     sizeDie: convertScoreToDamageDie(getSizeScoreFromWeight(data.form.weight)),
     agePenalty: getAgePenalty(data),
+    ageCategory: getAgeCategoryFromScore(getAgeScore(data))
   }
 }
 
@@ -205,6 +201,7 @@ export default function useCharacter(rawData) {
     form: {
       name: '',
       weight: '',
+      currentAge: '',
       maxAge: '',
       speed: '',      
     },
@@ -222,7 +219,7 @@ export default function useCharacter(rawData) {
       },
     }),
     coreValues: [],
-    miracles: [],
+    feats: [],
     abilityScoreChanges: {
       dexterity: '',
       strength: '',
@@ -256,6 +253,11 @@ export default function useCharacter(rawData) {
     setData(newData)
   }
 
+  const abilities = getAbilities(data)
+  const maxHitPoints = Math.round(Math.sqrt(data.form.weight))
+  let recovery = Math.round(maxHitPoints / 10 + abilities.constitution.modifier)
+  if(recovery < 1) recovery = 1
+
   return {
     raw: data,
     ...data,
@@ -263,8 +265,10 @@ export default function useCharacter(rawData) {
     updateMany,
     proficiencyBonus: 2 + getClassScoreFromLevel(data.level),
     class: getClassObject(data),
-    ...getAbilities(data),
+    ...abilities,
     form: getFormObject(data),
+    maxHitPoints,
+    recovery,
     initiative: getInitiative(data)
   }
 }

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import Grid from '@mui/material/Unstable_Grid2'
 
-import Score from './Score'
+import Score from '../../Score'
 
 export default function Miracles({ character }) {
   return <Grid>

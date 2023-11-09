@@ -16,7 +16,7 @@ function EditDialog({ character, submit, close }) {
   }
 
   return <>
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, maxWidth: 256 }}>
       <Grid container spacing={2}>
         <Grid xs={12}>
           <TextField fullWidth 

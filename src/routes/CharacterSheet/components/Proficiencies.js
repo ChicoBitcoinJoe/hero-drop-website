@@ -148,9 +148,9 @@ function EditDialog({ character, index, close }) {
         />
       </Grid>
       <Grid xs={4}>
-        <TraitButton label="Intelligence" 
-          state={state.abilities['intelligence']}
-          onClick={() => toggleAbility('intelligence')}
+        <TraitButton label="Strength" 
+          state={state.abilities['strength']}
+          onClick={() => toggleAbility('strength')}
         />
       </Grid>
       <Grid xs={4}>
@@ -160,15 +160,15 @@ function EditDialog({ character, index, close }) {
         />
       </Grid>
       <Grid xs={4}>
-        <TraitButton label="Wisdom" 
-          state={state.abilities['wisdom']}
-          onClick={() => toggleAbility('wisdom')}
+        <TraitButton label="Intelligence" 
+          state={state.abilities['intelligence']}
+          onClick={() => toggleAbility('intelligence')}
         />
       </Grid>
       <Grid xs={4}>
-        <TraitButton label="Strength" 
-          state={state.abilities['strength']}
-          onClick={() => toggleAbility('strength')}
+        <TraitButton label="Wisdom" 
+          state={state.abilities['wisdom']}
+          onClick={() => toggleAbility('wisdom')}
         />
       </Grid>
       <Grid xs={4}>
@@ -218,8 +218,8 @@ function Proficiency({ specialization, proficiencyBonus }) {
     return (
       <Box sx={{ 
         position: 'absolute', 
-        top: -3, 
-        left: -3,
+        top: -2, 
+        left: -2,
         zIndex: 2,
         backgroundColor: expert ? 'grey' : 'white', 
         border: '1px solid black',

@@ -17,12 +17,9 @@ function EditDialog({ character, submit, close }) {
   }
 
   return <>
-    <Box sx={{ p: 2 }}>
+    <Box sx={{ p: 2, maxWidth: 256 }}>
       <Grid container spacing={2}>
-        <Grid xs="auto">
-          <Typography variant="h5" pt={1.75}>&nbsp;{character.dexterity.modifier} +</Typography>
-        </Grid>
-        <Grid xs>
+        <Grid xs={12}>
           <TextField fullWidth 
             type="number"
             label="Initiative Bonuses"

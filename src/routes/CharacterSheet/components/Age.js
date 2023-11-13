@@ -64,7 +64,7 @@ export default function Age({ character }) {
     </Dialog>
     <BorderedContainer label="Age">
       <Clickable onClick={openDialog} sx={{ p: 1 }}>
-        <Score label="Current / Maximum" endLabel={character.form.currentAge + ' / ' + character.form.maxAge + ' years'} />
+        <Score label="Current / Maximum" endLabel={character.form.currentAge + (character.form.maxAge && ' / ' + character.form.maxAge + ' years')} />
         <Score label="Category" endLabel={character.form.maxAge && character.form.ageCategory} />
         <Score label="Penalty" endLabel={character.form.maxAge && character.form.agePenalty} />
       </Clickable>

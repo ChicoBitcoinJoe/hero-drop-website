@@ -90,7 +90,9 @@ function getAgePenalty(data) {
   else if(score === 3) penalty = -2
   else if(score === 4) penalty = -3
   else if(score === 5) penalty = -4
-  return penalty + getClassScoreFromLevel(data.level)
+  penalty = penalty + getClassScoreFromLevel(data.level)
+  if(penalty > 0) penalty = 0
+  return penalty
 }
 
 function getAgeScore(data) {
@@ -102,19 +104,6 @@ function getAgeScore(data) {
   else if(currentAge <= maxAge * 0.85) return 4
   else if(currentAge <= maxAge) return 5
   else return 6
-}
-
-function getCurrentNaturals(proficiencies) {
-  let naturals = 0
-  proficiencies.map((sp) => {
-    naturals += sp.natural && 1
-  })
-  // console.log({ proficiencies, naturals })
-  return naturals
-}
-
-function getMaxNaturals(level) {
-  return 1 + getClassScoreFromLevel(level)
 }
 
 function convertScoreToDamageDie(score) {
@@ -165,13 +154,11 @@ function getAbilities(data) {
 }
 
 function getClassObject(data) {
+  const classScore = getClassScoreFromLevel(data.level)
   return {
     category: getClassFromLevel(data.level),
-    score: getClassScoreFromLevel(data.level),
-    expertises: {
-      max: getMaxNaturals(data.level),
-      current: getCurrentNaturals(data.proficiencies)
-    },
+    score: classScore,
+    proficiencyBonus: 2 + classScore,
   }
 }
 
@@ -263,7 +250,7 @@ export default function useCharacter(rawData) {
     ...data,
     update,
     updateMany,
-    proficiencyBonus: 2 + getClassScoreFromLevel(data.level),
+    
     class: getClassObject(data),
     ...abilities,
     form: getFormObject(data),

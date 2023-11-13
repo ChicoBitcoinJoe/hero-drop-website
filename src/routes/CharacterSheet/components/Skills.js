@@ -132,7 +132,7 @@ function EditDialog({ character, index, close }) {
         <FormControlLabel 
           control={<Checkbox checked={state.expert} 
           onChange={(event) => updateState('expert', event.target.checked)} />} 
-          label={"Expert (+" + character.proficiencyBonus + ")"}
+          label={"Expert (+" + (character.proficiencyBonus || '2') + ")"}
         />
       </Grid>
       <Grid xs={4}>
@@ -192,7 +192,7 @@ function EditDialog({ character, index, close }) {
   </>
 }
 
-function Proficiency({ specialization, proficiencyBonus }) {
+function Skill({ specialization, proficiencyBonus }) {
   const { name, score, expert, abilities } = specialization
   // console.log({ name, training, score, traits, expert })
 
@@ -220,7 +220,6 @@ function Proficiency({ specialization, proficiencyBonus }) {
         position: 'absolute', 
         top: -2, 
         left: -2,
-        zIndex: 2,
         backgroundColor: expert ? 'grey' : 'white', 
         border: '1px solid black',
         borderRadius: 12,
@@ -233,7 +232,7 @@ function Proficiency({ specialization, proficiencyBonus }) {
   const fullScore = Number(score) + (expert ? Number(proficiencyBonus) : 0)
   
   return <>
-    <Grid container xs={12} sx={{ py: .11, fontSize: '9px', position: 'relative' }}>
+    <Grid container xs={12} sx={{ py: .115, fontSize: '9px', position: 'relative' }}>
       <ExpertCircle />
       <Grid xs="auto" pr={0.5} container justifyContent="center" alignItems="center">
         <Box sx={scoreStyles}>
@@ -282,7 +281,7 @@ function Proficiency({ specialization, proficiencyBonus }) {
   </>
 }
 
-export default function Proficiencies({ character }) {
+export default function Skills({ character }) {
   const [dialogOpen, setDialogOpen] = React.useState(false)
   const [clickedIndex, setIndex] = React.useState()
 
@@ -311,10 +310,10 @@ export default function Proficiencies({ character }) {
         character.proficiencies.map((specialization, index) => {
           return <React.Fragment key={index}>
             <Clickable square 
-              sx={{ p: 0.6, display: 'flex !important', alignItems: 'flex-start !important' }} 
+              sx={{ p: 0.57, display: 'flex !important', alignItems: 'flex-start !important', zIndex: 2 }} 
               onClick={() => openDialog(index)}
             >
-              <Proficiency specialization={specialization} proficiencyBonus={character.proficiencyBonus}/>
+              <Skill specialization={specialization} proficiencyBonus={character.proficiencyBonus}/>
             </Clickable>
           </React.Fragment>
         })

@@ -2,12 +2,15 @@ import * as React from 'react'
 import Grid from '@mui/material/Unstable_Grid2'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
+import Checkbox from '@mui/material/Checkbox'
 import Typography from '@mui/material/Typography'
 import Dialog from '@mui/material/Dialog'
 import IconButton from '@mui/material/IconButton'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos'
 import ShieldOutlinedIcon from '@mui/icons-material/ShieldOutlined'
+import ShieldIcon from '@mui/icons-material/Shield'
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank'
 
 import Clickable from '../../../components/Clickable'
 
@@ -154,6 +157,15 @@ function AbilityScoreModifier({ label, ability, state, onClick }){
   </Grid>
 }
 
+function SavingThrowCheckBox({ }){
+  return (
+    <Checkbox 
+      icon={<ShieldOutlinedIcon />}
+      checkedIcon={<ShieldIcon />}
+    />
+  )
+}
+
 function EditDialog({ character, submit, close }) {
   const [ state, setState ] = React.useState({
     ...character.abilityScoreChanges || {}
@@ -175,9 +187,27 @@ function EditDialog({ character, submit, close }) {
   return <Box p={2} sx={{ maxWidth: 560 }}>
     <Grid container spacing={2}>
       <Grid xs={12}>
-        <Typography variant="h5" sx={{ textAlign: 'center', pb: 2 }}>Ability Score Changes</Typography>
+        <Typography variant="h5" sx={{ textAlign: 'center', pb: 2 }}>Ability Scores</Typography>
       </Grid>
       
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
+      </Grid>
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
+      </Grid>
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
+      </Grid>
       <Grid xs={4}>
         <AbilityScoreModifier label={'DEX'} ability="dexterity" state={state.dexterity} onClick={onClick} />
       </Grid>
@@ -187,6 +217,9 @@ function EditDialog({ character, submit, close }) {
       <Grid xs={4}>
         <AbilityScoreModifier label={'CON'} ability="constitution" state={state.constitution} onClick={onClick} />
       </Grid>
+
+      <Grid xs={12} />
+
       <Grid xs={4}>
         <AbilityScoreModifier label={'INT'} ability="intelligence" state={state.intelligence} onClick={onClick} />
       </Grid>
@@ -195,6 +228,24 @@ function EditDialog({ character, submit, close }) {
       </Grid>
       <Grid xs={4}>
         <AbilityScoreModifier label={'CHA'} ability="charisma" state={state.charisma} onClick={onClick} />
+      </Grid>
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
+      </Grid>
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
+      </Grid>
+      <Grid xs={4} container justifyContent="center" alignItems="center">
+        <Typography sx={{ fontSize: '9px', textAlign: 'center' }}>
+          Saving Throw <br/>Proficiency
+        </Typography>
+        <SavingThrowCheckBox />
       </Grid>
 
       <Grid xs={12} />
@@ -233,34 +284,35 @@ export default function AbilityScores({ character }) {
     <Dialog onClose={closeDialog} open={dialogOpen}>
       <EditDialog character={character} submit={submit} close={closeDialog} />
     </Dialog>
-    <Clickable onClick={openDialog}>
-      <Grid container spacing={.5}>
-        <Grid xs={4}>
+    <Clickable onClick={openDialog} sx={{ height: '162px' }}>
+      <Grid container>
+        <Grid xs={4} container justifyContent="start">
           <AbilityScore label="DEX" 
             ability={character.level && character.dexterity}
           />
         </Grid>
-        <Grid xs={4} pb={1}>
+        <Grid xs={4} container justifyContent="center">
           <AbilityScore label="STR" 
             ability={character.level && character.strength}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={4} container justifyContent="end">
           <AbilityScore label="CON" 
             ability={character.level && character.constitution}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={12} pt={2} />
+        <Grid xs={4} container justifyContent="start">
           <AbilityScore label="INT" 
             ability={character.level && character.intelligence}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={4} container justifyContent="center">
           <AbilityScore label="WIS" 
             ability={character.level && character.wisdom}
           />
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={4} container justifyContent="end">
           <AbilityScore label="CHA" 
             ability={character.level && character.charisma}
           />
